@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fresh_farm/product.dart';
+import 'package:fresh_farm/App/Home.dart';
 import 'signIn.dart';
 class MyHomePage extends StatefulWidget{
   _MyHomePageState createState() => new _MyHomePageState(); // ghi de 1 doi tuong trang thai private
@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage>{
                     elevation: 7.0,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProductPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyHomeAppPage()));
                       },
                       child: Center(
                         child: Text(
