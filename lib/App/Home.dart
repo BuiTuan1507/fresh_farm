@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Products/Category.dart';
+import 'package:fresh_farm/App/Products/Fruits.dart';
 import 'package:fresh_farm/Login/Login.dart';
 import 'package:fresh_farm/product.dart';
 
@@ -20,7 +21,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
                 padding: EdgeInsets.only(right: 35.0),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyFruitsPage()));
                   },
                   child: Icon(
                     Icons.search,
@@ -63,7 +64,9 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
           ),
           ListTile(
             leading: GestureDetector(
-              onTap: (){},
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage()));
+              },
               child: Icon(
                 Icons.favorite,
                 size: 30,
