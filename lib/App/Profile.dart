@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fresh_farm/App/Home.dart';
 class MyProfilePage extends StatefulWidget{
   _MyProfilePageState createState() => new _MyProfilePageState(); // ghi de 1 doi tuong trang thai private
 }
@@ -23,7 +24,9 @@ class _MyProfilePageState extends State<MyProfilePage>{
           Padding(
               padding: EdgeInsets.only(right: 35.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyHomeAppPage()));
+                },
                 child: Icon(
                   Icons.home,
                   size: 35.0,

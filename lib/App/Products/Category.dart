@@ -1,6 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'FastFood.dart';
+import 'flower.dart';
+import 'Fruits.dart';
+import 'meatAndEgg.dart';
+import 'milk.dart';
+import 'TeaAndCoffee.dart';
+import 'vegetable.dart';
+import 'Wheat.dart';
 class MyCategoryPage extends StatefulWidget{
   _MyCategoryPageState createState() => new _MyCategoryPageState(); // ghi de 1 doi tuong trang thai private
 }
@@ -28,6 +35,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
         child: InkWell(
 
             onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyFruitsPage()));
 
             },
             child: Container(
@@ -116,6 +124,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyVegetablePage()));
 
                 },
                 child: Container(
@@ -160,6 +169,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyWheatPage()));
 
                 },
                 child: Container(
@@ -204,6 +214,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyMeatPage()));
 
                 },
                 child: Container(
@@ -248,6 +259,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyTeaPage()));
 
                 },
                 child: Container(
@@ -292,6 +304,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyMilkPage()));
 
                 },
                 child: Container(
@@ -336,6 +349,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyFlowerPage()));
 
                 },
                 child: Container(

@@ -13,7 +13,7 @@ class _MyFruitsPageState extends State<MyFruitsPage>{
         appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.green,
-        title: Text("Products",
+        title: Text("fruits",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
 
     ),

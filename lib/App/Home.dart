@@ -4,7 +4,13 @@ import 'package:fresh_farm/App/Products/Category.dart';
 import 'package:fresh_farm/App/Products/Fruits.dart';
 import 'package:fresh_farm/Login/Login.dart';
 import 'package:fresh_farm/product.dart';
-
+import 'UI/constants.dart';
+import 'UI/recommed.dart';
+import 'UI/featurred_plants.dart';
+import 'UI/header_with_seachbox.dart';
+import 'UI/recomend_plants.dart';
+import 'UI/title_with_more_bbtn.dart';
+import 'Profile.dart';
 class MyHomeAppPage extends StatefulWidget{
   _MyHomeAppPageState createState() => new _MyHomeAppPageState(); // ghi de 1 doi tuong trang thai private
 }
@@ -15,20 +21,22 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.green,
+        backgroundColor:Color(0xFF0C9869) ,
           actions: <Widget>[
             Padding(
-                padding: EdgeInsets.only(right: 35.0),
+                padding: EdgeInsets.only(right: 15.0),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyFruitsPage()));
                   },
                   child: Icon(
-                    Icons.search,
-                    size: 35.0,
+                    Icons.shopping_cart,
+                    size: 30.0,
                   ),
-                )
+                ),
+
             ),
+
           ],
 
     ),
@@ -47,7 +55,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
 
             ),
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: Color(0xFF0C9869),
             ),
 
           ),
@@ -56,10 +64,10 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProductPage()));
               },
-              child: Icon(Icons.markunread_mailbox,size: 30,color: Colors.green),
+              child: Icon(Icons.markunread_mailbox,size: 30,color:Color(0xFF0C9869)),
             ),
             title: Text('Product',style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green
+              fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0C9869)
             ),),
           ),
           ListTile(
@@ -70,20 +78,31 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               child: Icon(
                 Icons.favorite,
                 size: 30,
-                color: Colors.green,
+                color: Color(0xFF0C9869),
               ),
             ),
             title: Text('Favorite',style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green
+                fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0C9869)
             )),
           ),
           ListTile(
             leading: GestureDetector(
               onTap:(){},
-              child: Icon(Icons.shopping_cart,size: 30, color: Colors.green),
+              child: Icon(Icons.shopping_cart,size: 30, color:Color(0xFF0C9869) ),
             ),
             title: Text('Cart',style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green
+                fontSize: 20, fontWeight: FontWeight.bold, color:Color(0xFF0C9869)
+            )),
+          ),
+          ListTile(
+            leading: GestureDetector(
+              onTap:(){
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProfilePage()));
+              },
+              child: Icon(Icons.person,size: 30, color:Color(0xFF0C9869) ),
+            ),
+            title: Text('Profile',style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color:Color(0xFF0C9869)
             )),
           ),
           ListTile(
@@ -91,16 +110,31 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyHomePage()));
               },
-              child: Icon(Icons.exit_to_app,size: 30,color: Colors.green,),
+              child: Icon(Icons.exit_to_app,size: 30,color: Color(0xFF0C9869),),
             ),
             title: Text('Log Out',style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green
+                fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0C9869)
             )),
           ),
         ],
       ),
     ),
-    body:Column(
-    mainAxisAlignment:MainAxisAlignment.start,
-    //
-    children: <Widget>[]));}}
+    body: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          HeaderWithSearchBox(size: size),
+          FeaturedPlants(),
+          TitleWithMoreBtn(title: "Category", press: () {
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage()));
+          }),
+          RecomendsPlants(),
+          TitleWithMoreBtn(title: "Recomended", press: () {}),
+          Recomends(),
+
+          SizedBox(height: kDefaultPadding),
+        ],
+      ),
+
+
+    ));}}

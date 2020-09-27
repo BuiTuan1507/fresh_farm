@@ -13,7 +13,7 @@ class _MyHomePageState extends State<MyHomePage>{
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xFF0C9869),
           title: Text("FreshFarm",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
         ),
@@ -25,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage>{
               Container(
             height: size.height*0.3,
             width: double.infinity,
-            color: Colors.green,
+            color:Color(0xFF0C9869) ,
 
             child:    Center(
 
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage>{
                       children: <Widget>[
                         TextField(
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.person, color: Colors.green,),
+                              prefixIcon: Icon(Icons.person, color: Color(0xFF0C9869),),
                               border: OutlineInputBorder(),
 
 
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage>{
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black38),
                               focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.green))),
+                                  borderSide: BorderSide(color: Color(0xFF0C9869)))),
 
                         ),SizedBox(height: size.height*0.03),
 
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage>{
                         TextField(
 
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock_open,color: Colors.green,),
+                              prefixIcon: Icon(Icons.lock_open,color: Color(0xFF0C9869),),
                               //border: InputBorder.none,
                               border: OutlineInputBorder(),
                               labelText: 'Mật khẩu',
@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage>{
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black38),
                               focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.green))),
+                                  borderSide: BorderSide(color: Color(0xFF0C9869)))),
                           obscureText: true,
                         ),
                         SizedBox(height: size.height*0.03),
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage>{
                     child: Text(
                       'Quên mật khẩu',
                       style: TextStyle(
-                          color: Colors.green,
+                          color: Color(0xFF0C9869),
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',
@@ -123,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage>{
                   child: Material(
                     borderRadius: BorderRadius.circular(20.0),
                     shadowColor: Colors.blueAccent,
-                    color: Colors.green,
+                    color: Color(0xFF0C9869),
                     elevation: 7.0,
                     child: GestureDetector(
                       onTap: () {
@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage>{
                 child: Text(
                   'Đăng ký',
                   style: TextStyle(
-                      color: Colors.green,
+                      color: Color(0xFF0C9869),
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
