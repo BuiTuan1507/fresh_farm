@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 //import 'package:plant_app/screens/details/details_screen.dart';
 
 import 'constants.dart';
-
+import 'package:fresh_farm/App/Products/Detail.dart';
 class Recomends extends StatelessWidget {
   const Recomends({
-    Key key,
+    Key key, this.image, this.title, this.price,
   }) : super(key: key);
+  final image, price, title;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -14,63 +17,20 @@ class Recomends extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          RecomendPlantCard(
-            image: "assets/1.jpg",
-            title: "Hoa qua",
-            country: "Russia",
-             price: 440,
-            // press: () {
-            // Navigator.push(
-            //  context,
-            //  MaterialPageRoute(
-            //   builder: (context) => DetailsScreen(),
-            // ),
-            // );
-            // },
-          ),
-          RecomendPlantCard(
-            image: "assets/3.jpg",
-            title: "Rau cu",
-             country: "Russia",
-              price: 440,
-            // press: () {
-            // Navigator.push(
-            //   context,
-            //  MaterialPageRoute(
-            //   builder: (context) => DetailsScreen(),
-            //  ),
-            //  );
-            // },
-          ),
-          RecomendPlantCard(
-            image: "assets/2.jpg",
-            title: "Rau cu",
-              country: "Russia",
-             price: 440,
-            // press: () {},
-          ),
+          _buildCard(context,"Hoa qua",'440',"assets/1.jpg",),
+
+
+          _buildCard(context,
+             "Rau cu", '440',"assets/3.jpg",),
+         _buildCard(context, 'thit', '150', 'assets/2.jpg')
         ],
       ),
     );
   }
 }
 
-class RecomendPlantCard extends StatelessWidget {
-  const RecomendPlantCard({
-    Key key,
-    this.image,
-    this.title,
-    this.country,
-    this.price,
-    this.press,
-  }) : super(key: key);
 
-  final String image, title, country;
-  final int price;
-  final Function press;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildCard(BuildContext context, String title, String price, String image) {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.only(
@@ -83,7 +43,15 @@ class RecomendPlantCard extends StatelessWidget {
         children: <Widget>[
           Image.asset(image),
           GestureDetector(
-            onTap: press,
+            onTap: (){
+              Navigator.of(context).push(
+
+                  MaterialPageRoute(builder: (context) => Detail(
+                      assetPath: image,
+                      cookieprice:price,
+                      cookiename: title
+                  )));
+            },
             child: Container(
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(
@@ -108,12 +76,12 @@ class RecomendPlantCard extends StatelessWidget {
                         TextSpan(
                             text: "$title\n".toUpperCase(),
                             style: Theme.of(context).textTheme.button),
-                        TextSpan(
-                         text: "$country".toUpperCase(),
-                         style: TextStyle(
-                           color: kPrimaryColor.withOpacity(0.5),
-                          ),
-                         ),
+                        //TextSpan(
+                         //text: "$country".toUpperCase(),
+                         //style: TextStyle(
+                          // color: kPrimaryColor.withOpacity(0.5),
+                          //),
+                         //),
                       ],
                     ),
                   ),
@@ -133,4 +101,4 @@ class RecomendPlantCard extends StatelessWidget {
       ),
     );
   }
-}
+

@@ -129,7 +129,9 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage()));
           }),
           RecomendsPlants(),
-          TitleWithMoreBtn(title: "Recomended", press: () {}),
+          TitleWithMoreBtn(title: "Recomended", press: () {
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProductPage()));
+          }),
           Recomends(),
 
           SizedBox(height: kDefaultPadding),
