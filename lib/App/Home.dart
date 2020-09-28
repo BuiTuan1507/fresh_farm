@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Products/Category.dart';
 import 'package:fresh_farm/App/Products/Fruits.dart';
 import 'package:fresh_farm/Login/Login.dart';
+import 'package:fresh_farm/Model/authentication.dart';
 import 'package:fresh_farm/product.dart';
 import 'UI/constants.dart';
 import 'UI/recommed.dart';
@@ -11,10 +12,30 @@ import 'UI/header_with_seachbox.dart';
 import 'UI/recomend_plants.dart';
 import 'UI/title_with_more_bbtn.dart';
 import 'Profile.dart';
+import 'package:fresh_farm/App/Model/authetication.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+import 'dart:async';
 class MyHomeAppPage extends StatefulWidget{
-  _MyHomeAppPageState createState() => new _MyHomeAppPageState(); // ghi de 1 doi tuong trang thai private
+  _MyHomeAppPageState createState() => new _MyHomeAppPageState();
+  // ghi de 1 doi tuong trang thai private
+  MyHomeAppPage({Key key, this.auth, this.userId, this.logoutCallback})
+      : super(key: key);
+
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
+  final String userId;
 }
 class _MyHomeAppPageState extends State<MyHomeAppPage>{
+
+  signOut() async {
+    try {
+      await widget.auth.signOut();
+      widget.logoutCallback();
+    } catch (e) {
+      print(e);
+    }
+  }
   Widget build(BuildContext context){
     Size size = MediaQuery.of(context).size;
     return new Scaffold(
@@ -106,10 +127,8 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             )),
           ),
           ListTile(
-            leading: GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyHomePage()));
-              },
+            leading: FlatButton(
+              onPressed: signOut,
               child: Icon(Icons.exit_to_app,size: 30,color: Color(0xFF0C9869),),
             ),
             title: Text('Log Out',style: TextStyle(

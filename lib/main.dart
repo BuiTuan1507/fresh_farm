@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/product.dart';
 import 'Login/Login.dart';
+import 'Model/authentication.dart';
+import 'Model/root_page.dart';
 void main() {
   runApp(MyApp());
 }
@@ -27,8 +29,9 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
-    );
+      home: new RootPage(auth: new Auth()));
+    //MyHomePage(),
+
   }
 }
 
