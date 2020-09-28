@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/Cart.dart';
 
 
 class Detail extends StatelessWidget {
