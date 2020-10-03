@@ -3,11 +3,11 @@ import 'package:fresh_farm/App/Home.dart';
 import 'login_signup_page.dart';
 import 'authentication.dart';
 import 'home_page.dart';
-
+// quản lí trang thái của người dùng
 enum AuthStatus {
-  NOT_DETERMINED,
-  NOT_LOGGED_IN,
-  LOGGED_IN,
+  NOT_DETERMINED,// không xác định
+  NOT_LOGGED_IN,// không đăng nhập
+  LOGGED_IN,// đã đăng nhập
 }
 
 class RootPage extends StatefulWidget {
@@ -24,20 +24,19 @@ class _RootPageState extends State<RootPage> {
   String _userId = "";
 
   @override
-  void initState() {
-    super.initState();
-    widget.auth.getCurrentUser().then((user) {
+  void initState() {// kiem tra uid và set trang thai cho authStatus
+    super.initState();//override
+    widget.auth.getCurrentUser().then((user) {//lấy userID
       setState(() {
         if (user != null) {
-          _userId = user?.uid;
+          _userId = user?.uid;//
         }
-        authStatus =
-        user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
+        authStatus = user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
       });
     });
   }
 
-  void loginCallback() {
+  void loginCallback() {// set trang thai của userID, và trang thai login
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
@@ -48,13 +47,13 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  void logoutCallback() {
+  void logoutCallback() {// set trạng thái của biến authStatus
     setState(() {
       authStatus = AuthStatus.NOT_LOGGED_IN;
       _userId = "";
     });
   }
-
+// dựng màn hình chờ khi xử lí
   Widget buildWaitingScreen() {
     return Scaffold(
       body: Container(

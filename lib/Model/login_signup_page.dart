@@ -39,9 +39,12 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     });
     if (validateAndSave()) {
       String userId = "";
+      String name = "1";
       try {
         if (_isLoginForm) {
           userId = await widget.auth.signIn(_email, _password);
+          name = await widget.auth.getEmail();
+          print ("chay di:$name");
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
@@ -139,40 +142,40 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   Widget _showForm() {
     return new SingleChildScrollView(
-      child: Column(
-      children: <Widget>[
-        showLogo(),
-        Container(
+        child: Column(
+          children: <Widget>[
+            showLogo(),
+            Container(
 
-        padding: EdgeInsets.all(16.0),
-        child: new Form(
-          key: _formKey,
-          child: new ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              showLogin(),
-              showEmailInput(),
-              showPasswordInput(),
-              showPrimaryButton(),
-              showSecondaryButton(),
-              showErrorMessage(),
-            ],
-          ),
-        ))
-      ],
-    ));
+                padding: EdgeInsets.all(16.0),
+                child: new Form(
+                  key: _formKey,
+                  child: new ListView(
+                    shrinkWrap: true,
+                    children: <Widget>[
+                      showLogin(),
+                      showEmailInput(),
+                      showPasswordInput(),
+                      showPrimaryButton(),
+                      showSecondaryButton(),
+                      showErrorMessage(),
+                    ],
+                  ),
+                ))
+          ],
+        ));
 
   }
   Widget showLogin(){
     return new Container(
-      padding: EdgeInsets.only(top:20,bottom: 20),
-      child:Center(
-        child:  Text(
-        'Login', style: TextStyle(
-        fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black87
-      ),
-      ),
-      )
+        padding: EdgeInsets.only(top:20,bottom: 20),
+        child:Center(
+          child:  Text(
+            'Login', style: TextStyle(
+              fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black87
+          ),
+          ),
+        )
 
     );
   }
@@ -198,17 +201,17 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         .of(context)
         .size;
     return new Hero(
-      tag: 'hero',
-      child:  Container(
-          height: size.height * 0.3,
-          width: double.infinity,
-          color: Color(0xFF0C9869),
-          child: Center(
-            child: Image.asset(
-              "assets/farm.jpg",
-              width: size.width ,
-            ),
-          ))
+        tag: 'hero',
+        child:  Container(
+            height: size.height * 0.3,
+            width: double.infinity,
+            color: Color(0xFF0C9869),
+            child: Center(
+              child: Image.asset(
+                "assets/farm.jpg",
+                width: size.width ,
+              ),
+            ))
     );
   }
 

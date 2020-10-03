@@ -28,6 +28,9 @@ dependencies:
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+5
   firebase_database: ^3.0.7
+  provider: ^4.3.2+2
+  splashscreen: 1.2.0
+  flutter_signin_button: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -74,9 +77,11 @@ flutter:
     - assets/Fruits/xoai.jpg
     - assets/FastFood/xucxich.jpg
     - assets/FastFood/giolua.jpg
+    - assets/wheat/
     -  assets/icons/
     - assets/images/
     - assets/flutter-icon.png
+    - assets/dart.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
