@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fresh_farm/App/Home.dart';
+import 'package:fresh_farm/Model/updateProfile.dart';
 
 class MyProfilePage extends StatefulWidget{
   const MyProfilePage({Key key, this.uid}) : super(key: key);
@@ -44,7 +45,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
           ],
         ),
         body: StreamBuilder<DocumentSnapshot>(
-        stream: Firestore.instance.collection("User").document("0oULJrkVt3bTsqetIYgTY75ucP03").snapshots(),
+        stream: Firestore.instance.collection("User").document(widget.uid).snapshots(),
             builder: (context,snapshot) {
               if (!snapshot.hasData) return LinearProgressIndicator();
 
@@ -212,7 +213,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                         elevation: 7.0,
                         child: GestureDetector(
                           onTap: () {
-                            //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProfilePage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => updateProfile(uid:widget.uid)));
                           },
                           child: Center(
                             child: Text(
