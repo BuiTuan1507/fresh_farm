@@ -158,7 +158,7 @@ class _updateProfileState extends State<updateProfile> {
         padding: EdgeInsets.only(top:20,bottom: 20),
         child:Center(
           child:  Text(
-            'Register', style: TextStyle(
+            'Cap nhat thong tin ca nhan', style: TextStyle(
               fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black87
           ),
           ),
@@ -214,7 +214,7 @@ class _updateProfileState extends State<updateProfile> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Password',
+            hintText: 'Name',
             icon: new Icon(
               Icons.lock,
               color: Colors.grey,
@@ -233,7 +233,7 @@ class _updateProfileState extends State<updateProfile> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Password',
+            hintText: 'Address',
             icon: new Icon(
               Icons.lock,
               color: Colors.grey,
@@ -253,7 +253,7 @@ class _updateProfileState extends State<updateProfile> {
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
             color: Color(0xFF0C9869),
-            child: new Text('Create account',
+            child: new Text('Cap nhat thong tin',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: validateAndSubmit,
           ),

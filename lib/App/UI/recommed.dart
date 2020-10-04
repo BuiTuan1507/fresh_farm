@@ -17,12 +17,11 @@ class Recomends extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          _buildCard(context,"Hoa qua",'440',"assets/1.jpg",),
+          _buildCard(context,"Xoài",'440',"assets/Fruits/xoai.jpg",),
 
 
-          _buildCard(context,
-             "Rau cu", '440',"assets/3.jpg",),
-         _buildCard(context, 'thit', '150', 'assets/2.jpg')
+          _buildCard(context, "Thịt lợn", '440',"assets/meatAndEgg/pork.jpg",),
+         _buildCard(context, 'Hoa Tulip', '150', 'assets/flower/tulip.jpg')
         ],
       ),
     );

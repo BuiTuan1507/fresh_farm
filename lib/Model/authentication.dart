@@ -17,7 +17,7 @@ abstract class BaseAuth {// lớp
   Future<String> getEmail();
   Future<String> getName();
   Future<String> getPhotoURL();
-  Future<String> updateEmail();
+  Future<String> updatePassWord(String password);
   Future<List> updateProfile();
 
 
@@ -74,9 +74,9 @@ class Auth implements BaseAuth {
   }
 
   @override
-  Future<String> updateEmail() async{
+  Future<String> updatePassWord(String password) async{
     FirebaseUser user = await _firebaseAuth.currentUser();
-    user.updateEmail("email@gmail.com");
+    user.updatePassword(password);
     user.reload();
     return user.email;
   }

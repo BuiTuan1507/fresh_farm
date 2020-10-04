@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fresh_farm/App/Home.dart';
+import 'package:fresh_farm/Model/reset_password.dart';
 import 'package:fresh_farm/Model/updateProfile.dart';
 
 class MyProfilePage extends StatefulWidget{
@@ -26,7 +27,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
 
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xFF0C9869),
           title: Text("Thông tin cá nhân",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
           actions: <Widget>[
@@ -105,7 +106,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                         Container(
                           padding: EdgeInsets.only(left: 40, right: 15, bottom: 10),
                           child: Icon(
-                            Icons.phone, size: 23, color: Colors.green,
+                            Icons.phone, size: 23, color: Color(0xFF0C9869),
                           ),
                         ),
                         Container(
@@ -114,7 +115,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                             'Số điện thoại :', style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.green
+                              color: Colors.black87
                           ),
                           ),),
                         Container(
@@ -123,7 +124,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                               snapshot.data['photoURL'] , style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.green)
+                              color: Colors.black87)
                           ),
                         ),
                       ],
@@ -137,7 +138,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                 Container(
                                   padding: EdgeInsets.only(left: 40, right: 15),
                                   child: Icon(
-                                    Icons.home, size: 23, color: Colors.green,
+                                    Icons.home, size: 23, color:Color(0xFF0C9869) ,
                                   ),
                                 ),
                                 Container(
@@ -146,17 +147,17 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                     'Địa chỉ :', style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.green
+                                      color: Colors.black87
                                   ),
                                   ),),
                                 Container(
                                   padding: EdgeInsets.only(right: 0),
 
                                   child: Text(
-                                      'address' , style: TextStyle(
+                                      'NoWhere' , style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.green)
+                                      color: Colors.black87)
                                   ),
                                 ),
                               ],
@@ -173,8 +174,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                 Container(
                                   padding: EdgeInsets.only(left: 40, right: 15),
                                   child: Icon(
-                                    Icons.monetization_on, size: 23, color: Colors
-                                      .green,
+                                    Icons.monetization_on, size: 23, color: Color(0xFF0C9869),
                                   ),
                                 ),
                                 Container(
@@ -183,16 +183,16 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                     'Xu thưởng :', style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.green
+                                      color: Colors.black87
                                   ),
                                   ),),
                                 Container(
                                   padding: EdgeInsets.only(right: 20),
                                   child: Text(
-                                      'money', style: TextStyle(
+                                      '200', style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.green)
+                                      color: Colors.black87)
                                   ),
                                 ),
                               ],
@@ -209,7 +209,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                       child: Material(
                         borderRadius: BorderRadius.circular(20.0),
                         shadowColor: Colors.blueAccent,
-                        color: Colors.green,
+                        color: Color(0xFF0C9869),
                         elevation: 7.0,
                         child: GestureDetector(
                           onTap: () {
@@ -236,11 +236,11 @@ class _MyProfilePageState extends State<MyProfilePage>{
                       child: Material(
                         borderRadius: BorderRadius.circular(20.0),
                         shadowColor: Colors.blueAccent,
-                        color: Colors.green,
+                        color: Color(0xFF0C9869),
                         elevation: 7.0,
                         child: GestureDetector(
                           onTap: () {
-                            //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProfilePage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => resetPassword()));
                           },
                           child: Center(
                             child: Text(

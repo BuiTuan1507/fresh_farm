@@ -19,7 +19,7 @@ class RecomendsPlants extends StatelessWidget {
         children: <Widget>[
           RecomendPlantCard(
             image: "assets/1.jpg",
-            title: "Hoa qua",
+            title: "Hoa quả",
             //country: "Russia",
            // price: 440,
             press: () {
@@ -32,8 +32,8 @@ class RecomendsPlants extends StatelessWidget {
             },
           ),
           RecomendPlantCard(
-            image: "assets/3.jpg",
-            title: "Rau cu",
+            image: "assets/thit.jpg",
+            title: "Sản phẩm thịt",
            // country: "Russia",
           //  price: 440,
             press: () {
@@ -46,8 +46,8 @@ class RecomendsPlants extends StatelessWidget {
             },
           ),
           RecomendPlantCard(
-            image: "assets/2.jpg",
-            title: "Rau cu",
+            image: "assets/ngucoc.jpg",
+            title: "Ngũ cốc",
           //  country: "Russia",
            // price: 440,
             press: () {

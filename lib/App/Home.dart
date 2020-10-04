@@ -46,7 +46,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
 
         UserAccountsDrawerHeader(
 
-          accountName: new Text('Courage',style: TextStyle(fontWeight: FontWeight.bold,
+          accountName:new Text('Courage',style: TextStyle(fontWeight: FontWeight.bold,
               fontSize: 28),
           ),
           accountEmail: new Text('courage@gmail.com',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 16),),
@@ -64,10 +64,10 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProductPage()));
             },
-            child: Icon(Icons.markunread_mailbox,size: 30,color:Color(0xFF0C9869)),
+            child: Icon(Icons.markunread_mailbox,size: 26,color:Color(0xFF0C9869)),
           ),
           title: Text('Product',style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0C9869)
+              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black45
           ),),
         ),
         ListTile(
@@ -77,21 +77,21 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             },
             child: Icon(
               Icons.favorite,
-              size: 30,
+              size: 26,
               color: Color(0xFF0C9869),
             ),
           ),
           title: Text('Favorite',style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0C9869)
+              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
           )),
         ),
         ListTile(
           leading: GestureDetector(
             onTap:(){},
-            child: Icon(Icons.shopping_cart,size: 30, color:Color(0xFF0C9869) ),
+            child: Icon(Icons.shopping_cart,size: 26, color:Color(0xFF0C9869) ),
           ),
           title: Text('Cart',style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color:Color(0xFF0C9869)
+              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
           )),
         ),
         ListTile(
@@ -100,21 +100,25 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
 
               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProfilePage(uid: widget.userId)));
             },
-            child: Icon(Icons.person,size: 30, color:Color(0xFF0C9869) ),
+            child: Icon(Icons.person,size: 26, color:Color(0xFF0C9869) ),
           ),
           title: Text('Profile',style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color:Color(0xFF0C9869)
+              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
           )),
         ),
         ListTile(
-          leading: FlatButton(
-            onPressed: signOut,
-            child: Icon(Icons.exit_to_app,size: 30,color: Color(0xFF0C9869),),
+          leading: GestureDetector(
+            onTap: (){
+              signOut();
+            },
+            //onPressed: signOut,
+            child: Icon(Icons.exit_to_app,size: 26,color: Color(0xFF0C9869),),
           ),
           title: Text('Log Out',style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0C9869)
+              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
           )),
         ),
+        //Text("Product")
       ],
     );
   }

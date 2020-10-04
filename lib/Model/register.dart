@@ -170,18 +170,20 @@ class _SignupPageState extends State<SignupPage> {
             showLogo(),
             Container(
 
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.only(left:16.0,right: 16,top: 5),
                 child: new Form(
                   key: _formKey,
                   child: new ListView(
                     shrinkWrap: true,
                     children: <Widget>[
                       showLogin(),
+                      showText(),
                       showEmailInput(),
                       showPasswordInput(),
                       showNameInput(),
                       showImageInput(),
                       showPrimaryButton(),
+                      primaryButton(),
                       showErrorMessage(),
                     ],
                   ),
@@ -192,12 +194,27 @@ class _SignupPageState extends State<SignupPage> {
   }
   Widget showLogin(){
     return new Container(
-        padding: EdgeInsets.only(top:20,bottom: 20),
+        padding: EdgeInsets.only(top:15,bottom: 0, left: 15),
         child:Center(
           child:  Text(
-            'Register', style: TextStyle(
-              fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black87
+            'Chào mừng bạn đến với nông trại ', style: TextStyle(
+              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87
           ),
+
+          ),
+        )
+
+    );
+  }
+  Widget showText(){
+    return new Container(
+        padding: EdgeInsets.only(top:5,bottom: 5, left: 15),
+        child:Center(
+          child:  Text(
+            'xanh của chúng tôi', style: TextStyle(
+              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87
+          ),
+
           ),
         )
 
@@ -227,9 +244,10 @@ class _SignupPageState extends State<SignupPage> {
     return new Hero(
         tag: 'hero',
         child:  Container(
-            height: size.height * 0.3,
+          padding: EdgeInsets.only(top: 15),
+            height: size.height * 0.2,
             width: double.infinity,
-            color: Color(0xFF0C9869),
+            color: Colors.white,
             child: Center(
               child: Image.asset(
                 "assets/farm.jpg",
@@ -241,7 +259,7 @@ class _SignupPageState extends State<SignupPage> {
 
   Widget showEmailInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 5.0, 0.0),
       child: new TextFormField(
         controller: emailController,
         maxLines: 1,
@@ -251,7 +269,7 @@ class _SignupPageState extends State<SignupPage> {
             hintText: 'Email',
             icon: new Icon(
               Icons.mail,
-              color: Colors.grey,
+              color: Color(0xFF0C9869),
             )),
         validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
         onSaved: (value) => email = value.trim(),
@@ -261,7 +279,7 @@ class _SignupPageState extends State<SignupPage> {
 
   Widget showPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 5.0, 0.0),
       child: new TextFormField(
         controller: passwordController,
         maxLines: 1,
@@ -271,7 +289,7 @@ class _SignupPageState extends State<SignupPage> {
             hintText: 'Password',
             icon: new Icon(
               Icons.lock,
-              color: Colors.grey,
+              color: Color(0xFF0C9869),
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => password = value.trim(),
@@ -280,17 +298,17 @@ class _SignupPageState extends State<SignupPage> {
   }
   Widget showNameInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 5.0, 0.0),
       child: new TextFormField(
         controller: nameController,
         maxLines: 1,
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Password',
+            hintText: 'Name',
             icon: new Icon(
-              Icons.lock,
-              color: Colors.grey,
+              Icons.people,
+              color:Color(0xFF0C9869) ,
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => name = value.trim(),
@@ -299,17 +317,17 @@ class _SignupPageState extends State<SignupPage> {
   }
   Widget showImageInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 5.0, 0.0),
       child: new TextFormField(
         controller: photoURLController,
         maxLines: 1,
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Password',
+            hintText: 'Phone',
             icon: new Icon(
-              Icons.lock,
-              color: Colors.grey,
+              Icons.phone,
+              color: Color(0xFF0C9869),
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => photoURL = value.trim(),
@@ -320,7 +338,7 @@ class _SignupPageState extends State<SignupPage> {
 
   Widget showPrimaryButton() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(3.0, 30.0, 3.0, 0.0),
         child: SizedBox(
           height: 40.0,
           child: new RaisedButton(
@@ -333,5 +351,21 @@ class _SignupPageState extends State<SignupPage> {
             onPressed: validateAndSubmit,
           ),
         ));
+  }
+  Widget primaryButton(){
+    return new Container(
+      padding: EdgeInsets.only(top:8),
+      child: InkWell(
+        onTap: (){
+          Navigator.pop(context);
+        },
+        child: Center(
+          child:  Text(
+              'Đã có tài khoản',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color(0xFF0C9869)),
+          ),
+        )
+
+      ),
+    );
   }
 }
