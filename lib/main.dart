@@ -7,6 +7,7 @@ import 'package:splashscreen/splashscreen.dart';
 import 'Model/authentication.dart';
 import 'Model/root_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:scoped_model/scoped_model.dart';
 void main() {
   runApp(MyApp(
 

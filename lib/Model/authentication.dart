@@ -15,6 +15,8 @@ abstract class BaseAuth {// lớp
 
   Future<bool> isEmailVerified();// check mail co dung k
   Future<String> getEmail();
+  Future<String> getName();
+  Future<String> getPhotoURL();
   Future<String> updateEmail();
   Future<List> updateProfile();
 
@@ -68,7 +70,7 @@ class Auth implements BaseAuth {
   @override
   Future<String> getEmail() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
-    return user.displayName;
+    return user.email;
   }
 
   @override
@@ -84,6 +86,18 @@ class Auth implements BaseAuth {
     FirebaseUser user = await _firebaseAuth.currentUser();
     List userInfo = user.providerData;
     return userInfo;
+  }
+
+  @override
+  Future<String> getName() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    return user.displayName;
+  }
+
+  @override
+  Future<String> getPhotoURL() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    return user.photoUrl;
   }
 
 

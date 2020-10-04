@@ -4,6 +4,7 @@ import 'package:fresh_farm/App/Products/Category.dart';
 import 'package:fresh_farm/App/Products/Fruits.dart';
 
 import 'package:fresh_farm/Model/authentication.dart';
+import 'package:fresh_farm/Model/model_user.dart';
 import 'package:fresh_farm/Model/user.dart';
 import 'package:fresh_farm/product.dart';
 import 'UI/constants.dart';
@@ -37,6 +38,8 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
       print(e);
     }
   }
+
+
   Widget buildDrawer(BuildContext context){
     return new ListView(
       children: <Widget>[
@@ -94,7 +97,8 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap:(){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProfilePage()));
+
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProfilePage(uid: widget.userId)));
             },
             child: Icon(Icons.person,size: 30, color:Color(0xFF0C9869) ),
           ),
