@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/shop_items.dart';
 import 'package:fresh_farm/App/Products/Category.dart';
 import 'package:fresh_farm/App/Products/Fruits.dart';
 
@@ -62,7 +63,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProductPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ShopItems()));
             },
             child: Icon(Icons.markunread_mailbox,size: 26,color:Color(0xFF0C9869)),
           ),

@@ -57,7 +57,7 @@ class Detail extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Center(
-              child: Text(cookieprice,
+              child: Text('\$${cookieprice}',
                   style: TextStyle(
                       fontFamily: 'Varela',
                       fontSize: 22.0,

@@ -27,20 +27,20 @@ class _MyFastFoodPageState extends State<MyFastFoodPage>{
             mainAxisSpacing: 15.0,
             childAspectRatio: 1.0,
             children: <Widget>[
-              _buildCard('Gio lua', '\$3.99', 'assets/FastFood/giolua.jpg',
+              _buildCard('Gio lua', '3.99', 'assets/FastFood/giolua.jpg',
                   false, false, context),
-              _buildCard('Xuc xich', '\$3.99', 'assets/FastFood/xucxich.jpg',
+              _buildCard('Xuc xich', '3.99', 'assets/FastFood/xucxich.jpg',
                   true, false, context),
-              _buildCard('Xuc xich', '\$3.99', 'assets/FastFood/xucxich.jpg', false, true, context),
-              _buildCard('Xuc xich', '\$3.99', 'assets/FastFood/xucxich.jpg',
+              _buildCard('Xuc xich', '3.99', 'assets/FastFood/xucxich.jpg', false, true, context),
+              _buildCard('Xuc xich', '3.99', 'assets/FastFood/xucxich.jpg',
                   false, false, context),
-              _buildCard('Xuc xich', '\$3.99', 'assets/FastFood/xucxich.jpg',
+              _buildCard('Xuc xich', '3.99', 'assets/FastFood/xucxich.jpg',
                   false, false, context),
-              _buildCard('Xuc xich', '\$3.99', 'assets/FastFood/xucxich.jpg',
+              _buildCard('Xuc xich', '3.99', 'assets/FastFood/xucxich.jpg',
                   false, false, context),
-              _buildCard('Xuc xich', '\$3.99', 'assets/FastFood/xucxich.jpg',
+              _buildCard('Xuc xich', '3.99', 'assets/FastFood/xucxich.jpg',
                   false, false, context),
-              _buildCard('Xuc xich', '\$3.99', 'assets/FastFood/xucxich.jpg',
+              _buildCard('Xuc xich', '3.99', 'assets/FastFood/xucxich.jpg',
                   false, false, context),
             ]
 
@@ -57,7 +57,6 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
 
           onTap: () {
             Navigator.of(context).push(
-
                 MaterialPageRoute(builder: (context) => Detail(
                     assetPath: imgPath,
                     cookieprice:price,
@@ -96,7 +95,7 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
                                     image: AssetImage(imgPath),
                                     fit: BoxFit.fill)))),
                     //SizedBox(height: 7.0),
-                    Text(price,
+                    Text('\$${price}',
                         style: TextStyle(
                             color: Color(0xFFCC8053),
                             fontFamily: 'Varela',

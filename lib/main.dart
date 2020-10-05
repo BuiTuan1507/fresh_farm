@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/shopping_cart.dart';
 import 'package:fresh_farm/App/Service/home.dart';
 import 'package:fresh_farm/App/Service/signup.dart';
 import 'package:fresh_farm/Login/signIn.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Fresh Farm',
         routes: <String, WidgetBuilder>{
-          '/signup': (BuildContext context) => new SignupPage()
+          '/signup': (BuildContext context) => new SignupPage(),
+          '/checkout':(BuildContext context)=> new Checkout()
         },
 
         theme: ThemeData(
@@ -45,53 +47,5 @@ class MyApp extends StatelessWidget {
     //);
     //MyHomePage(),
 
-  }
-}
-class IntroScreen extends StatefulWidget{
-
-
-  @override
-  _IntroScreenState createState() => _IntroScreenState();
-}
-
-class _IntroScreenState extends State<IntroScreen> {
-
-  @override
-  void initState() {
-    super.initState();
-    FirebaseAuth.instance.currentUser().then((res) {
-      print(res);
-      if (res != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Home(uid: res.uid)),
-        );
-      }
-      else
-      {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => SignUp()),
-        );
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new SplashScreen(
-        seconds: 5,
-        title: new Text('Welcome To Meet up!',
-          style: new TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0
-          ),),
-        image: Image.asset('assets/images/dart.png',fit:BoxFit.scaleDown),
-        backgroundColor: Colors.white,
-        styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 100.0,
-        onClick: ()=>print("flutter"),
-        loaderColor: Colors.red
-    );
   }
 }
