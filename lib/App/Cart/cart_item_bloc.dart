@@ -10,14 +10,14 @@ class CartItemsBloc {
 
   final Map allItems = {
     'shop items': [
-      {'name': 'Hoa qua', 'price': 20, 'id': 1,'imgPath':'assets/1.jpg'},
-      {'name': 'Thit heo', 'price': 100, 'id': 2,'imgPath':'assets/4.jpg'},
-      {'name': 'Rau cu', 'price': 10, 'id': 3,'imgPath':'assets/2.jpg'},
-      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg'},
-      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg'},
-      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg'},
-      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg'},
-      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg'},
+      {'name': 'Hoa qua', 'price': 20, 'id': 1,'imgPath':'assets/1.jpg','count':1},
+      {'name': 'Thit heo', 'price': 100, 'id': 2,'imgPath':'assets/4.jpg','count':1},
+      {'name': 'Rau cu', 'price': 10, 'id': 3,'imgPath':'assets/2.jpg','count':1},
+      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg','count':1},
+      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg','count':1},
+      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg','count':1},
+      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg','count':1},
+      {'name': 'Bot', 'price': 90, 'id': 4,'imgPath':'assets/3.jpg','count':1},
     ],
     'cart items': []
   };

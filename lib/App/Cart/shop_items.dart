@@ -52,6 +52,7 @@ Widget shopItemsListBuilder(snapshot) {
       return new Padding(
 
           padding: EdgeInsets.only(top: 2.0, bottom: 2.0, left: 0, right: 0),
+
           child: InkWell(
               onTap: () {
                 Navigator.of(context).push(
