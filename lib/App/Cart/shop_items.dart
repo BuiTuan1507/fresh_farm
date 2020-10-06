@@ -44,15 +44,20 @@ Widget shopItemsListBuilder(snapshot) {
   return GridView.builder(
     padding: EdgeInsets.all(7),
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2
+      crossAxisCount: 2,
+      crossAxisSpacing: 15.0,
+      mainAxisSpacing: 15.0,
+      childAspectRatio: 1.1,
     ),
     itemCount: snapshot.data["shop items"].length,
     itemBuilder: (BuildContext context, i) {
       final shopList = snapshot.data["shop items"];
-      return new Padding(
-
-          padding: EdgeInsets.only(top: 2.0, bottom: 2.0, left: 0, right: 0),
-
+      return new Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.green[500])
+          ),
+          color: Colors.white,
           child: InkWell(
               onTap: () {
                 Navigator.of(context).push(
@@ -90,36 +95,69 @@ Widget shopItemsListBuilder(snapshot) {
                                         image: AssetImage(shopList[i]['imgPath']),
                                         fit: BoxFit.fill)))),
                         //SizedBox(height: 7.0),
-                          Text("\$${shopList[i]['price']}",
-                            style: TextStyle(
-                                color: Color(0xFFCC8053),
-                                fontFamily: 'Varela',
-                                fontSize: 20.0)),
-                        Text(shopList[i]['name'],
-                            style: TextStyle(
-                                color: Color(0xFF575E67),
-                                fontFamily: 'Varela',
-                                fontSize: 18.0)),
-                        Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Container(color: Color(0xFFEBEBEB), height: 1.0)),
-                        Padding(
-                          padding: EdgeInsets.only(left: 5.0, right: 5.0),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children:<Widget> [
-                                Text("Add to cart", style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                                IconButton(
+                        Column(
+                          children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    padding: EdgeInsets.only(left: 10),
 
-                                  icon: Icon(Icons.add_shopping_cart),
-                                  onPressed: () {
-                                    bloc.addToCart(shopList[i]);
-                                  },
-                                ),
-                              ],
+                                      child: Text(shopList[i]['name'],
+                                          style: TextStyle(
+                                              color: Color(0xFF575E67),
+                                              fontFamily: 'Varela',
+                                              fontSize: 20.0)),
 
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 30),
+                                     child:Text("\$${shopList[i]['price']}",
+                                          style: TextStyle(
+                                              color: Color(0xFFCC8053),
+                                              fontFamily: 'Varela',
+                                              fontSize: 18.0)),
+
+                                  ),
+
+                                ],
                               ),
-                        )
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(left: 10.0, right: 5.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children:<Widget> [
+                                      Container(
+                                        padding: EdgeInsets.only(left: 5,right: 15),
+                                        child: IconButton(
+                                          color: (shopList[i]['isLike']? Colors.green[800]:Colors.black),
+                                          icon: Icon(Icons.favorite,),
+                                          onPressed: () {
+                                            bloc.addToFavorite(shopList[i]);
+                                          },
+                                        ),
+                                      ),
+                                      Container(
+                                        child: IconButton(
+
+                                          icon: Icon(Icons.add_shopping_cart),
+                                          onPressed: () {
+                                            bloc.addToCart(shopList[i]);
+                                          },
+                                        ),
+                                      ),
+
+                                    ],
+
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+
+
                       ]))));
 
 

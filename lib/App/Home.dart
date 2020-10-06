@@ -8,6 +8,8 @@ import 'package:fresh_farm/Model/authentication.dart';
 import 'package:fresh_farm/Model/model_user.dart';
 import 'package:fresh_farm/Model/user.dart';
 import 'package:fresh_farm/product.dart';
+import 'Cart/shopping_cart.dart';
+import 'Favorite.dart';
 import 'UI/constants.dart';
 import 'UI/recommed.dart';
 import 'UI/featurred_plants.dart';
@@ -74,7 +76,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favorite()));
             },
             child: Icon(
               Icons.favorite,
@@ -136,7 +138,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               padding: EdgeInsets.only(right: 15.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyFruitsPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Checkout()));
                 },
                 child: Icon(
                   Icons.shopping_cart,

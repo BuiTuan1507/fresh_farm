@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fresh_farm/App/Products/Detail.dart';
-import 'cart_item_bloc.dart';
+import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
 
-class Checkout extends StatefulWidget {
+class Favorite extends StatefulWidget {
   @override
-  _CheckoutState createState() => _CheckoutState();
+  _FavoriteState createState() => _FavoriteState();
 }
 
-class _CheckoutState extends State<Checkout> with AutomaticKeepAliveClientMixin{
+class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
   @override
   bool get wantKeepAlive => true;
   @override
@@ -17,25 +17,25 @@ class _CheckoutState extends State<Checkout> with AutomaticKeepAliveClientMixin{
       appBar:AppBar(
           centerTitle: true,
           backgroundColor: Colors.green,
-          title: Text("Giỏ hàng",
+          title: Text("Yeu thich",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),)),
       body: StreamBuilder(
         stream: bloc.getStream,
         initialData: bloc.allItems,
         builder: (context, snapshot) {
 
-          return snapshot.data['cart items'].length > 0
+          return snapshot.data['favorite items'].length > 0
               ? Column(
             children: <Widget>[
 
-                Expanded(
+              Expanded(
                   child: ListView.builder(
 
 
                     shrinkWrap: true,
-                    itemCount: snapshot.data["cart items"].length,
+                    itemCount: snapshot.data["favorite items"].length,
                     itemBuilder: (BuildContext context, i) {
-                      final cartList = snapshot.data["cart items"];
+                      final cartList = snapshot.data["favorite items"];
                       int n = cartList[i]['count'];
                       void add(){
                         setState(() {
@@ -103,40 +103,7 @@ class _CheckoutState extends State<Checkout> with AutomaticKeepAliveClientMixin{
                                           ,)
                                       ],
                                     ),
-                                    Row(
-                                      children: <Widget>[
-                                        Container(
-                                          width: 30,
-                                          height: 30,
-                                          padding: EdgeInsets.only(right: 12),
 
-                                          child: new FloatingActionButton(
-                                            onPressed: add,
-                                            child: new Icon(Icons.add, color: Colors.green[800],),
-                                            backgroundColor: Colors.white,
-                                            heroTag: null,
-                                          ),
-                                        ),
-
-                                        new Text('$n',
-                                            style: new TextStyle(fontSize: 16.0)),
-                                        Container(
-                                          width: 30,
-                                          height: 30,
-                                          padding: EdgeInsets.only(left: 12),
-                                          child:  new FloatingActionButton(
-                                            onPressed: minus,
-                                            child: new Icon(
-                                                const IconData(0xe15b, fontFamily: 'MaterialIcons'),
-                                                color: Colors.green[800]),
-                                            backgroundColor: Colors.white,
-                                            heroTag: null,),
-                                        ),
-
-
-                                      ],
-
-                                    )
 
                                   ],
                                 ),
@@ -150,7 +117,7 @@ class _CheckoutState extends State<Checkout> with AutomaticKeepAliveClientMixin{
                                         IconButton(
                                           icon: Icon(Icons.delete,color: Colors.green[800],),
                                           onPressed: () {
-                                            bloc.removeFromCart(cartList[i]);
+                                            bloc.removeFromFavorite(cartList[i]);
                                           },
                                         ),
                                       ],
@@ -171,38 +138,8 @@ class _CheckoutState extends State<Checkout> with AutomaticKeepAliveClientMixin{
 
                     },
                   )
-                ),
-                Container(
-                padding: EdgeInsets.only(left: 30),
-                child:  Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text('Giá tiền:             ${snapshot.data['total']}',style: TextStyle(fontSize: 18, color: Colors.black),)
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text('Phí vận chuyển:     ${snapshot.data['delivery']}',style: TextStyle(fontSize: 18),)
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text('Tổng số tiền:      ${snapshot.data['subTotal']}',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.green[800]),)
-                        ],
-                      )
-                    ],
-                  ),
-              ) ,
-
-
-
-                  RaisedButton(
-                    onPressed: () {},
-                    child: Text("Thanh toan"),
-                color: Colors.green,
               ),
-              SizedBox(height: 40)
+
             ],
           )
               : Center(child: Text("Gio hang trong"));
