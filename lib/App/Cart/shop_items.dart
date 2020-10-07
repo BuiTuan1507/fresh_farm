@@ -65,6 +65,7 @@ Widget shopItemsListBuilder(snapshot) {
                     MaterialPageRoute(builder: (context) => Detail(
                         itemProduct: shopList[i],
                     )));
+                bloc.addToInfo(shopList[i]);
               },
               child: Container(
                 //color: Color(0xFFEFDB),
@@ -129,7 +130,7 @@ Widget shopItemsListBuilder(snapshot) {
                                       Container(
                                         padding: EdgeInsets.only(left: 5,right: 15),
                                         child: IconButton(
-                                          color: (shopList[i]['isLike']? Colors.red[800]:Colors.black),
+                                          color: (shopList[i]['isLike']? Colors.red[800]:Colors.white),
                                           icon: Icon(Icons.favorite,),
                                           onPressed: () {
                                             bloc.addToFavorite(shopList[i]);

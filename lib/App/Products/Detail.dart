@@ -1,5 +1,9 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Cart/Cart.dart';
+import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'package:fresh_farm/App/Cart/shopping_cart.dart';
 
 
 class Detail extends StatelessWidget {
@@ -13,12 +17,8 @@ class Detail extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0.0,
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF545D68)),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+
+
         title: Text('Chi tiết sản phẩm',
             style: TextStyle(
                 fontFamily: 'Varela',
@@ -27,89 +27,128 @@ class Detail extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.shopping_cart, color: Color(0xFF545D68)),
-            onPressed: () {},
+            onPressed: () {
+
+            },
           ),
         ],
       ),
 
-      body: ListView(
-          children: [
-            SizedBox(height: 15.0),
-            Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text(
-                  'Sản phẩm',
-                  style: TextStyle(
-                      fontFamily: 'Varela',
-                      fontSize: 42.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0C9869) )
-              ),
+      body: StreamBuilder(
+          initialData:bloc.allItems,
+            stream: bloc.getStream,
+            builder: (context,snapshot){
+            return snapshot.data["info item"].length > 0
+            ? InfoItemsListBuilder(context,snapshot)
+            : Center(child: Text("Ban chua xem san pham"));
+      },
+
+    ));
+  }
+}
+Widget InfoItemsListBuilder(context,snapshot){
+  Size size = MediaQuery
+      .of(context)
+      .size;
+  final infoItem = snapshot.data['info item'];
+  print(infoItem);
+  print(infoItem[0]);
+
+  return SingleChildScrollView(
+    child:Column(
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: Text(
+              'Rau cu',style: TextStyle(
+            fontFamily: 'Varela',
+            fontSize: 42.0,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF0C9869),
+          )),
+        ),
+        SizedBox(height: 15,),
+        Hero(
+          tag: infoItem[0]['imgPath'],
+          child: Image.asset(infoItem[0]['imgPath'],
+            height: size.height * 0.3,
+            width: double.infinity,
+          fit: BoxFit.contain,),
+
+        ),
+
+        Center(
+          child: Text('\$${infoItem[0]['price']}',style: TextStyle(
+              fontFamily: 'Varela',
+              fontSize: 22.0,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF0C9869)   )),
+        ),
+        SizedBox(height: 10.0),
+        Center(
+          child: Text(infoItem[0]['name'],
+              style: TextStyle(
+                  color: Color(0xFF575E67),
+                  fontFamily: 'Varela',
+                  fontSize: 24.0)),
+        ),
+        SizedBox(height: 20.0),
+        Center(
+          child: Container(
+            width: MediaQuery.of(context).size.width - 50.0,
+            child: Text('Cold, creamy ice cream sandwiched between delicious deluxe cookies. Pick your favorite deluxe cookies and ice cream flavor.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: 'Varela',
+                    fontSize: 16.0,
+                    color: Color(0xFFB4B8B9))
             ),
-            SizedBox(height: 15.0),
-            Hero(
-                tag: itemProduct['imgPath'],
-                child: Image.asset(itemProduct['imgPath'],
-                    height: 150.0,
-                    width: 100.0,
-                    fit: BoxFit.contain
-                )
-            ),
-            SizedBox(height: 20.0),
-            Center(
-              child: Text('\$${itemProduct['price']}',
-                  style: TextStyle(
-                      fontFamily: 'Varela',
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0C9869)   )),
-            ),
-            SizedBox(height: 10.0),
-            Center(
-              child: Text(itemProduct['name'],
-                  style: TextStyle(
-                      color: Color(0xFF575E67),
-                      fontFamily: 'Varela',
-                      fontSize: 24.0)),
-            ),
-            SizedBox(height: 20.0),
-            Center(
-              child: Container(
+          ),
+        ),
+        SizedBox(height: 20.0),
+        Center(
+            child: Container(
                 width: MediaQuery.of(context).size.width - 50.0,
-                child: Text('Cold, creamy ice cream sandwiched between delicious deluxe cookies. Pick your favorite deluxe cookies and ice cream flavor.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Varela',
-                        fontSize: 16.0,
-                        color: Color(0xFFB4B8B9))
+                height: 50.0,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25.0),
+                    color: Color(0xFF0C9869)
                 ),
-              ),
-            ),
-            SizedBox(height: 20.0),
-            Center(
-                child: Container(
-                    width: MediaQuery.of(context).size.width - 50.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: Color(0xFF0C9869)
-                    ),
-                    child: Center(
-                        child: Text('Add to cart',
-                          style: TextStyle(
-                              fontFamily: 'Varela',
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                          ),
+                child: Center(
+                  child: InkWell(
+                    onTap: (){
+                      bloc.addToCart(infoItem[0]);
+                      Navigator.of(context).push(
+
+                          MaterialPageRoute(builder: (context) => Checkout()));
+                    },
+                      child: Text('Add to cart',
+                        style: TextStyle(
+                            fontFamily: 'Varela',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                        ),
+                      )
                         )
-                    )
+
                 )
             )
-          ]
-      ),
+        ),
+        RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+            bloc.removeToInfo(infoItem[0]);
+          },
+          child: Text("Xem them san pham"),
+          color: Colors.green,
+        ),
+        SizedBox(height: 40)
+      ],
+    )
 
 
-    );
-  }
+
+  );
+
 }

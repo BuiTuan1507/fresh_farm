@@ -44,10 +44,19 @@ class CartItemsBloc {
     ],
     'cart items': [],
     'favorite items':[],
+    'info item': [],
     'total':0,
     'delivery':0,
     'subTotal': 0
   };
+
+  void addToInfo(item) {
+    allItems['info item'].add(item);
+  }
+  void removeToInfo(item){
+    allItems['info item'].remove(item);
+  }
+
   void addToCart(item) {
     allItems['shop items'].remove(item);
     allItems['cart items'].add(item);
