@@ -42,15 +42,15 @@ class Recomends extends StatelessWidget {
         children: <Widget>[
           Image.asset(image),
           GestureDetector(
-            onTap: (){
-              Navigator.of(context).push(
+           // onTap: (){
+           //   Navigator.of(context).push(
 
-                  MaterialPageRoute(builder: (context) => Detail(
-                      assetPath: image,
-                      cookieprice:price,
-                      cookiename: title
-                  )));
-            },
+             //     MaterialPageRoute(builder: (context) => Detail(
+               //       assetPath: image,
+                 //     cookieprice:price,
+                  //    cookiename: title
+               //   )));
+           // },
             child: Container(
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(

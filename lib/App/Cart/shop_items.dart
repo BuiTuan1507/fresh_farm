@@ -63,9 +63,7 @@ Widget shopItemsListBuilder(snapshot) {
                 Navigator.of(context).push(
 
                     MaterialPageRoute(builder: (context) => Detail(
-                        assetPath: shopList[i]['imgPath'],
-                        cookieprice:shopList[i]['price'],
-                        cookiename: shopList[i]['name']
+                        itemProduct: shopList[i],
                     )));
               },
               child: Container(
@@ -131,7 +129,7 @@ Widget shopItemsListBuilder(snapshot) {
                                       Container(
                                         padding: EdgeInsets.only(left: 5,right: 15),
                                         child: IconButton(
-                                          color: (shopList[i]['isLike']? Colors.green[800]:Colors.black),
+                                          color: (shopList[i]['isLike']? Colors.red[800]:Colors.black),
                                           icon: Icon(Icons.favorite,),
                                           onPressed: () {
                                             bloc.addToFavorite(shopList[i]);

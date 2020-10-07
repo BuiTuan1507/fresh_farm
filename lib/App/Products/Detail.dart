@@ -3,9 +3,9 @@ import 'package:fresh_farm/App/Cart/Cart.dart';
 
 
 class Detail extends StatelessWidget {
-  final assetPath, cookieprice, cookiename;
+  final itemProduct;
 
-  Detail({this.assetPath, this.cookieprice, this.cookiename});
+  Detail({this.itemProduct});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,14 +19,14 @@ class Detail extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Pickup',
+        title: Text('Chi tiết sản phẩm',
             style: TextStyle(
                 fontFamily: 'Varela',
                 fontSize: 20.0,
                 color: Color(0xFF545D68))),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications_none, color: Color(0xFF545D68)),
+            icon: Icon(Icons.shopping_cart, color: Color(0xFF545D68)),
             onPressed: () {},
           ),
         ],
@@ -38,7 +38,7 @@ class Detail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 20.0),
               child: Text(
-                  'Cookie',
+                  'Sản phẩm',
                   style: TextStyle(
                       fontFamily: 'Varela',
                       fontSize: 42.0,
@@ -48,8 +48,8 @@ class Detail extends StatelessWidget {
             ),
             SizedBox(height: 15.0),
             Hero(
-                tag: assetPath,
-                child: Image.asset(assetPath,
+                tag: itemProduct['imgPath'],
+                child: Image.asset(itemProduct['imgPath'],
                     height: 150.0,
                     width: 100.0,
                     fit: BoxFit.contain
@@ -57,7 +57,7 @@ class Detail extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Center(
-              child: Text('\$${cookieprice}',
+              child: Text('\$${itemProduct['price']}',
                   style: TextStyle(
                       fontFamily: 'Varela',
                       fontSize: 22.0,
@@ -66,7 +66,7 @@ class Detail extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Center(
-              child: Text(cookiename,
+              child: Text(itemProduct['name'],
                   style: TextStyle(
                       color: Color(0xFF575E67),
                       fontFamily: 'Varela',

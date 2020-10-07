@@ -54,15 +54,15 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
 
       padding: EdgeInsets.only(top: 2.0, bottom: 2.0, left: 0, right: 0),
       child: InkWell(
-
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Detail(
-                    assetPath: imgPath,
-                    cookieprice:price,
-                    cookiename: name
-                )));
-          },
+        onTap: (){},
+         // onTap: () {
+          //  Navigator.of(context).push(
+              //  MaterialPageRoute(builder: (context) => Detail(
+                 //   assetPath: imgPath,
+                 //   cookieprice:price,
+                //    cookiename: name
+              //  )));
+        //  },
           child: Container(
             //color: Color(0xFFEFDB),
               decoration: BoxDecoration(

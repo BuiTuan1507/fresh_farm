@@ -68,9 +68,7 @@ class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
                                       Navigator.of(context).push(
 
                                           MaterialPageRoute(builder: (context) => Detail(
-                                              assetPath: cartList[i]['imgPath'],
-                                              cookieprice:cartList[i]['price'],
-                                              cookiename: cartList[i]['name']
+                                              itemProduct: cartList[i],
                                           )));
                                     },
                                     child: Container(
@@ -142,7 +140,16 @@ class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
 
             ],
           )
-              : Center(child: Text("Gio hang trong"));
+              : Column(
+                children: <Widget>[
+                  Center(child: Text("Bạn chưa có sản phẩm yêu thích nào",style: TextStyle(fontSize: 24),)),
+                  RaisedButton(
+                    onPressed: () {},
+                    child: Text("Xem thêm sản phẩm"),
+                    color: Colors.green,
+                  ),
+            ],
+          );
         },
       ),
     );

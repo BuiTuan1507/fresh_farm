@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Cart/shop_items.dart';
 import 'package:fresh_farm/App/Products/Category.dart';
-import 'package:fresh_farm/App/Products/Fruits.dart';
+
 
 import 'package:fresh_farm/Model/authentication.dart';
 import 'package:fresh_farm/Model/model_user.dart';

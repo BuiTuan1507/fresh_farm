@@ -68,9 +68,7 @@ class _CheckoutState extends State<Checkout> with AutomaticKeepAliveClientMixin{
                                       Navigator.of(context).push(
 
                                           MaterialPageRoute(builder: (context) => Detail(
-                                              assetPath: cartList[i]['imgPath'],
-                                              cookieprice:cartList[i]['price'],
-                                              cookiename: cartList[i]['name']
+                                              itemProduct: cartList[i],
                                           )));
                                     },
                                     child: Container(
