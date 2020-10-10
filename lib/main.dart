@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
 import 'package:fresh_farm/App/Service/home.dart';
 import 'package:fresh_farm/App/Service/signup.dart';
 import 'package:fresh_farm/Login/signIn.dart';
 import 'package:fresh_farm/product.dart';
+import 'package:fresh_farm/test.dart';
+import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'Model/authentication.dart';
 import 'Model/root_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:scoped_model/scoped_model.dart';
+
+import 'Model/service.dart';
 void main() {
   runApp(MyApp(
 
@@ -19,7 +24,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final FirebaseService firebaseServices = FirebaseService();
+    return MultiProvider(
+      providers: [
+        StreamProvider<List<Item>>.value(value: firebaseServices.getItemList)
+      ],
+      child: MaterialApp(
         title: 'Fresh Farm',
         routes: <String, WidgetBuilder>{
           '/signup': (BuildContext context) => new SignupPage(),
@@ -42,7 +52,13 @@ class MyApp extends StatelessWidget {
           // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: new RootPage(auth: new Auth()),);
+        home: new RootPage(auth: new Auth(),)
+         //create: (BuildContext context) =>firebaseServices.getItemList(),
+          //child:  new RootPage(
+            //  auth: new Auth()),
+
+        ));
+
     //IntroScreen()
     //);
     //MyHomePage(),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Home.dart';
 import 'login_signup_page.dart';
 import 'authentication.dart';
-import 'home_page.dart';
+
 // quản lí trang thái của người dùng
 enum AuthStatus {
   NOT_DETERMINED,// không xác định

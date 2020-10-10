@@ -1,10 +1,15 @@
+import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Products/Detail.dart';
 
-import 'cart_item_bloc.dart';
-import 'package:flutter/material.dart';
 
-class ShopItems extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:fresh_farm/Model/service.dart';
+import 'package:provider/provider.dart';
+
+class Test extends StatelessWidget {
   Widget build(BuildContext context) {
+    List userList = Provider.of<List<Item>>(context);
+    FirebaseService firebaseServices = FirebaseService();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -14,32 +19,18 @@ class ShopItems extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.shopping_cart),
-            onPressed: () => Navigator.pushNamed(context, '/checkout'),
+
           )
         ],
       ),
-      body: ShopItemsWidget(),
+      body: shopItemsListBuilder(userList),
     );
   }
 }
 
-class ShopItemsWidget extends StatelessWidget {
 
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return StreamBuilder(
-      initialData: bloc.allItems,
-      stream: bloc.getStream,
-      builder: (context, snapshot) {
-        return snapshot.data["shop items"].length > 0
-            ? shopItemsListBuilder(snapshot)
-            : Center(child: Text("Ban da mua het hang"));
-      },
-    );
-  }
-}
 
-Widget shopItemsListBuilder(snapshot) {
+Widget shopItemsListBuilder(List userList) {
 
   return GridView.builder(
     padding: EdgeInsets.all(7),
@@ -49,9 +40,8 @@ Widget shopItemsListBuilder(snapshot) {
       mainAxisSpacing: 15.0,
       childAspectRatio: 1.1,
     ),
-    itemCount: snapshot.data["shop items"].length,
-    itemBuilder: (BuildContext context, i) {
-      final shopList = snapshot.data["shop items"];
+    itemCount: userList.length,
+    itemBuilder: (_, i) {
       return new Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
@@ -60,13 +50,6 @@ Widget shopItemsListBuilder(snapshot) {
           color: Colors.white,
           child: InkWell(
               onTap: () {
-                Navigator.of(context).push(
-
-                    MaterialPageRoute(builder: (context) => Detail(
-                        itemProduct: shopList[i],
-                    )));
-
-                bloc.addToInfo(shopList[i]);
 
               },
               child: Container(
@@ -93,35 +76,35 @@ Widget shopItemsListBuilder(snapshot) {
                                 width: 150,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage(shopList[i]['imgPath']),
+                                        image: AssetImage(userList[i].imgPath),
                                         fit: BoxFit.fill)))),
                         //SizedBox(height: 7.0),
                         Column(
                           children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.only(left: 10),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(left: 10),
 
-                                      child: Text(shopList[i]['name'],
-                                          style: TextStyle(
-                                              color: Color(0xFF575E67),
-                                              fontFamily: 'Varela',
-                                              fontSize: 20.0)),
+                                  child: Text(userList[i].name,
+                                      style: TextStyle(
+                                          color: Color(0xFF575E67),
+                                          fontFamily: 'Varela',
+                                          fontSize: 20.0)),
 
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(left: 30),
-                                     child:Text("\$${shopList[i]['price']}",
-                                          style: TextStyle(
-                                              color: Color(0xFFCC8053),
-                                              fontFamily: 'Varela',
-                                              fontSize: 18.0)),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 30),
+                                  child:Text("\$${userList[i].price}",
+                                      style: TextStyle(
+                                          color: Color(0xFFCC8053),
+                                          fontFamily: 'Varela',
+                                          fontSize: 18.0)),
 
-                                  ),
+                                ),
 
-                                ],
-                              ),
+                              ],
+                            ),
                             Row(
                               children: <Widget>[
                                 Container(
@@ -132,10 +115,10 @@ Widget shopItemsListBuilder(snapshot) {
                                       Container(
                                         padding: EdgeInsets.only(left: 5,right: 15),
                                         child: IconButton(
-                                          color: (shopList[i]['isLike']? Colors.red[800]:Colors.white),
+                                          color: (userList[i].isLike? Colors.red[800]:Colors.white),
                                           icon: Icon(Icons.favorite,),
                                           onPressed: () {
-                                            bloc.addToFavorite(shopList[i]);
+                                         //   bloc.addToFavorite(shopList[i]);
                                           },
                                         ),
                                       ),
@@ -144,7 +127,7 @@ Widget shopItemsListBuilder(snapshot) {
 
                                           icon: Icon(Icons.add_shopping_cart),
                                           onPressed: () {
-                                            bloc.addToCart(shopList[i]);
+                                         //   bloc.addToCart(shopList[i]);
                                           },
                                         ),
                                       ),

@@ -51,8 +51,7 @@ Widget InfoItemsListBuilder(context,snapshot){
       .of(context)
       .size;
   final infoItem = snapshot.data['info item'];
-  print(infoItem);
-  print(infoItem[0]);
+
 
   return SingleChildScrollView(
     child:Column(

@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shop_items.dart';
 import 'package:fresh_farm/App/Products/Category.dart';
+import 'package:fresh_farm/App/Search.dart';
 
 
 import 'package:fresh_farm/Model/authentication.dart';
 import 'package:fresh_farm/Model/model_user.dart';
 import 'package:fresh_farm/Model/user.dart';
 import 'package:fresh_farm/product.dart';
+import 'package:fresh_farm/test.dart';
 import 'Cart/shopping_cart.dart';
 import 'Favorite.dart';
 import 'UI/constants.dart';
@@ -138,7 +141,9 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               padding: EdgeInsets.only(right: 15.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Checkout()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Test()));
+
+
                 },
                 child: Icon(
                   Icons.shopping_cart,
