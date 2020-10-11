@@ -17,11 +17,10 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'Model/service.dart';
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => Cart(),
-      child:MyApp(
+  runApp(
+      MyApp(
 
-  )));
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -31,7 +30,9 @@ class MyApp extends StatelessWidget {
     final FirebaseService firebaseServices = FirebaseService();
     return MultiProvider(
       providers: [
-        StreamProvider<List<Item>>.value(value: firebaseServices.getItemList)
+        StreamProvider<List<Item>>.value(value: firebaseServices.getItemList),
+        ChangeNotifierProvider(create: (context) => Cart()),
+
       ],
       child: MaterialApp(
         title: 'Fresh Farm',

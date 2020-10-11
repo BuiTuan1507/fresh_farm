@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+
 import 'package:fresh_farm/App/Products/Detail.dart';
 import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'package:provider/provider.dart';
 
 class Favorite extends StatefulWidget {
   @override
@@ -19,12 +21,11 @@ class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
           backgroundColor: Colors.green,
           title: Text("Yeu thich",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),)),
-      body: StreamBuilder(
-        stream: bloc.getStream,
-        initialData: bloc.allItems,
-        builder: (context, snapshot) {
+      body: Consumer<Cart>(
 
-          return snapshot.data['favorite items'].length > 0
+        builder: (context, cart,child) {
+
+          return cart.FavoriteItem.length > 0
               ? Column(
             children: <Widget>[
 
@@ -33,21 +34,9 @@ class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
 
 
                     shrinkWrap: true,
-                    itemCount: snapshot.data["favorite items"].length,
+                    itemCount: cart.FavoriteItem.length,
                     itemBuilder: (BuildContext context, i) {
-                      final cartList = snapshot.data["favorite items"];
-                      int n = cartList[i]['count'];
-                      void add(){
-                        setState(() {
-                          n++;
-                        });
-                      }
-                      void minus(){
-                        setState(() {
-                          if(n != 0)
-                            n--;
-                        });
-                      }
+                      final cartList = cart.FavoriteItem;
 
 
                       return new Container(
@@ -76,7 +65,7 @@ class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
                                         height: 80,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
-                                                image: AssetImage(cartList[i]['imgPath']),
+                                                image: AssetImage(cartList[i].imgPath),
                                                 fit: BoxFit.fill))
                                     ),
                                   )),
@@ -87,7 +76,7 @@ class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
                                     Row(
                                       children: <Widget>[
                                         Center(
-                                            child: Text(cartList[i]['name'], style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                            child: Text(cartList[i].name, style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
                                             )
                                         )
                                       ],
@@ -96,7 +85,7 @@ class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
                                       children: <Widget>[
                                         Container(
                                           padding :EdgeInsets.only(bottom: 0),
-                                          child: Text('\$${cartList[i]['price']}', style: TextStyle(fontSize: 15, color: Colors.black),
+                                          child: Text('\$${cartList[i].price}', style: TextStyle(fontSize: 15, color: Colors.black),
                                           )
                                           ,)
                                       ],
@@ -115,7 +104,8 @@ class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
                                         IconButton(
                                           icon: Icon(Icons.delete,color: Colors.green[800],),
                                           onPressed: () {
-                                            bloc.removeFromFavorite(cartList[i]);
+
+                                            cart.removeFavorite(cartList[i]);
                                           },
                                         ),
                                       ],

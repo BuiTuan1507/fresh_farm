@@ -68,7 +68,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ShopItems()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Test(uid: widget.userId)));
             },
             child: Icon(Icons.markunread_mailbox,size: 26,color:Color(0xFF0C9869)),
           ),
@@ -141,7 +141,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               padding: EdgeInsets.only(right: 15.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Test()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Checkout()));
 
 
                 },

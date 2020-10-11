@@ -52,11 +52,14 @@ class Item{
 
 
 class Cart extends ChangeNotifier{
-  int id;
+
   List <Item> ListItem = [];
+  String uid;
   int total = 0;
   int delivery;
   int subTotal;
+  List <Item> FavoriteItem = [];
+
   void add(Item item) {
     ListItem.add(item);
     total= total + item.price;
@@ -68,7 +71,61 @@ class Cart extends ChangeNotifier{
     ListItem.remove(item);
     notifyListeners();
   }
+
+
+
+  void addFavorite(Item item) {
+    if (FavoriteItem.length == 0) {
+      item.isLike = true;
+      FavoriteItem.add(item);
+
+    }else{
+      for(int i =0; i<FavoriteItem.length;i++){
+        if (item.id == FavoriteItem[i].id){
+          break;
+        }
+        else{
+          item.isLike = true;
+          FavoriteItem.add(item);
+        }
+      }
+    }
+    notifyListeners();
+  }
+
+  void removeFavorite(Item item) {
+    item.isLike = false;
+    for(int i = 0 ;i<FavoriteItem.length;i++){
+      if (item.id == FavoriteItem[i].id){
+        FavoriteItem.remove(item);
+      }
+    }
+
+    notifyListeners();
+  }
+  void addUser(String userId){
+    uid = userId;
+  }
+  void createCart(List<Item> item,String uid){
+    List yourItemList = [];
+    for (int i = 0 ; i<item.length;i++){
+      yourItemList.add({
+        "id":item[i].id,
+        "name": item[i].name,
+        "price":item[i].price
+      });
+    }
+    Firestore firestoreInstance = Firestore.instance;
+
+    firestoreInstance.collection('cart').document(uid).setData({
+      "user":uid,
+      'item':FieldValue.arrayUnion(yourItemList)
+
+    });
+  }
 }
+
+
 
 class CartItemsBloc {
   /// The [cartStreamController] is an object of the StreamController class

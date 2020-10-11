@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:fresh_farm/Model/service.dart';
 import 'package:provider/provider.dart';
 class Test extends StatefulWidget{
+  String uid;
+  Test({Key key, this.uid}) : super(key: key);
   @override
   _TestState createState() => _TestState();
 }
@@ -16,6 +18,7 @@ class _TestState extends State<Test> {
     List userList = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
     return Consumer<Cart>(builder: (context, cart, child) {
+      cart.addUser(widget.uid);
       return Scaffold(
         appBar: AppBar(
           title: Text('Shopping cart'),
@@ -41,7 +44,7 @@ class _TestState extends State<Test> {
           ],
           centerTitle: true,
         ),
-        body: shopItemsListBuilder(userList,cart)
+        body: shopItemsListBuilder(userList,cart,this.widget.uid)
       );
     });
   }
@@ -51,7 +54,7 @@ class _TestState extends State<Test> {
 
 
 
-Widget shopItemsListBuilder(List userList,Cart cart) {
+Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
 
   return GridView.builder(
     padding: EdgeInsets.all(7),
@@ -61,7 +64,7 @@ Widget shopItemsListBuilder(List userList,Cart cart) {
       mainAxisSpacing: 15.0,
       childAspectRatio: 1.1,
     ),
-    itemCount: 4,
+    itemCount: 5,
     itemBuilder: (_, i,) {
       return new Card(
           shape: RoundedRectangleBorder(
@@ -71,7 +74,10 @@ Widget shopItemsListBuilder(List userList,Cart cart) {
           color: Colors.white,
           child: InkWell(
               onTap: () {
-                Navigator.pushNamed(_, '/checkout');
+
+                Navigator.of(_).push(
+
+                    MaterialPageRoute(builder: (context) => Checkout()));
 
               },
               child: Container(
@@ -140,7 +146,7 @@ Widget shopItemsListBuilder(List userList,Cart cart) {
                                           color: (userList[i].isLike? Colors.red[800]:Colors.white),
                                           icon: Icon(Icons.favorite,),
                                           onPressed: () {
-                                         //   bloc.addToFavorite(shopList[i]);
+                                         cart.addFavorite(userList[i]);
                                           },
                                         ),
                                       ),

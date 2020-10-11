@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fresh_farm/App/Products/Detail.dart';
@@ -9,9 +10,10 @@ class Checkout extends StatefulWidget {
   _CheckoutState createState() => _CheckoutState();
 }
 
-class _CheckoutState extends State<Checkout> with AutomaticKeepAliveClientMixin{
-  @override
-  bool get wantKeepAlive => true;
+class _CheckoutState extends State<Checkout> {
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String uid;
+
   @override
 
   Widget build(BuildContext context) {
@@ -181,7 +183,9 @@ class _CheckoutState extends State<Checkout> with AutomaticKeepAliveClientMixin{
 
 
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      cart.createCart(cart.ListItem, cart.uid);
+                    },
                     child: Text("Thanh toan"),
                 color: Colors.green,
               ),

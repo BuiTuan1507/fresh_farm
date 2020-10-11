@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:fresh_farm/App/Cart/Cart.dart';
+
 import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
 
