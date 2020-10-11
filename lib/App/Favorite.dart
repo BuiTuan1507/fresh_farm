@@ -57,7 +57,7 @@ class _FavoriteState extends State<Favorite> with AutomaticKeepAliveClientMixin{
                                       Navigator.of(context).push(
 
                                           MaterialPageRoute(builder: (context) => Detail(
-                                              itemProduct: cartList[i],
+
                                           )));
                                     },
                                     child: Container(

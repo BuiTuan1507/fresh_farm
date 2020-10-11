@@ -64,7 +64,7 @@ Widget shopItemsListBuilder(snapshot) {
                 Navigator.of(context).push(
 
                     MaterialPageRoute(builder: (context) => Detail(
-                        itemProduct: shopList[i],
+
                     )));
 
                 bloc.addToInfo(shopList[i]);

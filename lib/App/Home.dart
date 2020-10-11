@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shop_items.dart';
 import 'package:fresh_farm/App/Products/Category.dart';
+import 'package:fresh_farm/App/Products/Search.dart';
 import 'package:fresh_farm/App/Search.dart';
 
 
@@ -114,6 +115,18 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ),
         ListTile(
           leading: GestureDetector(
+            onTap:(){
+
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CloudFirestoreSearch()));
+            },
+            child: Icon(Icons.search,size: 26, color:Color(0xFF0C9869) ),
+          ),
+          title: Text('Search',style: TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
+          )),
+        ),
+        ListTile(
+          leading: GestureDetector(
             onTap: (){
               signOut();
             },
@@ -170,7 +183,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               }),
               RecomendsPlants(),
               TitleWithMoreBtn(title: "Recomended", press: () {
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProductPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyHomeAppPage()));
               }),
               Recomends(),
 

@@ -4,53 +4,56 @@ import 'package:flutter/material.dart';
 
 import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
+import 'package:provider/provider.dart';
 
+class Detail extends StatefulWidget {
+  @override
+  _DetailState createState() => _DetailState();
+}
 
-class Detail extends StatelessWidget {
-  final itemProduct;
-
-  Detail({this.itemProduct});
+class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        centerTitle: true,
+      return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0.0,
+            centerTitle: true,
 
 
-        title: Text('Chi tiết sản phẩm',
-            style: TextStyle(
-                fontFamily: 'Varela',
-                fontSize: 20.0,
-                color: Color(0xFF545D68))),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart, color: Color(0xFF545D68)),
-            onPressed: () {
+            title: Text('Chi tiết sản phẩm',
+                style: TextStyle(
+                    fontFamily: 'Varela',
+                    fontSize: 20.0,
+                    color: Color(0xFF545D68))),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.shopping_cart, color: Color(0xFF545D68)),
+                onPressed: () {
+
+                },
+              ),
+            ],
+          ),
+
+          body: Consumer<Cart>(
+            builder: (context,cart,child){
+              return InfoItemsListBuilder(context,cart);
 
             },
-          ),
-        ],
-      ),
 
-      body: StreamBuilder(
-          initialData:bloc.allItems,
-            stream: bloc.getStream,
-            builder: (context,snapshot){
-            return snapshot.data["info item"].length > 0
-            ? InfoItemsListBuilder(context,snapshot)
-            : Center(child: Text("Ban chua xem san pham"));
-      },
+          ));
+    }
 
-    ));
   }
-}
-Widget InfoItemsListBuilder(context,snapshot){
+
+
+
+Widget InfoItemsListBuilder(context,cart){
   Size size = MediaQuery
       .of(context)
       .size;
-  final infoItem = snapshot.data['info item'];
+  final infoItem = cart.infoItem;
 
 
   return SingleChildScrollView(
@@ -68,8 +71,8 @@ Widget InfoItemsListBuilder(context,snapshot){
         ),
         SizedBox(height: 15,),
         Hero(
-          tag: infoItem[0]['imgPath'],
-          child: Image.asset(infoItem[0]['imgPath'],
+          tag: infoItem[0].imgPath,
+          child: Image.asset(infoItem[0].imgPath,
             height: size.height * 0.3,
             width: double.infinity,
           fit: BoxFit.contain,),
@@ -77,7 +80,7 @@ Widget InfoItemsListBuilder(context,snapshot){
         ),
 
         Center(
-          child: Text('\$${infoItem[0]['price']}',style: TextStyle(
+          child: Text('\$${infoItem[0].price}',style: TextStyle(
               fontFamily: 'Varela',
               fontSize: 22.0,
               fontWeight: FontWeight.bold,
@@ -85,7 +88,7 @@ Widget InfoItemsListBuilder(context,snapshot){
         ),
         SizedBox(height: 10.0),
         Center(
-          child: Text(infoItem[0]['name'],
+          child: Text(infoItem[0].name,
               style: TextStyle(
                   color: Color(0xFF575E67),
                   fontFamily: 'Varela',
@@ -116,7 +119,7 @@ Widget InfoItemsListBuilder(context,snapshot){
                 child: Center(
                   child: InkWell(
                     onTap: (){
-                      bloc.addToCart(infoItem[0]);
+                      cart.add(infoItem[0]);
                       Navigator.of(context).push(
 
                           MaterialPageRoute(builder: (context) => Checkout()));
@@ -137,7 +140,7 @@ Widget InfoItemsListBuilder(context,snapshot){
         RaisedButton(
           onPressed: () {
             Navigator.pop(context);
-            bloc.removeToInfo(infoItem[0]);
+            cart.removeInfoItem(infoItem[0]);
           },
           child: Text("Xem them san pham"),
           color: Colors.green,

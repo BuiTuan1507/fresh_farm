@@ -74,10 +74,10 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
           color: Colors.white,
           child: InkWell(
               onTap: () {
-
+                cart.addInfoItem(userList[i]);
                 Navigator.of(_).push(
 
-                    MaterialPageRoute(builder: (context) => Checkout()));
+                    MaterialPageRoute(builder: (context) => Detail()));
 
               },
               child: Container(

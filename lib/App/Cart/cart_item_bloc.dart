@@ -59,6 +59,8 @@ class Cart extends ChangeNotifier{
   int delivery;
   int subTotal;
   List <Item> FavoriteItem = [];
+  List<Item> infoItem = [];
+  Item searchItem;
 
   void add(Item item) {
     ListItem.add(item);
@@ -122,6 +124,17 @@ class Cart extends ChangeNotifier{
       'item':FieldValue.arrayUnion(yourItemList)
 
     });
+  }
+  void addInfoItem(item){
+    infoItem.add(item);
+  }
+  void removeInfoItem(item){
+    infoItem.remove(item);
+  }
+  void getSearch(String id){
+    final firestoreInstance = Firestore.instance;
+    firestoreInstance.collection("User").document(id);
+
   }
 }
 
