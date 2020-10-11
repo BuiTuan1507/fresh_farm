@@ -1,36 +1,57 @@
 import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'package:fresh_farm/App/Cart/shopping_cart.dart';
+import 'package:fresh_farm/App/Model/user.dart';
 import 'package:fresh_farm/App/Products/Detail.dart';
 
 
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/Model/service.dart';
 import 'package:provider/provider.dart';
-
-class Test extends StatelessWidget {
+class Test extends StatefulWidget{
+  @override
+  _TestState createState() => _TestState();
+}
+class _TestState extends State<Test> {
   Widget build(BuildContext context) {
     List userList = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.green,
-        title: Text("Product",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-
-          )
-        ],
-      ),
-      body: shopItemsListBuilder(userList),
-    );
+    return Consumer<Cart>(builder: (context, cart, child) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Shopping cart'),
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.shopping_cart,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Checkout()));
+                    },
+                  ),
+                  Text(cart.ListItem.length.toString())
+                ],
+              ),
+            )
+          ],
+          centerTitle: true,
+        ),
+        body: shopItemsListBuilder(userList,cart)
+      );
+    });
   }
 }
 
 
 
-Widget shopItemsListBuilder(List userList) {
+
+
+Widget shopItemsListBuilder(List userList,Cart cart) {
 
   return GridView.builder(
     padding: EdgeInsets.all(7),
@@ -40,8 +61,8 @@ Widget shopItemsListBuilder(List userList) {
       mainAxisSpacing: 15.0,
       childAspectRatio: 1.1,
     ),
-    itemCount: userList.length,
-    itemBuilder: (_, i) {
+    itemCount: 4,
+    itemBuilder: (_, i,) {
       return new Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
@@ -50,6 +71,7 @@ Widget shopItemsListBuilder(List userList) {
           color: Colors.white,
           child: InkWell(
               onTap: () {
+                Navigator.pushNamed(_, '/checkout');
 
               },
               child: Container(
@@ -128,6 +150,7 @@ Widget shopItemsListBuilder(List userList) {
                                           icon: Icon(Icons.add_shopping_cart),
                                           onPressed: () {
                                          //   bloc.addToCart(shopList[i]);
+                                            cart.add(userList[i]);
                                           },
                                         ),
                                       ),

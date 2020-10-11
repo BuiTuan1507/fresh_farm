@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
@@ -15,9 +17,11 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'Model/service.dart';
 void main() {
-  runApp(MyApp(
+  runApp(ChangeNotifierProvider(
+    create: (context) => Cart(),
+      child:MyApp(
 
-  ));
+  )));
 }
 
 class MyApp extends StatelessWidget {

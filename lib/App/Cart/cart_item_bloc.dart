@@ -7,7 +7,9 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/Model/service.dart';
 import 'package:fresh_farm/Model/todo.dart';
+import 'package:provider/provider.dart';
 class Item{
   String key;
   int id;
@@ -49,14 +51,23 @@ class Item{
 }
 
 
-class Cart{
+class Cart extends ChangeNotifier{
   int id;
-  List <Item> ListItem;
-  int total;
+  List <Item> ListItem = [];
+  int total = 0;
   int delivery;
   int subTotal;
+  void add(Item item) {
+    ListItem.add(item);
+    total= total + item.price;
+    notifyListeners();
+  }
 
-  Cart(this.id, this.ListItem, this.total, this.delivery, this.subTotal);
+  void remove(Item item) {
+    total = total- item.price;
+    ListItem.remove(item);
+    notifyListeners();
+  }
 }
 
 class CartItemsBloc {
@@ -85,14 +96,6 @@ class CartItemsBloc {
     'subTotal': 0
   };
 
-  Firestore dataProduct = Firestore.instance;
-  List <Item> items = new List();
-  void addItem (item){
-    items.add(item);
-    cartStreamController.sink.add(items);
-  }
-  
-
 
 
   void addToInfo(item) {
@@ -111,7 +114,13 @@ class CartItemsBloc {
     cartStreamController.sink.add(allItems);
 
   }
-  
+  Firestore dataProduct = Firestore.instance;
+
+  Stream<List<Item>> getItemList =Firestore.instance.collection('shopItems')
+      .snapshots()
+      .map((snapShot) => snapShot.documents
+      .map((document) => Item.fromJson(document.data))
+      .toList());
 
 
   void removeFromCart(item) {

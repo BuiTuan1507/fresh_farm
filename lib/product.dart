@@ -48,7 +48,7 @@ class _MyProductPageState extends State<MyProductPage>{
           count = snapshot.data.documents[i]['count'];
           price = snapshot.data.documents[i]['price'];
           Item item  = new Item(id,name,imgPath,price,count,isLike);
-          bloc.addItem(item);
+
           print(item.id);
             print(item.name);
             print(item.imgPath);
