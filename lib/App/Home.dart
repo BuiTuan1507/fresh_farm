@@ -10,7 +10,7 @@ import 'package:fresh_farm/App/Search.dart';
 import 'package:fresh_farm/Model/authentication.dart';
 import 'package:fresh_farm/Model/model_user.dart';
 import 'package:fresh_farm/Model/user.dart';
-import 'package:fresh_farm/product.dart';
+
 import 'package:fresh_farm/test.dart';
 import 'Cart/shopping_cart.dart';
 import 'Favorite.dart';

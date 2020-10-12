@@ -6,7 +6,6 @@ import 'package:fresh_farm/App/Cart/shopping_cart.dart';
 import 'package:fresh_farm/App/Service/home.dart';
 import 'package:fresh_farm/App/Service/signup.dart';
 import 'package:fresh_farm/Login/signIn.dart';
-import 'package:fresh_farm/product.dart';
 import 'package:fresh_farm/test.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';

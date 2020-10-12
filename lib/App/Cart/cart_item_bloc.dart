@@ -20,6 +20,7 @@ class Item{
   int count;
   bool isLike;
 
+
   Item(this.id, this.name, this.imgPath, this.price, this.count,
       this.isLike);
   Item.fromJson(Map<String,dynamic> data)
@@ -48,6 +49,7 @@ class Item{
       "isLike":isLike
     };
   }
+
 }
 
 
