@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import 'package:fresh_farm/App/Products/Detail.dart';
-import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:provider/provider.dart';
 
 class Favorite extends StatefulWidget {

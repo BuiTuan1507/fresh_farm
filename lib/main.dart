@@ -1,20 +1,19 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
-import 'package:fresh_farm/App/Service/home.dart';
-import 'package:fresh_farm/App/Service/signup.dart';
+
 import 'package:fresh_farm/Login/signIn.dart';
-import 'package:fresh_farm/test.dart';
+import 'package:fresh_farm/App/Products/productRecommed.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'Model/authentication.dart';
-import 'Model/root_page.dart';
+import 'package:fresh_farm/App/Model/authentication.dart';
+import 'package:fresh_farm/UserCase/root_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'Model/service.dart';
+import 'package:fresh_farm/App/Model/service.dart';
 void main() {
   runApp(
       MyApp(

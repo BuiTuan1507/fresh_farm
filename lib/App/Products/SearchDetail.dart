@@ -4,9 +4,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
-import 'package:fresh_farm/test.dart';
+import 'productRecommed.dart';
 import 'package:provider/provider.dart';
 
 class SearchDetail extends StatefulWidget {

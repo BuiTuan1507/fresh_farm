@@ -1,7 +1,7 @@
 import 'package:fresh_farm/App/Products/Detail.dart';
-import 'package:fresh_farm/Model/service.dart';
+import 'package:fresh_farm/App/Model/service.dart';
 
-import 'cart_item_bloc.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:flutter/material.dart';
 
 class ShopItems extends StatelessWidget {

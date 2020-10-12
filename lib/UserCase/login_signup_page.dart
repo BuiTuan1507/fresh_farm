@@ -1,28 +1,28 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'authentication.dart';
 
-class SignupPage extends StatefulWidget {
+
+import 'package:flutter/material.dart';
+import 'package:fresh_farm/UserCase/register.dart';
+import 'package:fresh_farm/App/Model/authentication.dart';
+
+class LoginSignupPage extends StatefulWidget {
+  LoginSignupPage({this.auth, this.loginCallback});
+
+  final BaseAuth auth;
+  final VoidCallback loginCallback;
+
   @override
-  State<StatefulWidget> createState() => new _SignupPageState();
+  State<StatefulWidget> createState() => new _LoginSignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _LoginSignupPageState extends State<LoginSignupPage> {
   final _formKey = new GlobalKey<FormState>();
 
-  String email;
-  String password;
-  String name;
-  String photoURL;
+  String _email;
+  String _password;
   String _errorMessage;
-  bool _isLoading;
-  bool show;
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController photoURLController = TextEditingController();
+  bool _isLoginForm;
+  bool _isLoading;
 
   // Check if form is valid before perform login or signup
   bool validateAndSave() {
@@ -39,56 +39,29 @@ class _SignupPageState extends State<SignupPage> {
     setState(() {
       _errorMessage = "";
       _isLoading = true;
-      show = false;
     });
     if (validateAndSave()) {
       String userId = "";
-
-      try {{
-        email = emailController.text;
-        password =passwordController.text;
-        name = nameController.text;
-        photoURL = photoURLController.text;
-        FirebaseAuth auth = FirebaseAuth.instance;
-
-
-        AuthResult result = await auth.createUserWithEmailAndPassword(
-            email: email, password: password);
-        UserUpdateInfo userUpdateInfo = new UserUpdateInfo();
-        userUpdateInfo.displayName = name;
-
-        await result.user.updateProfile(userUpdateInfo);
-        await result.user.reload();
-
-        FirebaseUser user = result.user;
-        userId = user.uid;
-        //User
-        
+      String name = "1";
+      String email = "";
+      String photoURL = "";
+      try {
+        {
+          userId = await widget.auth.signIn(_email, _password);
+          name = await widget.auth.getEmail();
+          email = await widget.auth.getName();
+          photoURL = await widget.auth.getPhotoURL();
 
 
-
-
-          //widget.auth.sendEmailVerification();
-          //_showVerifyEmailSentDialog();
-          print('Signed up user: $userId');
+          print ("chay di:$name");
+          print('Signed in: $userId');
         }
         setState(() {
           _isLoading = false;
         });
 
         if (userId.length > 0 && userId != null) {
-          var firebaseUser = await FirebaseAuth.instance.currentUser();
-          final firestoreInstance = Firestore.instance;
-          firestoreInstance.collection("User").document(userId).setData(
-              {
-                "name" : name,
-                "email":email,
-                "userID": userId,
-                "photoURL":photoURL
-              }
-          );
-        }else{
-          print ("111");
+          widget.loginCallback();
         }
       } catch (e) {
         print('Error: $e');
@@ -105,6 +78,7 @@ class _SignupPageState extends State<SignupPage> {
   void initState() {
     _errorMessage = "";
     _isLoading = false;
+    _isLoginForm = true;
     super.initState();
   }
 
@@ -112,6 +86,7 @@ class _SignupPageState extends State<SignupPage> {
     _formKey.currentState.reset();
     _errorMessage = "";
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -169,21 +144,17 @@ class _SignupPageState extends State<SignupPage> {
           children: <Widget>[
             showLogo(),
             Container(
-
-                padding: EdgeInsets.only(left:16.0,right: 16,top: 5),
+                padding: EdgeInsets.all(16.0),
                 child: new Form(
                   key: _formKey,
                   child: new ListView(
                     shrinkWrap: true,
                     children: <Widget>[
                       showLogin(),
-                      showText(),
                       showEmailInput(),
                       showPasswordInput(),
-                      showNameInput(),
-                      showImageInput(),
                       showPrimaryButton(),
-                      primaryButton(),
+                      showSecondaryButton(),
                       showErrorMessage(),
                     ],
                   ),
@@ -194,27 +165,12 @@ class _SignupPageState extends State<SignupPage> {
   }
   Widget showLogin(){
     return new Container(
-        padding: EdgeInsets.only(top:15,bottom: 0, left: 15),
+        padding: EdgeInsets.only(top:10,bottom: 15),
         child:Center(
           child:  Text(
-            'Chào mừng bạn đến với nông trại ', style: TextStyle(
-              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87
+            'Login', style: TextStyle(
+              fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87
           ),
-
-          ),
-        )
-
-    );
-  }
-  Widget showText(){
-    return new Container(
-        padding: EdgeInsets.only(top:5,bottom: 5, left: 15),
-        child:Center(
-          child:  Text(
-            'xanh của chúng tôi', style: TextStyle(
-              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87
-          ),
-
           ),
         )
 
@@ -244,13 +200,11 @@ class _SignupPageState extends State<SignupPage> {
     return new Hero(
         tag: 'hero',
         child:  Container(
-          padding: EdgeInsets.only(top: 15),
-            height: size.height * 0.2,
+            height: size.height * 0.3,
             width: double.infinity,
-            color: Colors.white,
+            color: Color(0xFF0C9869),
             child: Center(
-              child: Image.asset(
-                "assets/farm.jpg",
+              child: Image.asset("assets/farm.jpg",
                 width: size.width ,
               ),
             ))
@@ -259,9 +213,8 @@ class _SignupPageState extends State<SignupPage> {
 
   Widget showEmailInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 5.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
       child: new TextFormField(
-        controller: emailController,
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
@@ -272,16 +225,15 @@ class _SignupPageState extends State<SignupPage> {
               color: Color(0xFF0C9869),
             )),
         validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
-        onSaved: (value) => email = value.trim(),
+        onSaved: (value) => _email = value.trim(),
       ),
     );
   }
 
   Widget showPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 5.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: new TextFormField(
-        controller: passwordController,
         maxLines: 1,
         obscureText: true,
         autofocus: false,
@@ -292,80 +244,45 @@ class _SignupPageState extends State<SignupPage> {
               color: Color(0xFF0C9869),
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
-        onSaved: (value) => password = value.trim(),
-      ),
-    );
-  }
-  Widget showNameInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 5.0, 0.0),
-      child: new TextFormField(
-        controller: nameController,
-        maxLines: 1,
-        obscureText: true,
-        autofocus: false,
-        decoration: new InputDecoration(
-            hintText: 'Name',
-            icon: new Icon(
-              Icons.people,
-              color:Color(0xFF0C9869) ,
-            )),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
-        onSaved: (value) => name = value.trim(),
-      ),
-    );
-  }
-  Widget showImageInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 5.0, 0.0),
-      child: new TextFormField(
-        controller: photoURLController,
-        maxLines: 1,
-        obscureText: true,
-        autofocus: false,
-        decoration: new InputDecoration(
-            hintText: 'Phone',
-            icon: new Icon(
-              Icons.phone,
-              color: Color(0xFF0C9869),
-            )),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
-        onSaved: (value) => photoURL = value.trim(),
+        onSaved: (value) => _password = value.trim(),
       ),
     );
   }
 
+  Widget showSecondaryButton() {
+    return new Container(
+      padding: EdgeInsets.only(top: 20),
+      child: InkWell(
+          onTap: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignupPage()));
+          },
+          child: new Center(
+              child:  Text(
+                  'Create an account' ,
+                  style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
+          )
+
+      ),
+    );
+
+  }
 
   Widget showPrimaryButton() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(3.0, 30.0, 3.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
         child: SizedBox(
-          height: 40.0,
+          height: 45.0,
           child: new RaisedButton(
             elevation: 5.0,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
             color: Color(0xFF0C9869),
-            child: new Text('Create account',
+            child: new Text('Login',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: validateAndSubmit,
           ),
         ));
-  }
-  Widget primaryButton(){
-    return new Container(
-      padding: EdgeInsets.only(top:8),
-      child: InkWell(
-        onTap: (){
-          Navigator.pop(context);
-        },
-        child: Center(
-          child:  Text(
-              'Đã có tài khoản',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color(0xFF0C9869)),
-          ),
-        )
-
-      ),
-    );
   }
 }

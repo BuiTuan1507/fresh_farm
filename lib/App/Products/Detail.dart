@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
 import 'package:provider/provider.dart';
 

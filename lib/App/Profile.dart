@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fresh_farm/App/Home.dart';
-import 'package:fresh_farm/Model/reset_password.dart';
-import 'package:fresh_farm/Model/updateProfile.dart';
+import 'package:fresh_farm/UserCase/reset_password.dart';
+import 'package:fresh_farm/UserCase/updateProfile.dart';
 
 class MyProfilePage extends StatefulWidget{
   const MyProfilePage({Key key, this.uid}) : super(key: key);

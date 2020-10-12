@@ -1,25 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shop_items.dart';
 import 'package:fresh_farm/App/Products/Category.dart';
 import 'package:fresh_farm/App/Products/Search.dart';
-import 'package:fresh_farm/App/Search.dart';
+import 'package:fresh_farm/App/Model/authentication.dart';
 
 
-import 'package:fresh_farm/Model/authentication.dart';
-import 'package:fresh_farm/Model/model_user.dart';
-import 'package:fresh_farm/Model/user.dart';
-
-import 'package:fresh_farm/test.dart';
+import 'package:fresh_farm/App/Products/productRecommed.dart';
 import 'Cart/shopping_cart.dart';
 import 'Favorite.dart';
-import 'UI/constants.dart';
-import 'UI/recommed.dart';
-import 'UI/featurred_plants.dart';
-import 'UI/header_with_seachbox.dart';
-import 'UI/recomend_plants.dart';
-import 'UI/title_with_more_bbtn.dart';
+import 'HomeComponent/constants.dart';
+import 'HomeComponent/recommed.dart';
+import 'HomeComponent/featurred_plants.dart';
+import 'HomeComponent/header_with_seachbox.dart';
+import 'HomeComponent/recomend_plants.dart';
+import 'HomeComponent/title_with_more_bbtn.dart';
 import 'Profile.dart';
 
 import 'package:firebase_database/firebase_database.dart';

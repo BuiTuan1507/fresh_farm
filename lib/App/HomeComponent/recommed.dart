@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:plant_app/screens/details/details_screen.dart';
+
 
 import 'constants.dart';
 import 'package:fresh_farm/App/Products/Detail.dart';

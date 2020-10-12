@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Home.dart';
 import 'login_signup_page.dart';
-import 'authentication.dart';
+import 'package:fresh_farm/App/Model/authentication.dart';
 
 // quản lí trang thái của người dùng
 enum AuthStatus {

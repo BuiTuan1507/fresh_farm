@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fresh_farm/SearchDetail.dart';
+import 'SearchDetail.dart';
 
 class CloudFirestoreSearch extends StatefulWidget {
   @override

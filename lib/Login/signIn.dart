@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/Login/signIn.dart';
-import 'package:fresh_farm/Model/authentication.dart';
+import 'package:fresh_farm/App/Model/authentication.dart';
 
 class SignupPage extends StatefulWidget {
   SignupPage({this.auth, this.loginCallback});

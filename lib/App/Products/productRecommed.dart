@@ -1,11 +1,11 @@
-import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
-import 'package:fresh_farm/App/Model/user.dart';
+
 import 'package:fresh_farm/App/Products/Detail.dart';
 
 
 import 'package:flutter/material.dart';
-import 'package:fresh_farm/Model/service.dart';
+import 'package:fresh_farm/App/Model/service.dart';
 import 'package:provider/provider.dart';
 class Test extends StatefulWidget{
   String uid;

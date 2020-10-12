@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Home.dart';
-import 'package:fresh_farm/Model/authentication.dart';
+import 'package:fresh_farm/App/Model/authentication.dart';
 class resetPassword extends StatefulWidget {
   const resetPassword({Key key, this.auth}) : super(key: key);
 

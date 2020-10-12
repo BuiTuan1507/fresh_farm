@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fresh_farm/App/Cart/cart_item_bloc.dart';
+import 'cart_item_bloc.dart';
 
 class FirebaseService{
   final productStreamController = StreamController.broadcast();

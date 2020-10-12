@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:fresh_farm/App/Products/Detail.dart';
 import 'package:provider/provider.dart';
-import 'cart_item_bloc.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 
 class Checkout extends StatefulWidget {
   @override
