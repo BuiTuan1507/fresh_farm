@@ -49,7 +49,7 @@ class _CheckoutState extends State<Checkout> {
                           child: Row(
                             children: <Widget>[
                               Container(
-                                  padding:EdgeInsets.only(left: 10,right: 30, top:4, bottom: 4),
+                                  padding:EdgeInsets.only(left: 10,right: 15, top:4, bottom: 4),
                                   child: InkWell(
                                     onTap: () {
                                      // Navigator.of(context).push(
@@ -68,7 +68,7 @@ class _CheckoutState extends State<Checkout> {
                                     ),
                                   )),
                               Container(
-                                padding: EdgeInsets.only(left: 20, right: 30),
+                                padding: EdgeInsets.only(left: 15, right: 15),
                                 child: Column(
                                   children: <Widget>[
                                     Row(

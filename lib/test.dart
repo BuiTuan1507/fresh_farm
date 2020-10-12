@@ -118,16 +118,16 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
                                       style: TextStyle(
                                           color: Color(0xFF575E67),
                                           fontFamily: 'Varela',
-                                          fontSize: 20.0)),
+                                          fontSize: 17.0)),
 
                                 ),
                                 Container(
-                                  padding: EdgeInsets.only(left: 30),
+                                  padding: EdgeInsets.only(left: 15),
                                   child:Text("\$${userList[i].price}",
                                       style: TextStyle(
                                           color: Color(0xFFCC8053),
                                           fontFamily: 'Varela',
-                                          fontSize: 18.0)),
+                                          fontSize: 16.0)),
 
                                 ),
 
