@@ -90,7 +90,9 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ),
         ListTile(
           leading: GestureDetector(
-            onTap:(){},
+            onTap:(){
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Checkout()));
+            },
             child: Icon(Icons.shopping_cart,size: 26, color:Color(0xFF0C9869) ),
           ),
           title: Text('Cart',style: TextStyle(

@@ -13,6 +13,7 @@ class _CheckoutState extends State<Checkout> {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String uid;
 
+
   @override
 
   Widget build(BuildContext context) {
@@ -36,6 +37,20 @@ class _CheckoutState extends State<Checkout> {
                     itemCount: cart.ListItem.length,
                     itemBuilder: (BuildContext context, i) {
                       final cartList = cart.ListItem;
+
+                      void add(){
+                        setState((){
+                          cart.ListItem[i].count++;
+
+                        });
+                      }
+                      void minus(){
+                        setState((){
+                          if (cart.ListItem[i].count != 1){
+                            cart.ListItem[i].count--;
+                          }
+                        });
+                      }
                       return new Container(
                         height: 100,
                         padding: EdgeInsets.only(left: 20,top: 5,bottom: 5,right: 20),
@@ -95,21 +110,21 @@ class _CheckoutState extends State<Checkout> {
                                           padding: EdgeInsets.only(right: 12),
 
                                           child: new FloatingActionButton(
-
+                                            onPressed: add,
                                             child: new Icon(Icons.add, color: Colors.green[800],),
                                             backgroundColor: Colors.white,
                                             heroTag: null,
                                           ),
                                         ),
 
-                                        new Text('1',
+                                        new Text('${cart.ListItem[i].count}',
                                             style: new TextStyle(fontSize: 16.0)),
                                         Container(
                                           width: 30,
                                           height: 30,
                                           padding: EdgeInsets.only(left: 12),
                                           child:  new FloatingActionButton(
-
+                                            onPressed: minus,
                                             child: new Icon(
                                                 const IconData(0xe15b, fontFamily: 'MaterialIcons'),
                                                 color: Colors.green[800]),
@@ -162,17 +177,17 @@ class _CheckoutState extends State<Checkout> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          Text('Giá tiền:             ${cart.total}',style: TextStyle(fontSize: 18, color: Colors.black),)
+                          Text('Giá tiền:             ${cart.totalPrice(cart.ListItem)}',style: TextStyle(fontSize: 18, color: Colors.black),)
                         ],
                       ),
                       Row(
                         children: <Widget>[
-                          Text('Phí vận chuyển:     ${cart.total}',style: TextStyle(fontSize: 18),)
+                          Text('Phí vận chuyển:     ${cart.totalPrice(cart.ListItem)}',style: TextStyle(fontSize: 18),)
                         ],
                       ),
                       Row(
                         children: <Widget>[
-                          Text('Tổng số tiền:      ${cart.total}',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.green[800]),)
+                          Text('Tổng số tiền:      ${cart.totalPrice(cart.ListItem)}',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.green[800]),)
                         ],
                       )
                     ],

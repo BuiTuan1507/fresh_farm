@@ -63,14 +63,21 @@ class Cart extends ChangeNotifier{
 
   void add(Item item) {
     ListItem.add(item);
-    total= total + item.price;
+    total= total + item.price*item.count;
     notifyListeners();
   }
 
   void remove(Item item) {
-    total = total- item.price;
+    total = total- item.price*item.count;
     ListItem.remove(item);
     notifyListeners();
+  }
+  int totalPrice(List<Item> item){
+    int n = 0;
+    for(int i = 0; i<item.length;i++){
+      n = n+ item[i].price*item[i].count;
+    }
+    return n;
   }
 
 
