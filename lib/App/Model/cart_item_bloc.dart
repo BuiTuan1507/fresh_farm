@@ -13,13 +13,13 @@ class Item{
   String name;
   String imgPath;
   int price;
-
+  double rating;
   int count;
   bool isLike;
 
 
   Item(this.id, this.name, this.imgPath, this.price, this.count,
-      this.isLike);
+      this.isLike, this.rating);
   Item.fromJson(Map<String,dynamic> data)
       :id= data['id'],
   name = data['name'],
@@ -27,7 +27,8 @@ class Item{
   price = data['price'],
 
   count = data['count'],
-  isLike = data['isLike'];
+  isLike = data['isLike'],
+  rating = data['rating'];
 
   Item.fromSnapshot(DocumentSnapshot snapshot) :
         id = snapshot['id'],
@@ -35,7 +36,8 @@ class Item{
         imgPath = snapshot["imgPath"],
         price = snapshot["price"],
         isLike = snapshot["isLike"],
-        count = snapshot["count"];
+        count = snapshot["count"],
+          rating = snapshot["rating"];
   toJson() {
     return {
       "id": id,
@@ -43,7 +45,8 @@ class Item{
       "imgPath": imgPath,
       "price" : price,
       "count": count,
-      "isLike":isLike
+      "isLike":isLike,
+      "rating" : rating
     };
   }
 

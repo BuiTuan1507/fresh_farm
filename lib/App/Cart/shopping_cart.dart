@@ -213,3 +213,15 @@ class _CheckoutState extends State<Checkout> {
   }
 }
 
+// start
+//child: StarRating(
+//size: 18.0,
+//rating: rating,
+//color: Colors.orange,
+//borderColor: Colors.grey,
+//starCount: 5,
+//onRatingChanged: (rating) => setState(
+//() {
+//this.rating = rating;
+//},
+//)),

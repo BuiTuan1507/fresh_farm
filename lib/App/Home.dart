@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
-import 'package:fresh_farm/App/Cart/shop_items.dart';
+
+
+
 import 'package:fresh_farm/App/Products/Category.dart';
 import 'package:fresh_farm/App/Products/Search.dart';
 import 'package:fresh_farm/App/Model/authentication.dart';
@@ -99,6 +100,8 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
           )),
         ),
+        Divider(),
+        Text('Products',style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
         ListTile(
           leading: GestureDetector(
             onTap:(){
@@ -186,8 +189,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               Recomends(),
 
               SizedBox(height: kDefaultPadding),
-            ],
-          ),
+        ])));
+  }
 
-
-        ));}}
+}
