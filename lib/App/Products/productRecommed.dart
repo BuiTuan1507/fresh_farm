@@ -15,7 +15,7 @@ class Test extends StatefulWidget{
 }
 class _TestState extends State<Test> {
   Widget build(BuildContext context) {
-    List userList = Provider.of<List<Item>>(context);
+    List<Item> userList = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
     return Consumer<Cart>(builder: (context, cart, child) {
       cart.addUser(widget.uid);

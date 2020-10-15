@@ -52,7 +52,7 @@ class Item{
 
 }
 class Rating{
-  String id;
+  int id;
   String uid;
   String text;
   int rating;
@@ -66,7 +66,6 @@ class Rating{
   Rating.fromSnapshot(DocumentSnapshot snapshot) :
         id = snapshot['id'],
         uid = snapshot["name"],
-
         rating = snapshot["rating"],
         text = snapshot["text"];
 

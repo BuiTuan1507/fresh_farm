@@ -161,6 +161,8 @@ Widget InfoItemsListBuilder(context,cart){
                   child:  GestureDetector(
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => RatingAndReview()));
+                      cart.getIdRating(infoItem[0]);
+                      cart.removeInfoItem(infoItem[0]);
                     },
                     child: Text('Rating and Review', style: TextStyle(fontSize: 16,),),
                   ),

@@ -101,7 +101,11 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
           )),
         ),
         Divider(),
-        Text('Products',style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+        Container(
+          padding: EdgeInsets.only(left: 10),
+          child: Text('Products',style: TextStyle(fontSize: 16,),),
+        )
+        ,
         ListTile(
           leading: GestureDetector(
             onTap:(){
@@ -125,6 +129,17 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
           title: Text('Search',style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
           )),
+        ),
+        ListTile(
+          leading: GestureDetector(
+            onTap: (){
+
+            },
+            child: Icon(Icons.chat,size: 26,),
+          ),
+          title: Text('Help', style:  TextStyle(
+            fontSize: 18, fontWeight: FontWeight.bold
+          ),),
         ),
         ListTile(
           leading: GestureDetector(

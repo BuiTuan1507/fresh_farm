@@ -26,11 +26,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirebaseService firebaseServices = FirebaseService();
+    final Firebase123 firebaseService123 = Firebase123();
     return MultiProvider(
       providers: [
         StreamProvider<List<Item>>.value(value: firebaseServices.getItemList),
         ChangeNotifierProvider(create: (context) => Cart()),
-        StreamProvider<List<Rating>>.value(value: firebaseServices.getRatingList)
+        StreamProvider<List<Rating>>.value(value: firebaseService123.getRatingList)
       ],
       child: MaterialApp(
         title: 'Fresh Farm',
