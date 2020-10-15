@@ -16,10 +16,16 @@ class FirebaseService{
         .map((document) => Item.fromJson(document.data))
         .toList());
 
+  Stream<List<Rating>> getRatingList =Firestore.instance.collection('Rating')
+      .snapshots()
+      .map((snapShot) => snapShot.documents
+      .map((document) => Rating.fromJson(document.data))
+      .toList());
 
   void dispose() {
     productStreamController.close(); // close our StreamController
   }
 
 }
+
 final blocProduct = FirebaseService();

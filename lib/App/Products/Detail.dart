@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
+import 'package:fresh_farm/App/Products/RatingAndReview.dart';
 import 'package:provider/provider.dart';
 
 class Detail extends StatefulWidget {
@@ -137,15 +138,41 @@ Widget InfoItemsListBuilder(context,cart){
                 )
             )
         ),
-        RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-            cart.removeInfoItem(infoItem[0]);
-          },
-          child: Text("Xem them san pham"),
-          color: Colors.green,
-        ),
-        SizedBox(height: 40)
+        Row(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(top:10,bottom: 5,left: 10,right: 10),
+                  child:  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      cart.removeInfoItem(infoItem[0]);
+                    },
+                    child: Text("Xem them san pham",style: TextStyle(fontSize: 16,),),
+
+                  ),
+                )
+              ],
+            ),
+            Column(
+              children: <Widget>[
+                Container(
+                  child:  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => RatingAndReview()));
+                    },
+                    child: Text('Rating and Review', style: TextStyle(fontSize: 16,),),
+                  ),
+                )
+              ],
+            )
+          ],
+        )
+
+
+
+
       ],
     )
 

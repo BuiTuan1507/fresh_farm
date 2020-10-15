@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       providers: [
         StreamProvider<List<Item>>.value(value: firebaseServices.getItemList),
         ChangeNotifierProvider(create: (context) => Cart()),
-
+        StreamProvider<List<Rating>>.value(value: firebaseServices.getRatingList)
       ],
       child: MaterialApp(
         title: 'Fresh Farm',

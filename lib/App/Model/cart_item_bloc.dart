@@ -51,12 +51,50 @@ class Item{
   }
 
 }
+class Rating{
+  String id;
+  String uid;
+  String text;
+  int rating;
 
+  Rating(this.id, this.uid, this.text, this.rating);
+  Rating.fromJson(Map<String,dynamic> data)
+      :id= data['id'],
+        uid = data['uid'],
+        text = data['text'],
+        rating= data['rating'];
+  Rating.fromSnapshot(DocumentSnapshot snapshot) :
+        id = snapshot['id'],
+        uid = snapshot["name"],
+
+        rating = snapshot["rating"],
+        text = snapshot["text"];
+
+  toJson() {
+    return {
+      "id": id,
+      "uid": uid,
+
+      "text" : text,
+      "rating": rating,
+
+
+    };
+  }
+}
+class User{
+  String uid;
+  String name;
+  String email;
+
+
+}
 
 class Cart extends ChangeNotifier{
-
+  List<Rating> RatingReview = [];
   List <Item> ListItem = [];
   String uid;
+  int idRating;
   int total = 0;
   int delivery;
   int subTotal;
@@ -144,6 +182,10 @@ class Cart extends ChangeNotifier{
     final firestoreInstance = Firestore.instance;
     firestoreInstance.collection("User").document(id);
 
+  }
+  int getIdRating(Item item){
+    idRating = item.id;
+    return idRating;
   }
 }
 
