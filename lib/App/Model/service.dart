@@ -10,7 +10,7 @@ class FirebaseService{
   Stream get getStream => productStreamController.stream;
   Firestore dataProduct = Firestore.instance;
 
-  Stream<List<Item>> getItemList =Firestore.instance.collection('shopItems')
+  Stream<List<Item>> getItemList =  Firestore.instance.collection('shopItems')
         .snapshots()
         .map((snapShot) => snapShot.documents
         .map((document) => Item.fromJson(document.data))
@@ -23,8 +23,8 @@ class FirebaseService{
   }
 
 }
-class Firebase123{
-  Stream<List<Rating>> getRatingList =Firestore.instance.collection('Rating')
+class Firebase123 {
+  Stream<List<Rating>> getRatingList =  Firestore.instance.collection('Rating')
       .snapshots()
       .map((snapShot) => snapShot.documents
       .map((document) => Rating.fromJson(document.data))

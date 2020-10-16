@@ -18,6 +18,8 @@ class _RatingAndReviewState extends State<RatingAndReview> {
     List userList = Provider.of<List<Rating>>(context);
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
+    return Consumer<Cart>(
+        builder: (context,cart,child){
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -28,8 +30,18 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                   fontFamily: 'Varela',
                   fontSize: 20.0,
                   color: Color(0xFF545D68))),
+          automaticallyImplyLeading: false,
+          leading: GestureDetector(
+            onTap: () {
+              cart.addInfoItem(cart.detailItem);
+            },
+            child: Icon(
+              Icons.arrow_back,  // add custom icons also
+            ),
+          ),
 
         ),
+
 
         body: Consumer<Cart>(
           builder: (context,cart,child){
@@ -82,7 +94,7 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                                             height: 80,
                                             decoration: BoxDecoration(
                                                 image: DecorationImage(
-                                                    image: AssetImage('assets/1.jpg'),
+                                                    image: AssetImage(cartList[i].photoURL),
                                                     fit: BoxFit.fill))
                                         ),
                                       )),
@@ -95,7 +107,7 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                                             Column(
                                               children: <Widget>[
                                                 Container(
-                                                    child: Text('Tuan', textAlign: TextAlign.left,style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                                    child: Text(cartList[i].name, textAlign: TextAlign.left,style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
                                                     )
                                                 )
                                               ],
@@ -166,7 +178,7 @@ class _RatingAndReviewState extends State<RatingAndReview> {
         ));}
 
 
-}
+); }}
 Widget buildText(Rating rating){
   return Container(
     child: Container(

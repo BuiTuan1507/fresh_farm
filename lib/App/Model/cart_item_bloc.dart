@@ -55,19 +55,25 @@ class Rating{
   int id;
   String uid;
   String text;
-  int rating;
+  double rating;
+  String name;
+  String photoURL;
 
-  Rating(this.id, this.uid, this.text, this.rating);
+  Rating(this.id, this.uid, this.text, this.rating, this.photoURL,this.name);
   Rating.fromJson(Map<String,dynamic> data)
       :id= data['id'],
         uid = data['uid'],
         text = data['text'],
-        rating= data['rating'];
+        rating= data['rating'],
+        name = data['name'],
+        photoURL = data['photoURL'];
   Rating.fromSnapshot(DocumentSnapshot snapshot) :
         id = snapshot['id'],
         uid = snapshot["name"],
         rating = snapshot["rating"],
-        text = snapshot["text"];
+        text = snapshot["text"],
+        name = snapshot['name'],
+        photoURL = snapshot['photoURL'];
 
   toJson() {
     return {
@@ -76,16 +82,42 @@ class Rating{
 
       "text" : text,
       "rating": rating,
+      'name':name,
+      'photoURL':photoURL
 
 
     };
   }
 }
 class User{
-  String uid;
   String name;
-  String email;
+  String uid;
+  String photoURL;
+  String email ;
 
+  User(this.name, this.uid, this.photoURL, this.email);
+  User.fromJson(Map<String,dynamic> data)
+      :name= data['name'],
+        uid = data['uid'],
+        email = data['email'],
+        photoURL= data['photoURL'];
+  User.fromSnapshot(DocumentSnapshot snapshot) :
+        name = snapshot['name'],
+        uid = snapshot["uid"],
+        email = snapshot["email"],
+        photoURL = snapshot["photoURL"];
+
+  toJson() {
+    return {
+      "name": name,
+      "uid": uid,
+
+      "email" : email,
+      "photoURL": photoURL,
+
+
+    };
+  }
 
 }
 
@@ -100,6 +132,8 @@ class Cart extends ChangeNotifier{
   List <Item> FavoriteItem = [];
   List<Item> infoItem = [];
   Item searchItem;
+  Item detailItem;
+  User currentUser;
 
   void add(Item item) {
     ListItem.add(item);
@@ -171,8 +205,19 @@ class Cart extends ChangeNotifier{
 
     });
   }
+  void createReview(int id, String uid, double rating, String text){
+    Firestore firestoreReview = Firestore.instance;
+    firestoreReview.collection('Rating').document(id.toString()).setData({
+      "id":id,
+      "uid":uid,
+      "rating":rating,
+      "text":text
+    });
+
+  }
   void addInfoItem(item){
     infoItem.add(item);
+    detailItem = item;
   }
   void removeInfoItem(item){
     infoItem.remove(item);
@@ -185,6 +230,10 @@ class Cart extends ChangeNotifier{
   int getIdRating(Item item){
     idRating = item.id;
     return idRating;
+  }
+  void addCurrentUser (String uid, String name, String photoURL, String email){
+    currentUser = User(name, uid, photoURL, email);
+
   }
 }
 

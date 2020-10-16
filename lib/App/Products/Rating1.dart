@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
+import 'package:provider/provider.dart';
 class Rating1 extends StatefulWidget {
   @override
   _Rating1State createState() => _Rating1State();
 }
 
 class _Rating1State extends State<Rating1> {
-
+  int id;
+  String uid;
   double rating = 3.5;
   int starCount = 5;
-  final _text = TextEditingController();
+  TextEditingController text = TextEditingController();
+  final _formKey = new GlobalKey<FormState>();
   bool _validate = false;
   @override
   void dispose() {
-    _text.dispose();
+    text.dispose();
     super.dispose();
   }
 
@@ -23,56 +27,72 @@ class _Rating1State extends State<Rating1> {
         appBar: new AppBar(
           title: new Text("Star Rating"),
         ),
-        body:
-        new Column(
-          children: <Widget>[
-            new Padding(
-              padding: new EdgeInsets.only(
-                top: 50.0,
-                bottom: 50.0,
-              ),
-              child: new StarRating(
-                size: 25.0,
-                rating: rating,
-                color: Colors.orange,
-                borderColor: Colors.grey,
-                starCount: starCount,
-                onRatingChanged: (rating) => setState(
-                      () {
-                    this.rating = rating;
-                  },
+        body:Consumer<Cart>(
+        builder: (context,cart,child){
+
+          return new Column(
+            children: <Widget>[
+              new Padding(
+                padding: new EdgeInsets.only(
+                  top: 20.0,
+                  bottom: 30.0,
                 ),
-              ),
-            ),
-            new Text(
-              "Your rating is: $rating",
-              style: new TextStyle(fontSize: 30.0),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Error Showed if Field is Empty on Submit button Pressed'),
-                TextField(
-                  controller: _text,
-                  decoration: InputDecoration(
-                    labelText: 'Enter the Value',
-                    errorText: _validate ? 'Value Can\'t Be Empty' : null,
+                child: new StarRating(
+                  size: 25.0,
+                  rating: rating,
+                  color: Colors.orange,
+                  borderColor: Colors.grey,
+                  starCount: starCount,
+                  onRatingChanged: (rating) => setState(
+                        () {
+                      this.rating = rating;
+                    },
                   ),
                 ),
-                RaisedButton(
-                  onPressed: () {
-                    setState(() {
-                      _text.text.isEmpty ? _validate = true : _validate = false;
-                    });
-                  },
-                  child: Text('Submit'),
-                  textColor: Colors.white,
-                  color: Colors.blueAccent,
-                )
-              ],
-            ),
-          ],
-        ),
-      );
+              ),
+
+              Container(
+
+                height: 100,
+                padding: EdgeInsets.only(left: 20,right: 10,top: 20,bottom: 20),
+                child: new Form(
+                   key: _formKey,
+                  child: TextFormField(
+                    controller: text,
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1, maxLines: 4,
+
+                    style: TextStyle(fontSize: 18),
+                    decoration: InputDecoration(
+                      labelText: 'Enter the Value',
+
+                    ),
+                    validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+                    onSaved: (value) => text = value.trim() as TextEditingController ,
+
+                  ),
+                ),
+
+
+              ),
+
+
+              RaisedButton(
+                onPressed: () {
+
+                  cart.createReview(cart.idRating, cart.uid, rating, text.text);
+                },
+                child: Text('Submit'),
+                textColor: Colors.white,
+                color: Colors.blueAccent,
+              )
+            ],
+          );
+
+        }
+
+
+        ));
+
   }
 }

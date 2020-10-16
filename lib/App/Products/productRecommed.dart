@@ -9,7 +9,10 @@ import 'package:fresh_farm/App/Model/service.dart';
 import 'package:provider/provider.dart';
 class Test extends StatefulWidget{
   String uid;
-  Test({Key key, this.uid}) : super(key: key);
+  String name;
+  String photoURL;
+  String email;
+  Test({Key key, this.uid,this.name, this.photoURL, this.email}) : super(key: key);
   @override
   _TestState createState() => _TestState();
 }
@@ -19,6 +22,7 @@ class _TestState extends State<Test> {
     FirebaseService firebaseServices = FirebaseService();
     return Consumer<Cart>(builder: (context, cart, child) {
       cart.addUser(widget.uid);
+      cart.addCurrentUser(widget.uid, widget.name, widget.photoURL, widget.email);
       return Scaffold(
           appBar: AppBar(
             title: Text('Shopping cart'),
