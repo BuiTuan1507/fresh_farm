@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,10 +9,15 @@ class FirebaseService{
   Firestore dataProduct = Firestore.instance;
 
   Stream<List<Item>> getItemList =  Firestore.instance.collection('shopItems')
-        .snapshots()
-        .map((snapShot) => snapShot.documents
-        .map((document) => Item.fromJson(document.data))
-        .toList());
+      .snapshots()
+      .map((snapShot) => snapShot.documents
+      .map((document) => Item.fromJson(document.data))
+      .toList());
+  Stream<List<Rating>> getRatingList =  Firestore.instance.collection('Rating')
+      .snapshots()
+      .map((snapShot) => snapShot.documents
+      .map((document) => Rating.fromJson(document.data))
+      .toList());
 
 
 
@@ -24,12 +27,6 @@ class FirebaseService{
   }
 
 }
-class Firebase123 {
-  Stream<List<Rating>> getRatingList =  Firestore.instance.collection('Rating')
-      .snapshots()
-      .map((snapShot) => snapShot.documents
-      .map((document) => Rating.fromJson(document.data))
-      .toList());
-}
+
 
 final blocProduct = FirebaseService();

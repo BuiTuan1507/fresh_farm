@@ -18,8 +18,8 @@ class _RatingAndReviewState extends State<RatingAndReview> {
     List userList = Provider.of<List<Rating>>(context);
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
-    return Consumer<Cart>(
-        builder: (context,cart,child){
+   // return Consumer<Cart>(
+       // builder: (context,cart,child){
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.white,
@@ -33,7 +33,7 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                 automaticallyImplyLeading: false,
                 leading: GestureDetector(
                   onTap: () {
-                    cart.addInfoItem(cart.detailItem);
+                    //cart.addInfoItem(cart.detailItem);
                   },
                   child: Icon(
                     Icons.arrow_back,  // add custom icons also
@@ -55,7 +55,7 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                     uid = cart.uid;// uid
 
                     print(cart.uid);
-                    for (int i =0 ;i < 10;i++){// tinh count va add cac binh luan vao 1 list
+                    for (int i =0 ;i < 2;i++){// tinh count va add cac binh luan vao 1 list
                       if(cart.idRating == userList[i].id){
                         count = count + 1;
                         now.add(userList[i]);
@@ -81,93 +81,95 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                               return new Container(
                                 height: 100,
 
-                                padding: EdgeInsets.only(left: 20,top: 5,bottom: 5,right: 20),
+                                padding: EdgeInsets.only(left: 0,top: 5,bottom: 5,right: 0),
+                                  child: Expanded(
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: <Widget>[
+                                        Container(
+                                            padding:EdgeInsets.only(left: 0,right: 0, top:4, bottom: 4),
+                                            child: InkWell(
+                                              onTap: () {
+                                                // Navigator.of(context).push(
 
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    Container(
-                                        padding:EdgeInsets.only(left: 10,right: 0, top:4, bottom: 4),
-                                        child: InkWell(
-                                          onTap: () {
-                                            // Navigator.of(context).push(
-
-                                            //   MaterialPageRoute(builder: (context) => Detail(
-                                            //     itemProduct: cartList[i],
-                                            //)));
-                                          },
-                                          child: Container(
-                                              width: 80,
-                                              height: 80,
-                                              decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(cartList[i].photoURL),
-                                                      fit: BoxFit.fill))
-                                          ),
-                                        )),
-                                    Container(
-                                      padding: EdgeInsets.only(left: 0, right: 15),
-                                      child: Row(
-                                        children: <Widget>[
-                                          Row(
+                                                //   MaterialPageRoute(builder: (context) => Detail(
+                                                //     itemProduct: cartList[i],
+                                                //)));
+                                              },
+                                              child: Container(
+                                                  width: 80,
+                                                  height: 80,
+                                                  decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                          image: AssetImage(cartList[i].photoURL),
+                                                          fit: BoxFit.fill))
+                                              ),
+                                            )),
+                                        Container(
+                                          padding: EdgeInsets.only(left: 0, right: 15),
+                                          child: Row(
                                             children: <Widget>[
-                                              Column(
+                                              Row(
                                                 children: <Widget>[
-                                                  Container(
-                                                      child: Text(cartList[i].name, textAlign: TextAlign.left,style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                                  Column(
+                                                    children: <Widget>[
+                                                      Container(
+                                                          child: Text(cartList[i].name, textAlign: TextAlign.left,style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                                          )
                                                       )
-                                                  )
-                                                ],
-                                              ),
-
-
-                                              Column(
-                                                children: <Widget>[
-                                                  Center(
-                                                      child: Text('${cartList[i].rating}', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
-                                                      )
-                                                    //${cartList[i].rating}
-                                                  )
-                                                ],
-                                              ),
-                                              Column(
-                                                children: <Widget>[
-                                                  (cart.uid == cartList[i].uid) ? Container(
-                                                    child: IconButton(
-                                                      onPressed: (){
-
-                                                      },
-                                                      icon: Icon(Icons.delete,size: 20,color: Colors.black45,),
-
-                                                    ),
-                                                  ) : Container(
-                                                    height: 0,
+                                                    ],
                                                   ),
+
+
+                                                  Column(
+                                                    children: <Widget>[
+                                                      Center(
+                                                          child: Text('4', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                                          )
+                                                        //${cartList[i].rating}
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    children: <Widget>[
+                                                      (cart.uid == cartList[i].uid) ? Container(
+                                                        child: IconButton(
+                                                          onPressed: (){
+
+                                                          },
+                                                          icon: Icon(Icons.delete,size: 20,color: Colors.black45,),
+
+                                                        ),
+                                                      ) : Container(
+                                                        height: 0,
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+
+                                                children: <Widget>[
+                                                  // buildText(cartList[i]),
+                                                  SizedBox(width: queryData.size.width*0.5, child: buildText(cartList[i])),
                                                 ],
                                               )
+
+
+
+
+
+
                                             ],
                                           ),
-                                          Row(
-
-                                            children: <Widget>[
-                                              // buildText(cartList[i]),
-                                              SizedBox(width: queryData.size.width*0.5, child: buildText(cartList[i])),
-                                            ],
-                                          )
+                                        ),
 
 
 
-
-
-
-                                        ],
-                                      ),
+                                      ],
                                     ),
+                                  ),
 
-
-
-                                  ],
-                                ),
 
                               );
 
@@ -198,10 +200,12 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                       : Center(child: Text("San pham chua co danh gia nao"));
                 },
 
-              ));}
+              ));
+        //}
 
 
-    ); }}
+    //);
+  }}
 Widget buildText(Rating rating){
   return Container(
     child: Container(

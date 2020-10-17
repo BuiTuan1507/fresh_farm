@@ -55,22 +55,22 @@ class Rating{
   int id;
   String uid;
   String text;
-  double rating;
+ // double rating;
   String name;
   String photoURL;
 
-  Rating(this.id, this.uid, this.text, this.rating, this.photoURL,this.name);
+  Rating(this.id, this.uid, this.text, this.photoURL,this.name);
   Rating.fromJson(Map<String,dynamic> data)
       :id= data['id'],
         uid = data['uid'],
         text = data['text'],
-        rating= data['rating'],
+        //rating= data['rating'],
         name = data['name'],
         photoURL = data['photoURL'];
   Rating.fromSnapshot(DocumentSnapshot snapshot) :
         id = snapshot['id'],
         uid = snapshot["name"],
-        rating = snapshot["rating"],
+      //  rating = snapshot["rating"],
         text = snapshot["text"],
         name = snapshot['name'],
         photoURL = snapshot['photoURL'];
@@ -81,7 +81,7 @@ class Rating{
       "uid": uid,
 
       "text" : text,
-      "rating": rating,
+     // "rating": rating,
       'name':name,
       'photoURL':photoURL
 
@@ -120,6 +120,7 @@ class User{
   }
 
 }
+
 
 class Cart extends ChangeNotifier{
   List<Rating> RatingReview = [];
