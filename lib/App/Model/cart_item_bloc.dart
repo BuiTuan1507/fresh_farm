@@ -55,22 +55,22 @@ class Rating{
   int id;
   String uid;
   String text;
- // double rating;
+  int rating;
   String name;
   String photoURL;
 
-  Rating(this.id, this.uid, this.text, this.photoURL,this.name);
+  Rating(this.id, this.uid, this.text,this.rating, this.photoURL,this.name);
   Rating.fromJson(Map<String,dynamic> data)
       :id= data['id'],
         uid = data['uid'],
         text = data['text'],
-        //rating= data['rating'],
+        rating= data['rating']   ,
         name = data['name'],
         photoURL = data['photoURL'];
   Rating.fromSnapshot(DocumentSnapshot snapshot) :
         id = snapshot['id'],
         uid = snapshot["name"],
-      //  rating = snapshot["rating"],
+        rating = snapshot["rating"],
         text = snapshot["text"],
         name = snapshot['name'],
         photoURL = snapshot['photoURL'];
@@ -81,7 +81,7 @@ class Rating{
       "uid": uid,
 
       "text" : text,
-     // "rating": rating,
+      "rating": rating,
       'name':name,
       'photoURL':photoURL
 
@@ -126,6 +126,9 @@ class Cart extends ChangeNotifier{
   List<Rating> RatingReview = [];
   List <Item> ListItem = [];
   String uid;
+  String name;
+  String photoURL;
+  String email;
   int idRating;
   int total = 0;
   int delivery;
@@ -186,8 +189,11 @@ class Cart extends ChangeNotifier{
 
     notifyListeners();
   }
-  void addUser(String userId){
+  void addUser(String userId,String name, String photoURL, String email){
     uid = userId;
+    name = name;
+    photoURL = photoURL;
+    email = email;
   }
   void createCart(List<Item> item,String uid){
     List yourItemList = [];
@@ -206,16 +212,27 @@ class Cart extends ChangeNotifier{
 
     });
   }
-  void createReview(int id, String uid, double rating, String text){
+  void createReview(int id, String uid, int rating, String text,String name, String photoURL){
     Firestore firestoreReview = Firestore.instance;
 
     firestoreReview.collection('Rating').document(id.toString()).setData({
       "id":id,
       "uid":uid,
       "rating":rating,
-      "text":text
+      "text":text,
+      "name":name,
+      "photoURL": photoURL
     });
 
+  }
+  CollectionReference users = Firestore.instance.collection('Rating');
+
+  Future<void> deleteReview(int id) {
+    return users
+        .document('2')
+        .delete()
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
   }
   void addInfoItem(item){
     infoItem.add(item);
@@ -233,10 +250,7 @@ class Cart extends ChangeNotifier{
     idRating = item.id;
     return idRating;
   }
-  void addCurrentUser (String uid, String name, String photoURL, String email){
-    currentUser = User(name, uid, photoURL, email);
 
-  }
 }
 
 

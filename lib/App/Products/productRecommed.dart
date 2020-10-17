@@ -21,8 +21,7 @@ class _TestState extends State<Test> {
     List<Item> userList = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
     return Consumer<Cart>(builder: (context, cart, child) {
-      cart.addUser(widget.uid);
-      cart.addCurrentUser(widget.uid, widget.name, widget.photoURL, widget.email);
+      cart.addUser(widget.uid,widget.name, widget.photoURL, widget.email);
       return Scaffold(
           appBar: AppBar(
             title: Text('Shopping cart'),

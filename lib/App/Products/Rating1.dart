@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating/flutter_rating.dart';
+
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:provider/provider.dart';
 class Rating1 extends StatefulWidget {
@@ -10,7 +11,7 @@ class Rating1 extends StatefulWidget {
 class _Rating1State extends State<Rating1> {
   int id;
   String uid;
-  double rating = 3.5;
+  int rating = 3;
   int starCount = 5;
   TextEditingController text = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
@@ -23,6 +24,15 @@ class _Rating1State extends State<Rating1> {
 
   @override
   Widget build(BuildContext context) {
+    List<User> userList = Provider.of<List<User>>(context);
+    String name = "";
+    String photoURL = "";
+    for (int i =0; i<userList.length;i++){
+      if (uid == userList[i].uid){
+        name = userList[i].name;
+        photoURL = userList[i].photoURL;
+      }
+    }
     return Scaffold(
         appBar: new AppBar(
           title: new Text("Star Rating"),
@@ -37,18 +47,21 @@ class _Rating1State extends State<Rating1> {
                       top: 20.0,
                       bottom: 30.0,
                     ),
-                    child: new StarRating(
-                      size: 25.0,
-                      rating: rating,
-                      color: Colors.orange,
-                      borderColor: Colors.grey,
-                      starCount: starCount,
-                      onRatingChanged: (rating) => setState(
-                            () {
-                          this.rating = rating;
-                        },
+                    child: new RatingBar(
+                      initialRating: 3,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
                       ),
-                    ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    )
                   ),
 
                   Container(
@@ -80,7 +93,7 @@ class _Rating1State extends State<Rating1> {
                   RaisedButton(
                     onPressed: () {
 
-                      cart.createReview(cart.idRating, cart.uid, rating, text.text);
+                      cart.createReview(cart.idRating, cart.uid, rating, text.text,name,photoURL);
                     },
                     child: Text('Submit'),
                     textColor: Colors.white,

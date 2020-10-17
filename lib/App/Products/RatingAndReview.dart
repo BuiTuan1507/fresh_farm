@@ -55,7 +55,7 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                     uid = cart.uid;// uid
 
                     print(cart.uid);
-                    for (int i =0 ;i < 2;i++){// tinh count va add cac binh luan vao 1 list
+                    for (int i =0 ;i < userList.length;i++){// tinh count va add cac binh luan vao 1 list
                       if(cart.idRating == userList[i].id){
                         count = count + 1;
                         now.add(userList[i]);
@@ -82,9 +82,9 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                                 height: 100,
 
                                 padding: EdgeInsets.only(left: 0,top: 5,bottom: 5,right: 0),
-                                  child: Expanded(
+
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+
                                       children: <Widget>[
                                         Container(
                                             padding:EdgeInsets.only(left: 0,right: 0, top:4, bottom: 4),
@@ -105,80 +105,62 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                                                           fit: BoxFit.fill))
                                               ),
                                             )),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 0, right: 15),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Row(
-                                                children: <Widget>[
-                                                  Column(
-                                                    children: <Widget>[
-                                                      Container(
-                                                          child: Text(cartList[i].name, textAlign: TextAlign.left,style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
-                                                          )
-                                                      )
-                                                    ],
-                                                  ),
+                                        Column(
+                                          children: <Widget>[
+                                             Row(
+                                              children: <Widget>[
+                                                Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                        child: Text(cartList[i].name, textAlign: TextAlign.left,style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                                        )
+                                                    )
+                                                  ],
+                                                ),
+                                                Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                        padding: EdgeInsets.only(left: 40),
+                                                        child: Text('${cartList[i].rating }', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                                        )
+                                                    ),]),
+                                                Column(
+                                                      children: <Widget>[
+                                                        (cart.uid == cartList[i].uid) ? Container(
+                                                          padding: EdgeInsets.only(left: 10),
+                                                          child: IconButton(
+                                                            onPressed: (){
+                                                                cart.deleteReview(cartList[i].id);
 
+                                                            },
+                                                            icon: Icon(Icons.delete,size: 20,color: Colors.black45,),
 
-                                                  Column(
-                                                    children: <Widget>[
-                                                      Center(
-                                                          child: Text('4', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
-                                                          )
-                                                        //${cartList[i].rating}
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children: <Widget>[
-                                                      (cart.uid == cartList[i].uid) ? Container(
-                                                        child: IconButton(
-                                                          onPressed: (){
-
-                                                          },
-                                                          icon: Icon(Icons.delete,size: 20,color: Colors.black45,),
-
+                                                          ),
+                                                        ) : Container(
+                                                          height: 0,
                                                         ),
-                                                      ) : Container(
-                                                        height: 0,
-                                                      ),
-                                                    ],
-                                                  )
-                                                ],
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                            Row(
+                                              children:<Widget> [Container(
+                                                color: Colors.white54,
+                                                child: Text(
+                                                    cartList[i].text,
+
+                                                    overflow: TextOverflow.fade, style: TextStyle(fontSize: 17,)
+                                                ),
                                               ),
-                                              Row(
+                                            ])
+                              ],
 
-                                                children: <Widget>[
-                                                  // buildText(cartList[i]),
-                                                  SizedBox(width: queryData.size.width*0.5, child: buildText(cartList[i])),
-                                                ],
-                                              )
+                                            ),
 
+                                          ],
 
-
-
-
-
-                                            ],
-                                          ),
                                         ),
-
-
-
-                                      ],
-                                    ),
-                                  ),
-
-
-                              );
-
-
-
-
-
-
-                            },
+                              );},
                           )
                       ),
                       Center(
@@ -197,7 +179,22 @@ class _RatingAndReviewState extends State<RatingAndReview> {
 
                     ],
                   )
-                      : Center(child: Text("San pham chua co danh gia nao"));
+                      : Column(
+                    children: <Widget>[
+                      Center(
+                        child: Text('San pham khong co danh gia nao', style: TextStyle(fontSize: 18),),
+                      ),
+                      Center(
+                        child:  RaisedButton(
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Rating1()));
+                          },
+                          child: Text('Danh gia san pham', style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        ),
+                      ),
+
+                    ],
+                  );
                 },
 
               ));
@@ -217,3 +214,4 @@ Widget buildText(Rating rating){
     ),
   );
 }
+
