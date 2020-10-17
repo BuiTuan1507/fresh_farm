@@ -120,6 +120,30 @@ class User{
   }
 
 }
+class Favorite{
+
+  List<Item> item;
+  String uid;
+
+
+  Favorite(this.item, this.uid);
+  Favorite.fromJson(Map<String,dynamic> data)
+      :item= data['item'],
+        uid = data['uid'];
+
+  Favorite.fromSnapshot(DocumentSnapshot snapshot) :
+        item = snapshot['item'],
+        uid = snapshot["uid"];
+
+  toJson() {
+    return {
+      "item": item,
+      "uid": uid,
+
+    };
+  }
+
+}
 
 
 class Cart extends ChangeNotifier{
@@ -168,7 +192,7 @@ class Cart extends ChangeNotifier{
     }else{
       for(int i =0; i<FavoriteItem.length;i++){
         if (item.id == FavoriteItem[i].id){
-          break;
+
         }
         else{
           item.isLike = true;
@@ -225,6 +249,25 @@ class Cart extends ChangeNotifier{
     });
 
   }
+  void createFavorite(List<Item> item,String uid){
+    List yourItemList = [];
+    for (int i = 0 ; i<item.length;i++){
+      yourItemList.add({
+        "id":item[i].id,
+        "name": item[i].name,
+        "price":item[i].price,
+        "image": item[i].imgPath
+      });
+    }
+    Firestore firestoreInstance = Firestore.instance;
+
+    firestoreInstance.collection('Favorite').document(uid).setData({
+      "user":uid,
+      'item':FieldValue.arrayUnion(yourItemList)
+
+    });
+  }
+
   CollectionReference users = Firestore.instance.collection('Rating');
 
   Future<void> deleteReview(int id) {

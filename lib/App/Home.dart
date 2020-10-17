@@ -77,7 +77,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favorite()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favorite1()));
             },
             child: Icon(
               Icons.favorite,

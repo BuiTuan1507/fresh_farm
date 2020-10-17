@@ -149,7 +149,12 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
                                           color: (userList[i].isLike? Colors.red[800]:Colors.white),
                                           icon: Icon(Icons.favorite,),
                                           onPressed: () {
-                                            cart.addFavorite(userList[i]);
+                                            if (userList[i].isLike == true){
+                                              cart.removeFavorite(userList[i]);
+                                            }else{
+                                              cart.addFavorite(userList[i]);
+                                            }
+
                                           },
                                         ),
                                       ),
