@@ -94,7 +94,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         appBar:AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF0C9869),
-          title: Text("FreshFarm",
+          title: Text("Nông Trại Xanh",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
         ),
         body: Stack(
@@ -115,28 +115,28 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     );
   }
 
-//  void _showVerifyEmailSentDialog() {
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        // return object of type Dialog
-//        return AlertDialog(
-//          title: new Text("Verify your account"),
-//          content:
-//              new Text("Link to verify account has been sent to your email"),
-//          actions: <Widget>[
-//            new FlatButton(
-//              child: new Text("Dismiss"),
-//              onPressed: () {
-//                toggleFormMode();
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
+ void _showVerifyEmailSentDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Verify your account"),
+          content:
+              new Text("Link to verify account has been sent to your email"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Dismiss"),
+              onPressed: () {
+
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   Widget _showForm() {
     return new SingleChildScrollView(
@@ -156,6 +156,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
                       showPrimaryButton(),
                       showSecondaryButton(),
                       showErrorMessage(),
+
                     ],
                   ),
                 ))
@@ -168,7 +169,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         padding: EdgeInsets.only(top:10,bottom: 15),
         child:Center(
           child:  Text(
-            'Login', style: TextStyle(
+            'Đăng Nhập', style: TextStyle(
               fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87
           ),
           ),
@@ -238,7 +239,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Password',
+            hintText: 'Mật khẩu',
             icon: new Icon(
               Icons.lock,
               color: Color(0xFF0C9869),
@@ -260,7 +261,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           },
           child: new Center(
               child:  Text(
-                  'Create an account' ,
+                  'Tạo tài khoản mới' ,
                   style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
           )
 
@@ -279,7 +280,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
             color: Color(0xFF0C9869),
-            child: new Text('Login',
+            child: new Text('Đăng nhập',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: validateAndSubmit,
           ),

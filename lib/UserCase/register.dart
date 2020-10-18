@@ -1,3 +1,5 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -91,14 +93,32 @@ class _SignupPageState extends State<SignupPage> {
           print ("111");
         }
       } catch (e) {
-        print('Error: $e');
+
         setState(() {
           _isLoading = false;
           _errorMessage = e.message;
           _formKey.currentState.reset();
         });
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Error"),
+                content: Text(e.message),
+                actions: [
+                  FlatButton(
+                    child: Text("Ok"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            });
       }
     }
+
+
   }
 
   @override
@@ -184,7 +204,7 @@ class _SignupPageState extends State<SignupPage> {
                       showImageInput(),
                       showPrimaryButton(),
                       primaryButton(),
-                      showErrorMessage(),
+                    //  showErrorMessage(),
                     ],
                   ),
                 ))
@@ -337,6 +357,7 @@ class _SignupPageState extends State<SignupPage> {
 
 
   Widget showPrimaryButton() {
+
     return new Padding(
         padding: EdgeInsets.fromLTRB(3.0, 30.0, 3.0, 0.0),
         child: SizedBox(
