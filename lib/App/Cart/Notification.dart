@@ -6,14 +6,14 @@ import 'package:fresh_farm/App/Products/Detail.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:provider/provider.dart';
 
-class Favorite1 extends StatefulWidget {
+class Sale extends StatefulWidget {
   @override
-  _Favorite1State createState() => _Favorite1State();
+  _SaleState createState() => _SaleState();
   String uid;
-  Favorite1({Key key, this.uid}) : super(key: key);
+  Sale({Key key, this.uid}) : super(key: key);
 }
 
-class _Favorite1State extends State<Favorite1> {
+class _SaleState extends State<Sale> {
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +22,12 @@ class _Favorite1State extends State<Favorite1> {
         appBar:AppBar(
             centerTitle: true,
             backgroundColor: Colors.green,
-            title: Text("Yeu thich",
+            title: Text("Thong bao",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),)),
-        body: StreamBuilder<QuerySnapshot>(
+        body: StreamBuilder(
           stream:  Firestore.instance
-              .collection('Favorite')
-              .where("user",isEqualTo: widget.uid)
+              .collection('Notification')
+
               .snapshots(),
           builder: (context, snapshot) {
 
@@ -35,26 +35,16 @@ class _Favorite1State extends State<Favorite1> {
                 ? Column(
               children: <Widget>[
 
-                SingleChildScrollView(
+                Expanded(
                     child: ListView.builder(
 
 
                       shrinkWrap: true,
                       //itemCount: cart.FavoriteItem.length,
-                      itemCount: snapshot.data.documents[0]['item'].length,
+                      itemCount: snapshot.data.documents.length,
                       itemBuilder: (BuildContext context, i) {
-                        var cartList = snapshot.data.documents[0]['item'];
-                         int id = cartList[i]['id'];
-                         String name = cartList[i]['name'];
-                         String imgPath = cartList[i]['imgPath'];
-                         bool isLike = cartList[i]['isLike'];
-                         int price = cartList[i]['price'];
-                         int count = cartList[i]['count'];
-                         double rating = cartList[i]['rating'];
-                         Item favoriteItem = new Item(id,name,imgPath,price,count,isLike,rating);
+                        DocumentSnapshot cartList = snapshot.data.documents[i];
 
-                        cart.FavoriteItem.add(favoriteItem);
-                        var favoriteList = cart.FavoriteItem;
                         return new Container(
                           height: 100,
                           padding: EdgeInsets.only(left: 20,top: 5,bottom: 5,right: 20),
@@ -81,7 +71,7 @@ class _Favorite1State extends State<Favorite1> {
                                           height: 80,
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
-                                                  image: AssetImage(favoriteList[i].imgPath),
+                                                  image: AssetImage(cartList['imgPath']),
                                                   fit: BoxFit.fill))
                                       ),
                                     )),
@@ -92,7 +82,7 @@ class _Favorite1State extends State<Favorite1> {
                                       Row(
                                         children: <Widget>[
                                           Center(
-                                              child: Text(favoriteList[i].name, style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                              child: Text('artList', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
                                               )
                                           )
                                         ],
@@ -101,7 +91,7 @@ class _Favorite1State extends State<Favorite1> {
                                         children: <Widget>[
                                           Container(
                                             padding :EdgeInsets.only(bottom: 0),
-                                            child: Text('\$${favoriteList[i].price}', style: TextStyle(fontSize: 15, color: Colors.black),
+                                            child: Text(cartList['text'], style: TextStyle(fontSize: 15, color: Colors.black),
                                             )
                                             ,)
                                         ],
@@ -111,25 +101,7 @@ class _Favorite1State extends State<Favorite1> {
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  padding: EdgeInsets.only(left: 40),
-                                  child:  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          IconButton(
-                                            icon: Icon(Icons.delete,color: Colors.green[800],),
-                                            onPressed: () {
 
-                                              cart.removeFavorite(favoriteList[i]);
-                                            },
-                                          ),
-                                        ],
-                                      ),
-
-                                    ],
-                                  ),
-                                )
 
 
                               ],
@@ -143,22 +115,13 @@ class _Favorite1State extends State<Favorite1> {
                       },
                     )
                 ),
-                Center(
-                  child: Center(
-                    child: RaisedButton(
-                      onPressed: (){
-                        cart.createFavorite(cart.FavoriteItem, cart.uid);
-                      },
-                      child: Text('cap nhat danh sach yeu thich'),
-                    ),
-                  ),
-                )
+
 
               ],
             )
                 : Column(
               children: <Widget>[
-                Center(child: Text("Bạn chưa có sản phẩm yêu thích nào",style: TextStyle(fontSize: 24),)),
+                Center(child: Text("khong co thong bao moi",style: TextStyle(fontSize: 24),)),
                 RaisedButton(
                   onPressed: () {},
                   child: Text("Xem thêm sản phẩm"),

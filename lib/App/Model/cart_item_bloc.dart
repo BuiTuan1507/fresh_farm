@@ -256,7 +256,10 @@ class Cart extends ChangeNotifier{
         "id":item[i].id,
         "name": item[i].name,
         "price":item[i].price,
-        "image": item[i].imgPath
+        "imgPath": item[i].imgPath,
+        "rating":item[i].rating,
+        "isLike": true,
+        "count":1
       });
     }
     Firestore firestoreInstance = Firestore.instance;

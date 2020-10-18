@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Products/Category.dart';
 import 'package:fresh_farm/App/Products/Search.dart';
 import 'package:fresh_farm/App/Model/authentication.dart';
-
+import 'package:fresh_farm/App/Cart/Notification.dart';
 
 import 'package:fresh_farm/App/Products/productRecommed.dart';
 import 'Cart/shopping_cart.dart';
@@ -77,7 +77,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favorite1()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favorite1(uid: widget.userId)));
             },
             child: Icon(
               Icons.favorite,
@@ -139,6 +139,17 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
           ),
           title: Text('Help', style:  TextStyle(
             fontSize: 18, fontWeight: FontWeight.bold
+          ),),
+        ),
+        ListTile(
+          leading: GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Sale()));
+            },
+            child: Icon(Icons.add_alert,size: 26,),
+          ),
+          title: Text('Notification', style:  TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold
           ),),
         ),
         ListTile(
