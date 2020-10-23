@@ -13,6 +13,7 @@ class FirebaseService{
       .map((snapShot) => snapShot.documents
       .map((document) => Item.fromJson(document.data))
       .toList());
+
   Stream<List<Rating>> getRatingList =  Firestore.instance.collection('Rating')
       .snapshots()
       .map((snapShot) => snapShot.documents

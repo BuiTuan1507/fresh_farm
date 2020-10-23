@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/ListProduct/giavi.dart';
 
 
 
@@ -66,7 +67,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Test(uid: widget.userId)));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Giavi(uid: widget.userId)));
             },
             child: Icon(Icons.markunread_mailbox,size: 26,color:Color(0xFF0C9869)),
           ),

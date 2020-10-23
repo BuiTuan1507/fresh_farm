@@ -50,7 +50,7 @@ class _Favorite1State extends State<Favorite1> {
                          bool isLike = cartList[i]['isLike'];
                          int price = cartList[i]['price'];
                          int count = cartList[i]['count'];
-                         double rating = cartList[i]['rating'];
+                         int rating = cartList[i]['rating'];
                          Item favoriteItem = new Item(id,name,imgPath,price,count,isLike,rating);
 
                         cart.FavoriteItem.add(favoriteItem);

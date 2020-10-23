@@ -7,51 +7,57 @@ import 'package:fresh_farm/App/Products/Detail.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Model/service.dart';
 import 'package:provider/provider.dart';
-class Test extends StatefulWidget{
+class Giavi extends StatefulWidget{
   String uid;
   String name;
   String photoURL;
   String email;
-  Test({Key key, this.uid,this.name, this.photoURL, this.email}) : super(key: key);
+  Giavi({Key key, this.uid,this.name, this.photoURL, this.email}) : super(key: key);
   @override
-  _TestState createState() => _TestState();
+  _GiaviState createState() => _GiaviState();
 }
-class _TestState extends State<Test> {
+class _GiaviState extends State<Giavi> {
   Widget build(BuildContext context) {
-    List<Item> userList = Provider.of<List<Item>>(context);
+    List<Item> userList1 = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
-    return (userList != null ) ?
-      Consumer<Cart>(builder: (context, cart, child) {
-        cart.addUser(widget.uid,widget.name, widget.photoURL, widget.email);
-        return Scaffold(
-            appBar: AppBar(
-              title: Text('Shopping cart'),
-              actions: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(
-                          Icons.shopping_cart,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Checkout()));
-                        },
+    return (userList1 != null ) ?
+    Consumer<Cart>(builder: (context, cart, child) {
+      cart.addUser(widget.uid,widget.name, widget.photoURL, widget.email);
+      List<Item> user = [];
+      for (int i = 0; i<userList1.length;i++){
+        if(userList1[i].id > 5){
+          user.add(userList1[i]);
+        }
+      }
+      return Scaffold(
+          appBar: AppBar(
+            title: Text('Shopping cart'),
+            actions: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
                       ),
-                      Text(cart.ListItem.length.toString())
-                    ],
-                  ),
-                )
-              ],
-              centerTitle: true,
-            ),
-            body: shopItemsListBuilder(userList,cart,this.widget.uid)
-        );
-      })
-     :  Container(child: Text("Loading",textAlign: TextAlign.center,));
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Checkout()));
+                      },
+                    ),
+                    Text(cart.ListItem.length.toString())
+                  ],
+                ),
+              )
+            ],
+            centerTitle: true,
+          ),
+          body: shopItemsListBuilder(user,cart,this.widget.uid)
+      );
+    })
+        :  Container(child: Text("Loading",textAlign: TextAlign.center,));
 
 
   }

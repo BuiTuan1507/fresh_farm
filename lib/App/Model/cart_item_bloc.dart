@@ -13,7 +13,7 @@ class Item{
   String name;
   String imgPath;
   int price;
-  double rating;
+  int rating;
   int count;
   bool isLike;
 
@@ -246,6 +246,20 @@ class Cart extends ChangeNotifier{
       "text":text,
       "name":name,
       "photoURL": photoURL
+    });
+
+  }
+  void addProduct(){
+    Firestore firestoreReview = Firestore.instance;
+
+    firestoreReview.collection('shopItems').document("8").setData({
+      "id":8,
+      "name":"hanhla",
+      "imgPath":"assets/image/giavi/hanhla.jpg",
+      "price":20,
+      "count":1,
+      "isLike": false,
+      "rating":4
     });
 
   }

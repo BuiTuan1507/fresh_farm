@@ -43,7 +43,7 @@ class _SearchDetailState extends State<SearchDetail> {
             bool isLike = snapshot.data.documents[0]['isLike'];
             int price = snapshot.data.documents[0]['price'];
             int count = snapshot.data.documents[0]['count'];
-            double rating = snapshot.data.documents[0]['rating'];
+            int rating = snapshot.data.documents[0]['rating'];
             Item searchItem = new Item(id,name,imgPath,price,count,isLike,rating);
 
             return new SingleChildScrollView(
