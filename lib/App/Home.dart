@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/ListProduct/giavi.dart';
+import 'package:fresh_farm/App/ListProduct/hoaqua.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 
 
 
@@ -10,6 +12,8 @@ import 'package:fresh_farm/App/Model/authentication.dart';
 import 'package:fresh_farm/App/Cart/Notification.dart';
 
 import 'package:fresh_farm/App/Products/productRecommed.dart';
+import 'package:fresh_farm/addData.dart';
+import 'package:provider/provider.dart';
 import 'Cart/shopping_cart.dart';
 import 'Favorite.dart';
 import 'HomeComponent/constants.dart';
@@ -46,6 +50,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
 
 
   Widget buildDrawer(BuildContext context){
+    List<Item> userList = Provider.of<List<Item>>(context);
     return new ListView(
       children: <Widget>[
 
@@ -67,7 +72,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Giavi(uid: widget.userId)));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Hoaqua(uid: widget.userId)));
             },
             child: Icon(Icons.markunread_mailbox,size: 26,color:Color(0xFF0C9869)),
           ),
@@ -93,7 +98,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap:(){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Checkout()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Data123Page()));
             },
             child: Icon(Icons.shopping_cart,size: 26, color:Color(0xFF0C9869) ),
           ),

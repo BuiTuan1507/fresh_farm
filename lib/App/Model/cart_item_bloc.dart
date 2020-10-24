@@ -249,20 +249,7 @@ class Cart extends ChangeNotifier{
     });
 
   }
-  void addProduct(){
-    Firestore firestoreReview = Firestore.instance;
 
-    firestoreReview.collection('shopItems').document("8").setData({
-      "id":8,
-      "name":"hanhla",
-      "imgPath":"assets/image/giavi/hanhla.jpg",
-      "price":20,
-      "count":1,
-      "isLike": false,
-      "rating":4
-    });
-
-  }
   void createFavorite(List<Item> item,String uid){
     List yourItemList = [];
     for (int i = 0 ; i<item.length;i++){

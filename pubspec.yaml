@@ -88,6 +88,13 @@ flutter:
     - assets/flower/tulip.jpg
     - assets/meatAndEgg/pork.jpg
     - assets/image/giavi/
+    - assets/image/haisan/
+    - assets/image/hoaqua/
+    - assets/image/ngucoc/
+    - assets/image/rau/
+    - assets/image/thit/
+    - assets/image/thucpham/
+    - assets/image/trungsua/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
