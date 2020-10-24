@@ -3,6 +3,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Cart/shop_items.dart';
+import 'package:fresh_farm/App/ListProduct/giavi.dart';
+import 'package:fresh_farm/App/ListProduct/haisan.dart';
+import 'package:fresh_farm/App/ListProduct/hoaqua.dart';
+import 'package:fresh_farm/App/ListProduct/ngucoc.dart';
+import 'package:fresh_farm/App/ListProduct/rau.dart';
+import 'package:fresh_farm/App/ListProduct/thit.dart';
+import 'package:fresh_farm/App/ListProduct/thucpham.dart';
+import 'package:fresh_farm/App/ListProduct/trungsua.dart';
 import 'FastFood.dart';
 class MyCategoryPage extends StatefulWidget{
   _MyCategoryPageState createState() => new _MyCategoryPageState(); // ghi de 1 doi tuong trang thai private
@@ -15,7 +23,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
         appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.green,
-        title: Text("Danh muc",
+        title: Text("Danh muc san pham",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
     ),
     body:  GridView.count(
@@ -31,7 +39,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
         child: InkWell(
 
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ShopItems()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Raucu()));
 
             },
             child: Container(
@@ -56,10 +64,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                           width: size.width*0.4,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/1.jpg"),
+                                  image: AssetImage("assets/category/raucu.jpg"),
                                   fit: BoxFit.fill)))),
 
-                  Text('thit',
+                  Text('Rau củ',
                       style: TextStyle(
                           color: Color(0xFF575E67),
                           fontFamily: 'Varela',
@@ -71,13 +79,11 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
         ]),
     ))),
         Padding(
-
             padding: EdgeInsets.only(top: 2.0, bottom: 2.0, left: 0, right: 0),
             child: InkWell(
-
                 onTap: () {
-
-                },
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Hoaqua()));
+                  },
                 child: Container(
                   //color: Color(0xFFEFDB),
                   decoration: BoxDecoration(
@@ -100,10 +106,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/1.jpg"),
+                                        image: AssetImage("assets/category/hoaqua.jpg"),
                                         fit: BoxFit.fill)))),
 
-                        Text('thit',
+                        Text('Hoa quả',
                             style: TextStyle(
                                 color: Color(0xFF575E67),
                                 fontFamily: 'Varela',
@@ -120,7 +126,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>ShopItems()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Haisan()));
 
                 },
                 child: Container(
@@ -145,10 +151,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/1.jpg"),
+                                        image: AssetImage("assets/category/haisan.jpg"),
                                         fit: BoxFit.fill)))),
 
-                        Text('thit',
+                        Text('Hải sản',
                             style: TextStyle(
                                 color: Color(0xFF575E67),
                                 fontFamily: 'Varela',
@@ -165,7 +171,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>ShopItems()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Thit()));
 
                 },
                 child: Container(
@@ -190,10 +196,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/1.jpg"),
+                                        image: AssetImage("assets/category/thit.jpg"),
                                         fit: BoxFit.fill)))),
 
-                        Text('thit',
+                        Text('Thịt',
                             style: TextStyle(
                                 color: Color(0xFF575E67),
                                 fontFamily: 'Varela',
@@ -210,7 +216,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ShopItems()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Ngucoc()));
 
                 },
                 child: Container(
@@ -235,10 +241,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/1.jpg"),
+                                        image: AssetImage("assets/category/ngucoc.jpg"),
                                         fit: BoxFit.fill)))),
 
-                        Text('thit',
+                        Text('Ngũ cốc',
                             style: TextStyle(
                                 color: Color(0xFF575E67),
                                 fontFamily: 'Varela',
@@ -255,7 +261,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ShopItems()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Giavi()));
 
                 },
                 child: Container(
@@ -280,10 +286,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/1.jpg"),
+                                        image: AssetImage("assets/category/giavi.jpg"),
                                         fit: BoxFit.fill)))),
 
-                        Text('thit',
+                        Text('Gia vị',
                             style: TextStyle(
                                 color: Color(0xFF575E67),
                                 fontFamily: 'Varela',
@@ -300,7 +306,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ShopItems()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Thucpham()));
 
                 },
                 child: Container(
@@ -325,10 +331,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/1.jpg"),
+                                        image: AssetImage("assets/category/giocha.jpg"),
                                         fit: BoxFit.fill)))),
 
-                        Text('thit',
+                        Text('Sản phẩm chế biến sẵn',
                             style: TextStyle(
                                 color: Color(0xFF575E67),
                                 fontFamily: 'Varela',
@@ -345,7 +351,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ShopItems()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Trungsua()));
 
                 },
                 child: Container(
@@ -370,10 +376,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/1.jpg"),
+                                        image: AssetImage("assets/category/trungsua.jpg"),
                                         fit: BoxFit.fill)))),
 
-                        Text('thit',
+                        Text('Trứng sữa',
                             style: TextStyle(
                                 color: Color(0xFF575E67),
                                 fontFamily: 'Varela',

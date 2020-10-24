@@ -25,13 +25,13 @@ class _HoaquaState extends State<Hoaqua> {
       cart.addUser(widget.uid,widget.name, widget.photoURL, widget.email);
       List<Item> userList = [];
       for (int i = 0; i<userList1.length;i++){
-        if(userList1[i].id > 16){
+        if((userList1[i].id > 16) && (userList1[i]).id<=24){
           userList.add(userList1[i]);
         }
       }
       return Scaffold(
           appBar: AppBar(
-            title: Text('Shopping cart'),
+            title: Text('Thực phẩm chế biến'),
             actions: <Widget>[
               Padding(
                 padding: EdgeInsets.all(8.0),

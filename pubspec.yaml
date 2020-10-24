@@ -95,6 +95,14 @@ flutter:
     - assets/image/thit/
     - assets/image/thucpham/
     - assets/image/trungsua/
+    - assets/category/giavi.jpg
+    - assets/category/giocha.jpg
+    - assets/category/haisan.jpg
+    - assets/category/hoaqua.jpg
+    - assets/category/ngucoc.jpg
+    - assets/category/raucu.jpg
+    - assets/category/thit.jpg
+    - assets/category/trungsua.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

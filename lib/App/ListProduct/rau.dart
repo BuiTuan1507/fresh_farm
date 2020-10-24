@@ -7,31 +7,31 @@ import 'package:fresh_farm/App/Products/Detail.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Model/service.dart';
 import 'package:provider/provider.dart';
-class Giavi extends StatefulWidget{
+class Raucu extends StatefulWidget{
   String uid;
   String name;
   String photoURL;
   String email;
-  Giavi({Key key, this.uid,this.name, this.photoURL, this.email}) : super(key: key);
+  Raucu({Key key, this.uid,this.name, this.photoURL, this.email}) : super(key: key);
   @override
-  _GiaviState createState() => _GiaviState();
+  _RaucuState createState() => _RaucuState();
 }
-class _GiaviState extends State<Giavi> {
+class _RaucuState extends State<Raucu> {
   Widget build(BuildContext context) {
     List<Item> userList1 = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
     return (userList1 != null ) ?
     Consumer<Cart>(builder: (context, cart, child) {
       cart.addUser(widget.uid,widget.name, widget.photoURL, widget.email);
-      List<Item> user = [];
+      List<Item> userList = [];
       for (int i = 0; i<userList1.length;i++){
-        if ((userList1[i].id >=1)&&(userList1[i].id <=8 )){
-          user.add(userList1[i]);
+        if((userList1[i].id > 32) && (userList1[i]).id <= 40){
+          userList.add(userList1[i]);
         }
       }
       return Scaffold(
           appBar: AppBar(
-            title: Text('Gia vị'),
+            title: Text('Thực phẩm chế biến'),
             actions: <Widget>[
               Padding(
                 padding: EdgeInsets.all(8.0),
@@ -54,7 +54,7 @@ class _GiaviState extends State<Giavi> {
             ],
             centerTitle: true,
           ),
-          body: shopItemsListBuilder(user,cart,this.widget.uid)
+          body: shopItemsListBuilder(userList,cart,this.widget.uid)
       );
     })
         :  Container(child: Text("Loading",textAlign: TextAlign.center,));
@@ -175,7 +175,6 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
                                           onPressed: () {
                                             //   bloc.addToCart(shopList[i]);
                                             cart.add(userList[i]);
-
                                           },
                                         ),
                                       ),
