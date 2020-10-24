@@ -18,14 +18,24 @@ class Test extends StatefulWidget{
 }
 class _TestState extends State<Test> {
   Widget build(BuildContext context) {
-    List<Item> userList = Provider.of<List<Item>>(context);
+    List<Item> userList1 = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
-    return (userList != null ) ?
+    return (userList1 != null ) ?
       Consumer<Cart>(builder: (context, cart, child) {
         cart.addUser(widget.uid,widget.name, widget.photoURL, widget.email);
+        List<Item> userList = [];
+        List<int> chiso = [1,9,17,25,33,41,50,60];
+        for (int i = 0; i<userList1.length;i++){
+          for(int j = 0;j<8;j++){
+            if(userList1[i].id == chiso[j]){
+              userList.add(userList1[i]);
+              break;
+            }
+          }
+        }
         return Scaffold(
             appBar: AppBar(
-              title: Text('Shopping cart'),
+              title: Text('Mat hang dac biet hom nay'),
               actions: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(8.0),

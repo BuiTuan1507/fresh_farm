@@ -1,35 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
+import 'package:provider/provider.dart';
 
 
 import 'constants.dart';
 import 'package:fresh_farm/App/Products/Detail.dart';
-class Recomends extends StatelessWidget {
-  const Recomends({
-    Key key, this.image, this.title, this.price,
-  }) : super(key: key);
-  final image, price, title;
-
-
-
+class Recomend extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: <Widget>[
-          _buildCard(context,"Xoài",'440',"assets/Fruits/xoai.jpg",),
-
-
-          _buildCard(context, "Thịt lợn", '440',"assets/meatAndEgg/pork.jpg",),
-         _buildCard(context, 'Hoa Tulip', '150', 'assets/flower/tulip.jpg')
-        ],
-      ),
-    );
-  }
+  _RecomendState createState() => _RecomendState();
 }
 
+class _RecomendState extends State<Recomend> {
+  @override
+  Widget build(BuildContext context) {
 
-  Widget _buildCard(BuildContext context, String title, String price, String image) {
+      List<Item> userList1 = Provider.of<List<Item>>(context);
+      return (userList1 != null) ?
+      Consumer<Cart>(builder: (context, cart, child) {
+        List<Item> userList = [];
+        List<int> chiso = [9,17,25];
+        for (int i = 0; i<userList1.length;i++){
+          for(int j = 0;j<3;j++){
+            if(userList1[i].id == chiso[j]){
+              userList.add(userList1[i]);
+              break;
+            }
+          }
+        }
+
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: <Widget>[
+              _buildCard(
+                  context, userList[0].name, userList[0].price.toString(),
+                  userList[0].imgPath, userList[0], cart),
+              _buildCard(
+                  context, userList[1].name, userList[1].price.toString(),
+                  userList[1].imgPath, userList[1], cart),
+              _buildCard(
+                  context, userList[2].name, userList[2].price.toString(),
+                  userList[2].imgPath, userList[2], cart),
+
+
+            ],
+          ),
+        );
+      }) : Container(child: Text("Loading", textAlign: TextAlign.center,));
+    }
+  }
+
+
+
+
+
+  Widget _buildCard(BuildContext context, String title, String price, String image,Item item,Cart cart) {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.only(
@@ -42,15 +67,11 @@ class Recomends extends StatelessWidget {
         children: <Widget>[
           Image.asset(image),
           GestureDetector(
-           // onTap: (){
-           //   Navigator.of(context).push(
-
-             //     MaterialPageRoute(builder: (context) => Detail(
-               //       assetPath: image,
-                 //     cookieprice:price,
-                  //    cookiename: title
-               //   )));
-           // },
+            onTap: (){
+              cart.addInfoItem(item);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => Detail()));
+            },
             child: Container(
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(

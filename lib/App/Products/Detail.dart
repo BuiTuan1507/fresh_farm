@@ -99,7 +99,7 @@ Widget InfoItemsListBuilder(context,cart){
         Center(
           child: Container(
             width: MediaQuery.of(context).size.width - 50.0,
-            child: Text('Cold, creamy ice cream sandwiched between delicious deluxe cookies. Pick your favorite deluxe cookies and ice cream flavor.',
+            child: Text('Được nuôi trồng với quy trình vietGap từ khâu chọn giống đến khâu thu hoạch, sản phẩm sẽ cung cấp một sức khỏe tốt nhất đến gia đình bạn',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'Varela',

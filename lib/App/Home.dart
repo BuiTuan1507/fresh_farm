@@ -72,7 +72,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Hoaqua(uid: widget.userId)));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Test(uid: widget.userId)));
             },
             child: Icon(Icons.markunread_mailbox,size: 26,color:Color(0xFF0C9869)),
           ),
@@ -98,7 +98,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap:(){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Data123Page()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Checkout()));
             },
             child: Icon(Icons.shopping_cart,size: 26, color:Color(0xFF0C9869) ),
           ),
@@ -218,7 +218,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               TitleWithMoreBtn(title: "Recomended", press: () {
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyHomeAppPage()));
               }),
-              Recomends(),
+              Recomend(),
 
               SizedBox(height: kDefaultPadding),
         ])));

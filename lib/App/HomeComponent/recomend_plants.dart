@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Cart/shop_items.dart';
+import 'package:fresh_farm/App/ListProduct/hoaqua.dart';
+import 'package:fresh_farm/App/ListProduct/ngucoc.dart';
+import 'package:fresh_farm/App/ListProduct/thit.dart';
 import 'package:fresh_farm/App/Products/FastFood.dart';
 import 'constants.dart';
 
@@ -15,7 +18,7 @@ class RecomendsPlants extends StatelessWidget {
       child: Row(
         children: <Widget>[
           RecomendPlantCard(
-            image: "assets/1.jpg",
+            image: "assets/category/hoaqua.jpg",
             title: "Hoa quả",
             //country: "Russia",
            // price: 440,
@@ -23,7 +26,7 @@ class RecomendsPlants extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ShopItems(),
+                  builder: (context) => Hoaqua(),
                 ),
               );
             },
@@ -37,7 +40,7 @@ class RecomendsPlants extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                 builder: (context) => MyFastFoodPage(),
+                 builder: (context) => Thit(),
                 ),
               );
             },
@@ -51,7 +54,7 @@ class RecomendsPlants extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>ShopItems(),
+                  builder: (context) =>Ngucoc(),
                 ),
               );
             },
