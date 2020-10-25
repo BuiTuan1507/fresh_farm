@@ -13,7 +13,9 @@ import 'package:fresh_farm/App/ListProduct/thucpham.dart';
 import 'package:fresh_farm/App/ListProduct/trungsua.dart';
 import 'FastFood.dart';
 class MyCategoryPage extends StatefulWidget{
-  _MyCategoryPageState createState() => new _MyCategoryPageState(); // ghi de 1 doi tuong trang thai private
+  _MyCategoryPageState createState() => new _MyCategoryPageState();
+  String uid;
+  MyCategoryPage({Key key, this.uid}) : super(key: key);
 }
 class _MyCategoryPageState extends State<MyCategoryPage>{
   Widget build(BuildContext context){
@@ -39,7 +41,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
         child: InkWell(
 
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Raucu()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Raucu(uid: widget.uid)));
 
             },
             child: Container(
@@ -64,7 +66,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                           width: size.width*0.4,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/category/raucu.jpg"),
+                                  image: AssetImage("assets/nhan/raucu.jpg"),
                                   fit: BoxFit.fill)))),
 
                   Text('Rau củ',
@@ -82,7 +84,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             padding: EdgeInsets.only(top: 2.0, bottom: 2.0, left: 0, right: 0),
             child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Hoaqua()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Hoaqua(uid: widget.uid)));
                   },
                 child: Container(
                   //color: Color(0xFFEFDB),
@@ -106,7 +108,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/category/hoaqua.jpg"),
+                                        image: AssetImage("assets/nhan/hoaqua.jpg"),
                                         fit: BoxFit.fill)))),
 
                         Text('Hoa quả',
@@ -126,7 +128,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Haisan()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Haisan(uid: widget.uid,)));
 
                 },
                 child: Container(
@@ -151,7 +153,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/category/haisan.jpg"),
+                                        image: AssetImage("assets/nhan/haisan.jpg"),
                                         fit: BoxFit.fill)))),
 
                         Text('Hải sản',
@@ -171,7 +173,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Thit()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Thit(uid: widget.uid,)));
 
                 },
                 child: Container(
@@ -196,7 +198,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/category/thit.jpg"),
+                                        image: AssetImage("assets/nhan/thit.jpg"),
                                         fit: BoxFit.fill)))),
 
                         Text('Thịt',
@@ -216,7 +218,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Ngucoc()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Ngucoc(uid: widget.uid,)));
 
                 },
                 child: Container(
@@ -241,7 +243,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/category/ngucoc.jpg"),
+                                        image: AssetImage("assets/nhan/ngucoc.jpg"),
                                         fit: BoxFit.fill)))),
 
                         Text('Ngũ cốc',
@@ -261,7 +263,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Giavi()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Giavi(uid: widget.uid,)));
 
                 },
                 child: Container(
@@ -286,7 +288,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/category/giavi.jpg"),
+                                        image: AssetImage("assets/nhan/giavi.jpg"),
                                         fit: BoxFit.fill)))),
 
                         Text('Gia vị',
@@ -306,7 +308,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Thucpham()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Thucpham(uid: widget.uid,)));
 
                 },
                 child: Container(
@@ -331,7 +333,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/category/giocha.jpg"),
+                                        image: AssetImage("assets/nhan/giocha.jpg"),
                                         fit: BoxFit.fill)))),
 
                         Text('Sản phẩm chế biến sẵn',
@@ -351,7 +353,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
             child: InkWell(
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Trungsua()));
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Trungsua(uid: widget.uid,)));
 
                 },
                 child: Container(
@@ -376,7 +378,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: AssetImage("assets/category/trungsua.jpg"),
+                                        image: AssetImage("assets/nhan/trungsua.jpg"),
                                         fit: BoxFit.fill)))),
 
                         Text('Trứng sữa',

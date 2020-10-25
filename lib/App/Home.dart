@@ -212,7 +212,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               HeaderWithSearchBox(size: size),
               FeaturedPlants(),
               TitleWithMoreBtn(title: "Category", press: () {
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage(uid:widget.userId)));
               }),
               RecomendsPlants(),
               TitleWithMoreBtn(title: "Recomended", press: () {

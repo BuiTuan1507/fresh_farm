@@ -1,9 +1,13 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fresh_farm/App/Home.dart';
 import 'package:fresh_farm/UserCase/reset_password.dart';
 import 'package:fresh_farm/UserCase/updateProfile.dart';
+
 
 class MyProfilePage extends StatefulWidget{
   const MyProfilePage({Key key, this.uid}) : super(key: key);
@@ -17,6 +21,8 @@ class _MyProfilePageState extends State<MyProfilePage>{
   String name;
   String email;
   String photoURL;
+  File _imageFile;
+
   Widget build(BuildContext context) {
     Size size = MediaQuery
         .of(context)
@@ -81,6 +87,8 @@ class _MyProfilePageState extends State<MyProfilePage>{
 
                               ),
                             ),
+
+
                             Center(
                               child: Text(
                                 snapshot.data['name'], style: TextStyle(fontSize: 24,
@@ -257,6 +265,11 @@ class _MyProfilePageState extends State<MyProfilePage>{
                     SizedBox(height: 20,),
 
 
+
                   ]);
             }));
-  }}
+  }
+
+}
+
+
