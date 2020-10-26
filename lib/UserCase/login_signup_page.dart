@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/UserCase/Register/register1.dart';
 import 'package:fresh_farm/UserCase/register.dart';
 import 'package:fresh_farm/App/Model/authentication.dart';
 
@@ -257,7 +258,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           onTap: (){
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SignupPage()));
+                MaterialPageRoute(builder: (context) =>signUp()));
           },
           child: new Center(
               child:  Text(

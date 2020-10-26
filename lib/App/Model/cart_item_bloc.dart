@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -271,6 +272,15 @@ class Cart extends ChangeNotifier{
 
     });
   }
+  void removeItemFavorite(Item item){
+    Firestore firestoreInstance = Firestore.instance;
+    FavoriteItem.remove(item);
+    firestoreInstance.collection("Favorite").document(uid).updateData({
+      "user": uid,
+      "item": FieldValue.arrayUnion(FavoriteItem)
+    });
+  }
+
 
   CollectionReference users = Firestore.instance.collection('Rating');
 

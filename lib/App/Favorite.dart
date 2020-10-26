@@ -52,8 +52,7 @@ class _Favorite1State extends State<Favorite1> {
                          int count = cartList[i]['count'];
                          int rating = cartList[i]['rating'];
                          Item favoriteItem = new Item(id,name,imgPath,price,count,isLike,rating);
-
-                        cart.FavoriteItem.add(favoriteItem);
+                         cart.FavoriteItem.add(favoriteItem);
                         var favoriteList = cart.FavoriteItem;
                         return new Container(
                           height: 100,
@@ -67,7 +66,7 @@ class _Favorite1State extends State<Favorite1> {
                             child: Row(
                               children: <Widget>[
                                 Container(
-                                    padding:EdgeInsets.only(left: 10,right: 30, top:4, bottom: 4),
+                                    padding:EdgeInsets.only(left: 10,right: 15, top:4, bottom: 4),
                                     child: InkWell(
                                       onTap: () {
                                         Navigator.of(context).push(
@@ -86,7 +85,7 @@ class _Favorite1State extends State<Favorite1> {
                                       ),
                                     )),
                                 Container(
-                                  padding: EdgeInsets.only(left: 20, right: 30),
+                                  padding: EdgeInsets.only(left: 15, right: 15),
                                   child: Column(
                                     children: <Widget>[
                                       Row(
@@ -120,8 +119,8 @@ class _Favorite1State extends State<Favorite1> {
                                           IconButton(
                                             icon: Icon(Icons.delete,color: Colors.green[800],),
                                             onPressed: () {
-
                                               cart.removeFavorite(favoriteList[i]);
+                                              cart.removeItemFavorite(favoriteList[i]);
                                             },
                                           ),
                                         ],

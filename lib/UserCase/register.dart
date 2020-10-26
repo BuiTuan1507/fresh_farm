@@ -231,7 +231,7 @@ class _SignupPageState extends State<SignupPage> {
         padding: EdgeInsets.only(top:5,bottom: 5, left: 15),
         child:Center(
           child:  Text(
-            'xanh của chúng tôi', style: TextStyle(
+            'Nong trai xanh của chúng tôi', style: TextStyle(
               fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87
           ),
 
