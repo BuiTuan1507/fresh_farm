@@ -272,14 +272,7 @@ class Cart extends ChangeNotifier{
 
     });
   }
-  void removeItemFavorite(Item item){
-    Firestore firestoreInstance = Firestore.instance;
-    FavoriteItem.remove(item);
-    firestoreInstance.collection("Favorite").document(uid).updateData({
-      "user": uid,
-      "item": FieldValue.arrayUnion(FavoriteItem)
-    });
-  }
+
 
 
   CollectionReference users = Firestore.instance.collection('Rating');

@@ -179,6 +179,7 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
                                           onPressed: () {
                                             //   bloc.addToCart(shopList[i]);
                                             cart.add(userList[i]);
+
                                           },
                                         ),
                                       ),

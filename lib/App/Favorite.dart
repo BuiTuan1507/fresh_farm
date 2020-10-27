@@ -14,7 +14,18 @@ class Favorite1 extends StatefulWidget {
 }
 
 class _Favorite1State extends State<Favorite1> {
+  Future<QuerySnapshot> future;
 
+  @override
+  void initState() {
+    super.initState();
+    future = Firestore.instance.collection("Favorite").where('user' ,isEqualTo: "0oULJrkVt3bTsqetIYgTY75ucP03").getDocuments();
+  }
+  @override
+  void setState(fn) {
+
+    super.setState(fn);
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<Cart>(builder: (context,cart,child){
@@ -24,11 +35,8 @@ class _Favorite1State extends State<Favorite1> {
             backgroundColor: Colors.green,
             title: Text("Yeu thich",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),)),
-        body: StreamBuilder<QuerySnapshot>(
-          stream:  Firestore.instance
-              .collection('Favorite')
-              .where("user",isEqualTo: widget.uid)
-              .snapshots(),
+        body: FutureBuilder<QuerySnapshot>(
+          future:  future,
           builder: (context, snapshot) {
 
             return (snapshot.hasData != null)
@@ -44,15 +52,15 @@ class _Favorite1State extends State<Favorite1> {
                       itemCount: snapshot.data.documents[0]['item'].length,
                       itemBuilder: (BuildContext context, i) {
                         var cartList = snapshot.data.documents[0]['item'];
-                         int id = cartList[i]['id'];
-                         String name = cartList[i]['name'];
-                         String imgPath = cartList[i]['imgPath'];
-                         bool isLike = cartList[i]['isLike'];
-                         int price = cartList[i]['price'];
-                         int count = cartList[i]['count'];
-                         int rating = cartList[i]['rating'];
-                         Item favoriteItem = new Item(id,name,imgPath,price,count,isLike,rating);
-                         cart.FavoriteItem.add(favoriteItem);
+                        int id = cartList[i]['id'];
+                        String name = cartList[i]['name'];
+                        String imgPath = cartList[i]['imgPath'];
+                        bool isLike = cartList[i]['isLike'];
+                        int price = cartList[i]['price'];
+                        int count = cartList[i]['count'];
+                        int rating = cartList[i]['rating'];
+                        Item favoriteItem = new Item(id,name,imgPath,price,count,isLike,rating);
+                        cart.FavoriteItem.add(favoriteItem);
                         var favoriteList = cart.FavoriteItem;
                         return new Container(
                           height: 100,
@@ -120,7 +128,7 @@ class _Favorite1State extends State<Favorite1> {
                                             icon: Icon(Icons.delete,color: Colors.green[800],),
                                             onPressed: () {
                                               cart.removeFavorite(favoriteList[i]);
-                                              cart.removeItemFavorite(favoriteList[i]);
+
                                             },
                                           ),
                                         ],
@@ -172,4 +180,3 @@ class _Favorite1State extends State<Favorite1> {
 
   }
 }
-
