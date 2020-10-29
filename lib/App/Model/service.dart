@@ -24,12 +24,11 @@ class FirebaseService{
       .map((snapShot) => snapShot.documents
       .map((document) => User.fromJson(document.data))
       .toList());
-
-
-
-
-
-
+  Stream<List<Favorite>> getFavorite =  Firestore.instance.collection('Favorite')
+      .snapshots()
+      .map((snapShot) => snapShot.documents
+      .map((document) => Favorite.fromJson(document.data))
+      .toList());
 
 
   void dispose() {

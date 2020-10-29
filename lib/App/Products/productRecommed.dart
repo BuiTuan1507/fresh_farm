@@ -18,6 +18,7 @@ class Test extends StatefulWidget{
 }
 class _TestState extends State<Test> {
   Widget build(BuildContext context) {
+
     List<Item> userList1 = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
     return (userList1 != null ) ?
@@ -164,9 +165,12 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
                                           icon: Icon(Icons.favorite,),
                                           onPressed: () {
                                             if (userList[i].isLike == true){
-                                              cart.removeFavorite(userList[i]);
+                                              //cart.removeFavorite(userList[i]);
+
+                                              cart.deleteFavorite(cart.uid + userList[i].id.toString());
                                             }else{
-                                              cart.addFavorite(userList[i]);
+
+                                              cart.createItemFavorite1(userList[i],cart.uid);
                                             }
 
                                           },

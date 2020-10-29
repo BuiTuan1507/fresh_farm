@@ -14,54 +14,41 @@ class Favorite1 extends StatefulWidget {
 }
 
 class _Favorite1State extends State<Favorite1> {
-  Future<QuerySnapshot> future;
 
-  @override
-  void initState() {
-    super.initState();
-    future = Firestore.instance.collection("Favorite").where('user' ,isEqualTo: "0oULJrkVt3bTsqetIYgTY75ucP03").getDocuments();
-  }
-  @override
-  void setState(fn) {
-
-    super.setState(fn);
-  }
   @override
   Widget build(BuildContext context) {
+    List<Favorite> userList1 = Provider.of<List<Favorite>>(context);
+
     return Consumer<Cart>(builder: (context,cart,child){
+      print(userList1[0].idFavorite);
+      List userFavorite = [];
+      if (userList1!=null){
+      for (int i=0;i<userList1.length;i++){
+        if(userList1[i].uid == '0oULJrkVt3bTsqetIYgTY75ucP03'){
+          userFavorite.add(userList1[i]);
+          }
+        }
+      }
       return Scaffold(
         appBar:AppBar(
             centerTitle: true,
             backgroundColor: Colors.green,
             title: Text("Yeu thich",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),)),
-        body: FutureBuilder<QuerySnapshot>(
-          future:  future,
-          builder: (context, snapshot) {
-
-            return (snapshot.hasData != null)
-                ? Column(
-              children: <Widget>[
-
-                SingleChildScrollView(
-                    child: ListView.builder(
+        body:(userFavorite.length != 0)
+                ?
+              SingleChildScrollView(
+                   child: Column(
+                      children: <Widget>[
+                        ListView.builder(
 
 
                       shrinkWrap: true,
                       //itemCount: cart.FavoriteItem.length,
-                      itemCount: snapshot.data.documents[0]['item'].length,
+                      itemCount: userFavorite.length,
                       itemBuilder: (BuildContext context, i) {
-                        var cartList = snapshot.data.documents[0]['item'];
-                        int id = cartList[i]['id'];
-                        String name = cartList[i]['name'];
-                        String imgPath = cartList[i]['imgPath'];
-                        bool isLike = cartList[i]['isLike'];
-                        int price = cartList[i]['price'];
-                        int count = cartList[i]['count'];
-                        int rating = cartList[i]['rating'];
-                        Item favoriteItem = new Item(id,name,imgPath,price,count,isLike,rating);
-                        cart.FavoriteItem.add(favoriteItem);
-                        var favoriteList = cart.FavoriteItem;
+
+                        var favoriteList = userFavorite;
                         return new Container(
                           height: 100,
                           padding: EdgeInsets.only(left: 20,top: 5,bottom: 5,right: 20),
@@ -74,7 +61,7 @@ class _Favorite1State extends State<Favorite1> {
                             child: Row(
                               children: <Widget>[
                                 Container(
-                                    padding:EdgeInsets.only(left: 10,right: 15, top:4, bottom: 4),
+                                    padding:EdgeInsets.only(left: 10,right: 30, top:4, bottom: 4),
                                     child: InkWell(
                                       onTap: () {
                                         Navigator.of(context).push(
@@ -93,7 +80,7 @@ class _Favorite1State extends State<Favorite1> {
                                       ),
                                     )),
                                 Container(
-                                  padding: EdgeInsets.only(left: 15, right: 15),
+                                  padding: EdgeInsets.only(left: 20, right: 30),
                                   child: Column(
                                     children: <Widget>[
                                       Row(
@@ -127,8 +114,8 @@ class _Favorite1State extends State<Favorite1> {
                                           IconButton(
                                             icon: Icon(Icons.delete,color: Colors.green[800],),
                                             onPressed: () {
-                                              cart.removeFavorite(favoriteList[i]);
 
+                                             cart.deleteFavorite(favoriteList[i].idFavorite);
                                             },
                                           ),
                                         ],
@@ -148,20 +135,19 @@ class _Favorite1State extends State<Favorite1> {
 
 
                       },
-                    )
-                ),
+                    ),
                 Center(
                   child: Center(
                     child: RaisedButton(
                       onPressed: (){
-                        cart.createFavorite(cart.FavoriteItem, cart.uid);
+                        cart.createFavorite(cart.userFavorite);
                       },
                       child: Text('cap nhat danh sach yeu thich'),
                     ),
                   ),
                 )
 
-              ],
+              ]),
             )
                 : Column(
               children: <Widget>[
@@ -172,11 +158,10 @@ class _Favorite1State extends State<Favorite1> {
                   color: Colors.green,
                 ),
               ],
-            );
+            ));
           },
-        ),
-      );
-    });
+        );
+
 
   }
 }

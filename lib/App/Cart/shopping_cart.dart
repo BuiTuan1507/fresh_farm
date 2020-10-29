@@ -199,7 +199,7 @@ class _CheckoutState extends State<Checkout> {
                   RaisedButton(
                     onPressed: () {
                       cart.createCart(cart.ListItem, cart.uid);
-                      cart.createFavorite(cart.FavoriteItem, "0oULJrkVt3bTsqetIYgTY75ucP03");
+
                     },
                     child: Text("Thanh toan"),
                 color: Colors.green,

@@ -122,28 +122,54 @@ class User{
 
 }
 class Favorite{
-
-  List<Item> item;
+  String key;
+  int id;
+  String name;
+  String imgPath;
+  int price;
+  int rating;
+  int count;
+  bool isLike;
   String uid;
+  String idFavorite;
 
-
-  Favorite(this.item, this.uid);
+  Favorite(this.id, this.name, this.imgPath, this.price, this.count,
+      this.isLike, this.rating,this.uid,this.idFavorite);
   Favorite.fromJson(Map<String,dynamic> data)
-      :item= data['item'],
-        uid = data['uid'];
+      :id= data['id'],
+        name = data['name'],
+        imgPath = data['imgPath'],
+        price = data['price'],
+
+        count = data['count'],
+        isLike = data['isLike'],
+        uid = data['uid'],
+        idFavorite = data['idFavorite'],
+        rating = data['rating'];
 
   Favorite.fromSnapshot(DocumentSnapshot snapshot) :
-        item = snapshot['item'],
-        uid = snapshot["uid"];
-
+        id = snapshot['id'],
+        name = snapshot["name"],
+        imgPath = snapshot["imgPath"],
+        price = snapshot["price"],
+        isLike = snapshot["isLike"],
+        count = snapshot["count"],
+        uid = snapshot['uid'],
+        idFavorite = snapshot['idFavorite'],
+        rating = snapshot["rating"];
   toJson() {
     return {
-      "item": item,
-      "uid": uid,
-
+      "id": id,
+      "name": name,
+      "imgPath": imgPath,
+      "price" : price,
+      "count": count,
+      "isLike":isLike,
+      "rating" : rating,
+      "uid":uid,
+      "idFavorite": idFavorite
     };
   }
-
 }
 
 
@@ -163,6 +189,7 @@ class Cart extends ChangeNotifier{
   Item searchItem;
   Item detailItem;
   User currentUser;
+  List<Favorite> userFavorite = [];
 
   void add(Item item) {
     ListItem.add(item);
@@ -184,36 +211,40 @@ class Cart extends ChangeNotifier{
   }
 
 
-
-  void addFavorite(Item item) {
-    if (FavoriteItem.length == 0) {
+  Favorite createItemFavorite(Item item, String uid){
+    String idFavorite = uid + item.id.toString();
+    return new Favorite(item.id,item.name,item.imgPath,item.price,item.count,item.isLike,item.rating,uid,idFavorite);
+  }
+  void addFavorite(Item item,String uid) {
+    Favorite favorite = createItemFavorite(item, uid);
+    if (userFavorite.length == 0) {
       item.isLike = true;
-      FavoriteItem.add(item);
+
+      userFavorite.add(favorite);
 
     }else{
-      for(int i =0; i<FavoriteItem.length;i++){
-        if (item.id == FavoriteItem[i].id){
-
+      for(int i =0; i<userFavorite.length;i++){
+        if (item.id == userFavorite[i].id){
+            break;
         }
         else{
           item.isLike = true;
-          FavoriteItem.add(item);
+          userFavorite.add(favorite);
         }
       }
     }
     notifyListeners();
   }
 
-  void removeFavorite(Item item) {
-    item.isLike = false;
-    for(int i = 0 ;i<FavoriteItem.length;i++){
-      if (item.id == FavoriteItem[i].id){
-        FavoriteItem.remove(item);
-      }
-    }
 
-    notifyListeners();
+
+  void removeFavorite(Item item, String uid){
+    Favorite favorite = createItemFavorite(item, uid);
+    userFavorite.remove(favorite);
   }
+
+
+
   void addUser(String userId,String name, String photoURL, String email){
     uid = userId;
     name = name;
@@ -251,26 +282,24 @@ class Cart extends ChangeNotifier{
 
   }
 
-  void createFavorite(List<Item> item,String uid){
-    List yourItemList = [];
+  void createFavorite(List<Favorite> item){
+    Firestore firestoreInstance = Firestore.instance;
     for (int i = 0 ; i<item.length;i++){
-      yourItemList.add({
+      firestoreInstance.collection('Favorite').document().setData({
+        "uid":uid,
         "id":item[i].id,
-        "name": item[i].name,
+        "name":item[i].name,
+        "imgPath":item[i].imgPath,
+        "count":item[i].count,
         "price":item[i].price,
-        "imgPath": item[i].imgPath,
         "rating":item[i].rating,
-        "isLike": true,
-        "count":1
+        "isLike":item[i].isLike,
+        "idFavorite": uid + item[i].id.toString()
       });
     }
-    Firestore firestoreInstance = Firestore.instance;
 
-    firestoreInstance.collection('Favorite').document(uid).setData({
-      "user":uid,
-      'item':FieldValue.arrayUnion(yourItemList)
 
-    });
+
   }
 
 
@@ -283,6 +312,30 @@ class Cart extends ChangeNotifier{
         .delete()
         .then((value) => print("User Updated"))
         .catchError((error) => print("Failed to update user: $error"));
+  }
+  CollectionReference usaa = Firestore.instance.collection('Favorite');
+  Future<void> deleteFavorite(String idFavorite) {
+    return usaa
+        .document(idFavorite)
+        .delete()
+        .then((value) => print("Favorite Updated"))
+        .catchError((error) => print("Failed to update favorite: $error"));
+  }
+  void createItemFavorite1 (Item item,String uid){
+    Firestore firestoreReview = Firestore.instance;
+
+    String idFavorite = uid+ item.id.toString();
+    firestoreReview.collection('Favorite').document(idFavorite).setData({
+      "uid":uid,
+      "id":item.id,
+      "name":item.name,
+      "imgPath":item.imgPath,
+      "count":item.count,
+      "price":item.price,
+      "rating":item.rating,
+      "isLike":item.isLike,
+      "idFavorite": uid + item.id.toString()
+    });
   }
   void addInfoItem(item){
     infoItem.add(item);

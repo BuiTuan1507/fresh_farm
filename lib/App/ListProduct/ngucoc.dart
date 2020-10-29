@@ -160,9 +160,10 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
                                           icon: Icon(Icons.favorite,),
                                           onPressed: () {
                                             if (userList[i].isLike == true){
-                                              cart.removeFavorite(userList[i]);
+                                              //cart.removeFavorite(cart.uid + userList[i].id.toString());
+                                              cart.removeFavorite(userList[i], cart.uid);
                                             }else{
-                                              cart.addFavorite(userList[i]);
+                                              cart.addFavorite(userList[i],cart.uid);
                                             }
 
                                           },
