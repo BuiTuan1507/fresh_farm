@@ -63,6 +63,7 @@ class _signUpPassState extends State<signUpPass> {
   }
 
   Widget _showText() {
+    print('1');
     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 70, bottom: 0),
       child: Center(
@@ -79,6 +80,7 @@ class _signUpPassState extends State<signUpPass> {
   }
 
   Widget _showPasswordField() {
+    print('1');
     return new Container(
         padding: EdgeInsets.only(top: 50.0, left: 20.0, right: 20.0),
         child: TextFormField(
@@ -97,6 +99,7 @@ class _signUpPassState extends State<signUpPass> {
   }
 
   Widget _showButton(context) {
+    print('1');
     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 50, bottom: 0),
       height: 100.0,

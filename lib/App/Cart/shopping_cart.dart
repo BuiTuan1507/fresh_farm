@@ -19,11 +19,7 @@ class _CheckoutState extends State<Checkout> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar:AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.green,
-          title: Text("Giỏ hàng",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),)),
+
       body: Consumer<Cart>(
         builder: (context, cart,child) {
 

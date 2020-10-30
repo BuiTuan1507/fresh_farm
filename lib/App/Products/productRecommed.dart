@@ -1,3 +1,4 @@
+import 'package:fresh_farm/App/Cart/TabBarCart.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
 
@@ -18,7 +19,7 @@ class Test extends StatefulWidget{
 }
 class _TestState extends State<Test> {
   Widget build(BuildContext context) {
-
+    List<Favorite> favorite = Provider.of<List<Favorite>>(context);
     List<Item> userList1 = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
     return (userList1 != null ) ?
@@ -31,6 +32,24 @@ class _TestState extends State<Test> {
             if(userList1[i].id == chiso[j]){
               userList.add(userList1[i]);
               break;
+            }
+          }
+        }
+        List<Favorite> _userFavorite = [];
+        for (int i = 0; i<favorite.length;i++){
+          if (favorite[i].uid == cart.uid){
+            _userFavorite.add(favorite[i]);
+            print(favorite[i].name);
+            print(favorite[i].id);
+          }
+        }
+        for (int i =0;i<_userFavorite.length;i++){
+          for (int j=0;j<8;j++){
+            if (_userFavorite[i].id == userList[j].id){
+              userList[j].isLike = true;
+              print(userList[j].id);
+            }else{
+              userList[j].isLike = false;
             }
           }
         }
@@ -49,7 +68,7 @@ class _TestState extends State<Test> {
                         ),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Checkout()));
+                              builder: (context) => TabBarCart()));
                         },
                       ),
                       Text(cart.ListItem.length.toString())

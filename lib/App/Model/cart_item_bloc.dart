@@ -314,11 +314,13 @@ class Cart extends ChangeNotifier{
         .catchError((error) => print("Failed to update user: $error"));
   }
   CollectionReference usaa = Firestore.instance.collection('Favorite');
+
   Future<void> deleteFavorite(String idFavorite) {
+
     return usaa
         .document(idFavorite)
         .delete()
-        .then((value) => print("Favorite Updated"))
+        .then((value) => print("Favorite delete"))
         .catchError((error) => print("Failed to update favorite: $error"));
   }
   void createItemFavorite1 (Item item,String uid){

@@ -142,6 +142,7 @@ class _signUpPrivacyState extends State<signUpPrivacy> {
   }
 
   Widget _showText2() {
+    print('1');
     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 20),
 
@@ -186,7 +187,8 @@ class _signUpPrivacyState extends State<signUpPrivacy> {
     );
   }
   Widget _showButtonLogin(context) {
-     new Container(
+    print('1');
+     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 30, bottom: 0),
       height: 70.0,
       child: Material(

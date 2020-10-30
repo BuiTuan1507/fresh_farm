@@ -1,31 +1,21 @@
-
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fresh_farm/UserCase/Register/forgetPassword.dart';
-import 'package:fresh_farm/UserCase/Register/register1.dart';
-import 'package:fresh_farm/UserCase/register.dart';
+import 'package:fresh_farm/App/Home.dart';
 import 'package:fresh_farm/App/Model/authentication.dart';
-
-class LoginSignupPage extends StatefulWidget {
-  LoginSignupPage({this.auth, this.loginCallback});
-
-  final BaseAuth auth;
-  final VoidCallback loginCallback;
+class forgetPassword extends StatefulWidget {
+  const forgetPassword({Key key, this.auth}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => new _LoginSignupPageState();
+  _forgetPasswordState createState() => _forgetPasswordState();
+  final BaseAuth auth;
 }
 
-class _LoginSignupPageState extends State<LoginSignupPage> {
+class _forgetPasswordState extends State<forgetPassword> {
   final _formKey = new GlobalKey<FormState>();
-
-  String _email;
-  String _password;
+  String email;
   String _errorMessage;
-
-  bool _isLoginForm;
   bool _isLoading;
-
+  TextEditingController passwordController = TextEditingController();
   // Check if form is valid before perform login or signup
   bool validateAndSave() {
     final form = _formKey.currentState;
@@ -40,31 +30,21 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   void validateAndSubmit() async {
     setState(() {
       _errorMessage = "";
-      _isLoading = true;
+      _isLoading = false;
     });
     if (validateAndSave()) {
-      String userId = "";
-      String name = "1";
       String email = "";
-      String photoURL = "";
+
       try {
         {
-          userId = await widget.auth.signIn(_email, _password);
-          name = await widget.auth.getEmail();
-          email = await widget.auth.getName();
-          photoURL = await widget.auth.getPhotoURL();
-
-
-          print ("chay di:$name");
-          print('Signed in: $userId');
+          email = passwordController.text;
+          await widget.auth.resetPassword('buiminhtuan1507@gmail.com');
         }
         setState(() {
           _isLoading = false;
         });
 
-        if (userId.length > 0 && userId != null) {
-          widget.loginCallback();
-        }
+
       } catch (e) {
         print('Error: $e');
         setState(() {
@@ -80,7 +60,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   void initState() {
     _errorMessage = "";
     _isLoading = false;
-    _isLoginForm = true;
     super.initState();
   }
 
@@ -96,7 +75,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         appBar:AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF0C9869),
-          title: Text("Nông Trại Xanh",
+          title: Text("Change Password",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
         ),
         body: Stack(
@@ -117,34 +96,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     );
   }
 
- void _showVerifyEmailSentDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Verify your account"),
-          content:
-              new Text("Link to verify account has been sent to your email"),
-          actions: <Widget>[
-            new FlatButton(
-              child: new Text("Dismiss"),
-              onPressed: () {
-
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   Widget _showForm() {
     return new SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            showLogo(),
             Container(
                 padding: EdgeInsets.all(16.0),
                 child: new Form(
@@ -153,13 +109,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
                     shrinkWrap: true,
                     children: <Widget>[
                       showLogin(),
-                      showEmailInput(),
+
                       showPasswordInput(),
                       showPrimaryButton(),
                       showSecondaryButton(),
-                      showForgetButton(),
                       showErrorMessage(),
-
                     ],
                   ),
                 ))
@@ -172,7 +126,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         padding: EdgeInsets.only(top:10,bottom: 15),
         child:Center(
           child:  Text(
-            'Đăng Nhập', style: TextStyle(
+            'Nhap email', style: TextStyle(
               fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87
           ),
           ),
@@ -197,42 +151,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     }
   }
 
-  Widget showLogo() {
-    Size size = MediaQuery
-        .of(context)
-        .size;
-    return new Hero(
-        tag: 'hero',
-        child:  Container(
-            height: size.height * 0.3,
-            width: double.infinity,
-            color: Color(0xFF0C9869),
-            child: Center(
-              child: Image.asset("assets/farm.jpg",
-                width: size.width ,
-              ),
-            ))
-    );
-  }
 
-  Widget showEmailInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-      child: new TextFormField(
-        maxLines: 1,
-        keyboardType: TextInputType.emailAddress,
-        autofocus: false,
-        decoration: new InputDecoration(
-            hintText: 'Email',
-            icon: new Icon(
-              Icons.mail,
-              color: Color(0xFF0C9869),
-            )),
-        validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
-        onSaved: (value) => _email = value.trim(),
-      ),
-    );
-  }
+
+
 
   Widget showPasswordInput() {
     return Padding(
@@ -242,13 +163,13 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Mật khẩu',
+            hintText: 'Nhap email cua ban',
             icon: new Icon(
               Icons.lock,
               color: Color(0xFF0C9869),
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
-        onSaved: (value) => _password = value.trim(),
+        onSaved: (value) => email = value.trim(),
       ),
     );
   }
@@ -260,30 +181,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           onTap: (){
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>signUp()));
-          },
-          child: new Center(
-              child:  Text(
-                  'Tạo tài khoản mới' ,
-                  style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
-          )
-
-      ),
-    );
-
-  }
-  Widget showForgetButton() {
-    return new Container(
-      padding: EdgeInsets.only(top: 20),
-      child: InkWell(
-          onTap: (){
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>forgetPassword(auth: widget.auth,)));
+                MaterialPageRoute(builder: (context) => MyHomeAppPage()));
           },
           child: new Center(
             child:  Text(
-                'Tạo tài khoản mới' ,
+                'Quay ve trang chu' ,
                 style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
           )
 
@@ -291,7 +193,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     );
 
   }
-
 
   Widget showPrimaryButton() {
     return new Padding(
@@ -303,10 +204,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
             color: Color(0xFF0C9869),
-            child: new Text('Đăng nhập',
+            child: new Text('Doi mat khau',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: validateAndSubmit,
           ),
         ));
   }
 }
+

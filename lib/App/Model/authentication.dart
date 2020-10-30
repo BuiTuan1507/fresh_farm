@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fresh_farm/UserCase/reset_password.dart';
 
 abstract class BaseAuth {// lớp
   Future<String> signIn(String email, String password);// khai báo 1 lớp future đăng nhập
@@ -19,7 +20,7 @@ abstract class BaseAuth {// lớp
   Future<String> getPhotoURL();
   Future<String> updatePassWord(String password);
   Future<List> updateProfile();
-
+  Future <void> resetPassword(String email);
 
 }
 
@@ -98,6 +99,10 @@ class Auth implements BaseAuth {
   Future<String> getPhotoURL() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user.photoUrl;
+  }
+  @override
+  Future<void> resetPassword(String email )async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
 
