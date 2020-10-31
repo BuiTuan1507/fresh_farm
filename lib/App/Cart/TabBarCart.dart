@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/AllCart.dart';
 import 'package:fresh_farm/App/Cart/ListShipCart.dart';
 import 'package:fresh_farm/App/Cart/ShipCart.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
@@ -56,8 +57,9 @@ class _TabBarCartState extends State<TabBarCart> {
           body: TabBarView(
             children: [
               Checkout(),
-             ShipCart(),
-              ListShipCart()
+
+              ListShipCart(),
+              AllCart()
             ],
           ),
         ),

@@ -173,7 +173,7 @@ class Favorite{
   }
 }
 class ListCart{
-  String id;
+  int id;
   String uid;
   String imgPath;
   int price;
@@ -286,7 +286,7 @@ class Cart extends ChangeNotifier{
     photoURL = photoURL;
     email = email;
   }
-  void createCart(List<Item> item,String uid,String address,int totalPrice,String id){
+  void createCart(List<Item> item,String uid,String address,int totalPrice,int id){
     List yourItemList = [];
     var timeNow = DateTime.now();
     var endTime = timeNow.add(new Duration(hours : 1));
@@ -311,7 +311,7 @@ class Cart extends ChangeNotifier{
       "price" : totalPrice
     });
   }
-  void addListCart(String id, String uid, int price, String imgPath){
+  void addListCart(int id, String uid, int price, String imgPath){
     Firestore _firestore = Firestore.instance;
     var timeNow = DateTime.now();
     var endTime = timeNow.add(new Duration(hours : 1));
@@ -411,6 +411,7 @@ class Cart extends ChangeNotifier{
     idRating = item.id;
     return idRating;
   }
+
 
 }
 

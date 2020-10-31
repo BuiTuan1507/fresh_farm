@@ -9,7 +9,7 @@ import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 class ShipCart extends StatefulWidget {
   @override
   _ShipCartState createState() => _ShipCartState();
-  String id;
+  int id;
   ShipCart({Key key, this.id}) : super(key: key);
 }
 
@@ -23,7 +23,26 @@ class _ShipCartState extends State<ShipCart> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Color(0xFF0C9869),
+        title: Text("Xem chi tiet don hang",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
+        actions: <Widget>[
+          Padding(
+              padding: EdgeInsets.only(right: 35.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.shopping_cart,
+                  size: 35.0,
+                ),
+              )
+          ),
+        ],
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
             .collection('cart')
@@ -31,14 +50,14 @@ class _ShipCartState extends State<ShipCart> {
             .snapshots(),
         builder:(context,snapshot){
           print(widget.id);
-          print(snapshot.data.documents[0]['uid']);
+          print(snapshot.data.documents[0]['user']);
           return (snapshot.hasData !=null)
               ? Column(
             children: <Widget>[
 
               SingleChildScrollView(
                   child: ListView.builder(
-                    shrinkWrap: true,
+                     shrinkWrap: true,
                     itemCount: snapshot.data.documents[0]['item'].length,
                     itemBuilder: (BuildContext context, i) {
                       final cartList = snapshot.data.documents[0]['item'];

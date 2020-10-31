@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:fresh_farm/App/Cart/Pay.dart';
 import 'package:provider/provider.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 
@@ -23,7 +24,14 @@ class _CheckoutState extends State<Checkout> {
 
       body: Consumer<Cart>(
         builder: (context, cart,child) {
-
+          int ramdomNumber(){
+            int x = cart.totalPrice(cart.ListItem) * 10;
+            int y = 0;
+            for (int i = 0; i<cart.ListItem.length;i++){
+              y =y+ cart.ListItem[i].id;
+            }
+            return x - y;
+          }
           return cart.ListItem.length > 0
               ? Column(
             children: <Widget>[
@@ -48,6 +56,9 @@ class _CheckoutState extends State<Checkout> {
                           }
                         });
                       }
+
+
+
                       return new Container(
                         height: 100,
                         padding: EdgeInsets.only(left: 20,top: 5,bottom: 5,right: 20),
@@ -195,9 +206,9 @@ class _CheckoutState extends State<Checkout> {
 
                   RaisedButton(
                     onPressed: () {
-                      cart.createCart(cart.ListItem, cart.uid,'1,DaiLa,Hoang Mai',cart.totalPrice(cart.ListItem),Timestamp.fromDate(DateTime.now()).toString());
-                      cart.addListCart(Timestamp.fromDate(DateTime.now()).toString(), cart.uid,cart.totalPrice(cart.ListItem) , 'assets/1.jpg');
-
+                    //  cart.createCart(cart.ListItem, cart.uid,'1,DaiLa,Hoang Mai',cart.totalPrice(cart.ListItem),ramdomNumber());
+                    //  cart.addListCart(ramdomNumber(), cart.uid,cart.totalPrice(cart.ListItem) , 'assets/1.jpg');
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Pay()));
                     },
                     child: Text("Thanh toan"),
                 color: Colors.green,
