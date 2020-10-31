@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -194,8 +195,8 @@ class _CheckoutState extends State<Checkout> {
 
                   RaisedButton(
                     onPressed: () {
-                      cart.createCart(cart.ListItem, cart.uid,'1,DaiLa,Hoang Mai',cart.totalPrice(cart.ListItem),'1 ');
-                      cart.addListCart('1', cart.uid,cart.totalPrice(cart.ListItem) , 'assets/1.jpg');
+                      cart.createCart(cart.ListItem, cart.uid,'1,DaiLa,Hoang Mai',cart.totalPrice(cart.ListItem),Timestamp.fromDate(DateTime.now()).toString());
+                      cart.addListCart(Timestamp.fromDate(DateTime.now()).toString(), cart.uid,cart.totalPrice(cart.ListItem) , 'assets/1.jpg');
 
                     },
                     child: Text("Thanh toan"),

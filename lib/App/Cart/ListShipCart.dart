@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/ShipCart.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 class ListShipCart extends StatefulWidget {
   @override
   _ListShipCartState createState() => _ListShipCartState();
+
 }
 
 class _ListShipCartState extends State<ListShipCart> {
@@ -64,11 +66,11 @@ class _ListShipCartState extends State<ListShipCart> {
                                   padding:EdgeInsets.only(left: 5,right: 5, top:4, bottom: 4),
                                   child: InkWell(
                                     onTap: () {
-                                      // Navigator.of(context).push(
+                                       Navigator.of(context).push(
 
-                                      //   MaterialPageRoute(builder: (context) => Detail(
-                                      //     itemProduct: cartList[i],
-                                      //)));
+                                         MaterialPageRoute(builder: (context) => ShipCart(
+                                           id: userFavorite[i].id,
+                                      )));
                                     },
                                     child: Container(
                                         width: 80,

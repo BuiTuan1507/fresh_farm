@@ -9,6 +9,8 @@ import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 class ShipCart extends StatefulWidget {
   @override
   _ShipCartState createState() => _ShipCartState();
+  String id;
+  ShipCart({Key key, this.id}) : super(key: key);
 }
 
 class _ShipCartState extends State<ShipCart> {
@@ -25,10 +27,11 @@ class _ShipCartState extends State<ShipCart> {
       body: StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
             .collection('cart')
-            .where("user",isEqualTo: '0oULJrkVt3bTsqetIYgTY75ucP03')
+            .where("id",isEqualTo: widget.id)
             .snapshots(),
         builder:(context,snapshot){
-
+          print(widget.id);
+          print(snapshot.data.documents[0]['uid']);
           return (snapshot.hasData !=null)
               ? Column(
             children: <Widget>[
