@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/UserCase/Register/registerName.dart';
 import 'service.dart';
 
 import 'package:provider/provider.dart';
@@ -171,6 +172,40 @@ class Favorite{
     };
   }
 }
+class ListCart{
+  String id;
+  String uid;
+  String imgPath;
+  int price;
+  Timestamp createTime;
+  Timestamp endTime;
+  ListCart(this.id, this.uid, this.imgPath, this.price,this.createTime,this.endTime);
+  ListCart.fromJson(Map<String,dynamic> data)
+      :id= data['id'],
+        uid = data['uid'],
+        createTime = data['createTime'],
+        endTime = data['endTime'],
+        price = data['price'],
+        imgPath = data['imgPath'];
+  ListCart.fromSnapshot(DocumentSnapshot snapshot) :
+        id = snapshot['id'],
+        uid = snapshot["uid"],
+        createTime = snapshot["createTime"],
+        endTime = snapshot["endTime"],
+        price = snapshot['price'],
+        imgPath = snapshot['imgPath'];
+
+  toJson() {
+    return {
+      "id": id,
+      "uid": uid,
+      "createTime" : createTime,
+      "endTime": endTime,
+      "price": price,
+      "imgPath": imgPath
+    };
+  }
+}
 
 
 class Cart extends ChangeNotifier{
@@ -251,21 +286,42 @@ class Cart extends ChangeNotifier{
     photoURL = photoURL;
     email = email;
   }
-  void createCart(List<Item> item,String uid){
+  void createCart(List<Item> item,String uid,String address,int totalPrice,String id){
     List yourItemList = [];
+    var timeNow = DateTime.now();
+    var endTime = timeNow.add(new Duration(hours : 1));
     for (int i = 0 ; i<item.length;i++){
       yourItemList.add({
         "id":item[i].id,
         "name": item[i].name,
-        "price":item[i].price
+        "price":item[i].price,
+        "imgPath": item[i].imgPath,
+       "count" : item[i].count
       });
     }
     Firestore firestoreInstance = Firestore.instance;
 
-    firestoreInstance.collection('cart').document(uid).setData({
+    firestoreInstance.collection('cart').document().setData({
+      "id" : id,
       "user":uid,
-      'item':FieldValue.arrayUnion(yourItemList)
-
+      'item':FieldValue.arrayUnion(yourItemList),
+      "createTime" : Timestamp.fromDate(timeNow),
+      "endTime" : Timestamp.fromDate(endTime),
+      "address": address,
+      "price" : totalPrice
+    });
+  }
+  void addListCart(String id, String uid, int price, String imgPath){
+    Firestore _firestore = Firestore.instance;
+    var timeNow = DateTime.now();
+    var endTime = timeNow.add(new Duration(hours : 1));
+    _firestore.collection('ListCart').document().setData({
+      "id" : id,
+      "uid" : uid,
+      "createTime" : Timestamp.fromDate(timeNow),
+      "endTime" : Timestamp.fromDate(endTime),
+      "price" : price,
+      "imgPath" : imgPath
     });
   }
   void createReview(int id, String uid, int rating, String text,String name, String photoURL){

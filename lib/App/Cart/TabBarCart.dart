@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/ListShipCart.dart';
 import 'package:fresh_farm/App/Cart/ShipCart.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
 import 'package:fresh_farm/App/Products/productRecommed.dart';
@@ -12,7 +13,7 @@ class _TabBarCartState extends State<TabBarCart> {
   Widget build(BuildContext context) {
     bool hasBeenPress = false;
     return DefaultTabController(
-      length: 4,
+      length: 3,
 
       child: MaterialApp(
         home: Scaffold(
@@ -48,12 +49,7 @@ class _TabBarCartState extends State<TabBarCart> {
                       child: Text("Đã giao"),
                     ),
                   ),
-                  Tab(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text("Tất cả"),
-                    ),
-                  ),
+
                 ]
             ),
           ),
@@ -61,17 +57,7 @@ class _TabBarCartState extends State<TabBarCart> {
             children: [
               Checkout(),
              ShipCart(),
-              Center(
-                  child: Text(
-                    "3",
-                    style: TextStyle(fontSize: 40),
-                  )),
-              Center(
-                  child: Text(
-                    "4",
-                    style: TextStyle(fontSize: 40),
-                  )),
-
+              ListShipCart()
             ],
           ),
         ),

@@ -194,7 +194,8 @@ class _CheckoutState extends State<Checkout> {
 
                   RaisedButton(
                     onPressed: () {
-                      cart.createCart(cart.ListItem, cart.uid);
+                      cart.createCart(cart.ListItem, cart.uid,'1,DaiLa,Hoang Mai',cart.totalPrice(cart.ListItem),'1 ');
+                      cart.addListCart('1', cart.uid,cart.totalPrice(cart.ListItem) , 'assets/1.jpg');
 
                     },
                     child: Text("Thanh toan"),

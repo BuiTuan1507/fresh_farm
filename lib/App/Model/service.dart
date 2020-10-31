@@ -29,7 +29,11 @@ class FirebaseService{
       .map((snapShot) => snapShot.documents
       .map((document) => Favorite.fromJson(document.data))
       .toList());
-
+  Stream<List<ListCart>> getListCart =  Firestore.instance.collection('ListCart')
+      .snapshots()
+      .map((snapShot) => snapShot.documents
+      .map((document) => ListCart.fromJson(document.data))
+      .toList());
 
   void dispose() {
     productStreamController.close(); // close our StreamController

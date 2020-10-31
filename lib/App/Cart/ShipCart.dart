@@ -85,7 +85,7 @@ class _ShipCartState extends State<ShipCart> {
                                       children: <Widget>[
                                         Container(
                                           padding :EdgeInsets.only(bottom: 0),
-                                          child: Text('\$${cartList[i]['count']}', style: TextStyle(fontSize: 15, color: Colors.black),
+                                          child: Text('${cartList[i]['count']} kg', style: TextStyle(fontSize: 15, color: Colors.black),
                                           )
                                           ,)
                                       ],
@@ -110,11 +110,12 @@ class _ShipCartState extends State<ShipCart> {
               Column(
                 children: <Widget>[
                   Container(
+                    child: Text('Địa chỉ: ${snapshot.data.documents[0]['address']}'),
+                  ),
+                  Container(
                     padding: EdgeInsets.only(top: 20),
                     child:Text(
-                      DateFormat('dd/MM/yyyy kk:mm')
-                          .format(DateTime
-                          .fromMillisecondsSinceEpoch(int.parse(snapshot.data.documents[0]['createTime']))),
+                     'Thời gian mua hàng : ${snapshot.data.documents[0]['createTime'].toDate()}'
 
                     ),
 
@@ -122,15 +123,12 @@ class _ShipCartState extends State<ShipCart> {
                   Container(
                     padding: EdgeInsets.only(top: 10),
                     child:Text(
-                      DateFormat('dd/MM/yyyy kk:mm')
-                          .format(DateTime
-                          .fromMillisecondsSinceEpoch(int.parse(snapshot.data.documents[0]['endTime']))),
-
+                        'Thời gian giao hàng: ${snapshot.data.documents[0]['endTime'].toDate()}'
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10),
-                    child: Text('${snapshot.data.documents[0]['price']} ', style: TextStyle(fontSize: 18),),
+                    child: Text('Giá tiền : ${snapshot.data.documents[0]['price']} ', style: TextStyle(fontSize: 18),),
                   )
                 ],
               )
