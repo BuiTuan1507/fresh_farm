@@ -9,6 +9,10 @@ class Pay extends StatefulWidget {
 class _PayState extends State<Pay> {
 
   bool _checked = false;
+  int _pay ;
+  int _time;
+  int _value = 1;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -23,38 +27,116 @@ class _PayState extends State<Pay> {
             builder: (context, cart,child) {
               return Column(
                 children: <Widget>[
-                  Row(
+                  Center(
+                    child:
+                      Text('Chon phuong thuc thanh toan',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold))
+
+                  ),
+                  Column(
                     children: <Widget>[
-                      Text('Chon phuong thuc thanh toan')
+                      RadioListTile(
+                        title: Text('Thanh toan bang tien mat'),
+                        value: 1,
+                        groupValue: _pay,
+                        onChanged: (value){setState(() {
+                          _pay =  value;
+                        });},
+                      ),
+                      RadioListTile(
+                        title: Text('Thanh toan online'),
+                        value: 0,
+                        groupValue: _pay,
+                        onChanged: (value){setState(() {
+                          _pay =  value;
+                        });},
+                      )
                     ],
                   ),
+                  Container(
+                    padding:EdgeInsets.only(top: 10),
+                      child:
+                      Text('Chon thoi gian giao hang',textAlign: TextAlign.center,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold))
 
-                  Row(
+                  ),
+                  Column(
                     children: <Widget>[
-                      Container(
-                        child: CheckboxListTile(
-                          title: Text('Thanh toan bang tien mat'),
-                          secondary: Icon(Icons.payment),
-                          controlAffinity: ListTileControlAffinity.platform,
-                          value: _checked,
-                          onChanged: (bool value){
-                            setState(() {
-                              _checked = value;
-                            });
-                          },
-                          activeColor: Colors.green,
-                          checkColor: Colors.black,
-                        ),
-
-
-                      ),SizedBox(width: 30, height: 30,)
+                      RadioListTile(
+                        title: Text('Nhanh(1-2h)'),
+                        value: 1,
+                        groupValue: _time,
+                        onChanged: (value){setState(() {
+                          _time =  value;
+                        });},
+                      ),
+                      RadioListTile(
+                        title: Text('Cham(3-4h)'),
+                        value: 0,
+                        groupValue: _time,
+                        onChanged: (value){setState(() {
+                          _time =  value;
+                        });},
+                      )
                     ],
-                  )
-                ]);
+                  ),
+                  Container(
+                      padding:EdgeInsets.only(top: 10),
+                      child:
+                      Text('Dia chi cua ban',textAlign: TextAlign.center,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold))
 
+                  ),
+                  DropdownButton(
+                      value: _value,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("Hoàng Mai"),
+                          value: 1,
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Hai Bà Trưng"),
+                          value: 2,
+                        ),
+                        DropdownMenuItem(
+                            child: Text("Hoài Kiếm"),
+                            value: 3
+                        ),
+                        DropdownMenuItem(
+                            child: Text("Ba Đình"),
+                            value: 4
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          _value = value;
+                        });
+                      }),
+                  DropdownButton(
+                      value: _value,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("Hoàng Mai"),
+                          value: 1,
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Hai Bà Trưng"),
+                          value: 2,
+                        ),
+                        DropdownMenuItem(
+                            child: Text("Hoài Kiếm"),
+                            value: 3
+                        ),
+                        DropdownMenuItem(
+                            child: Text("Ba Đình"),
+                            value: 4
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          _value = value;
+                        });
+                      }),
 
-
-            })
-    );
+                ],
+              );}
+    ));
   }
 }
