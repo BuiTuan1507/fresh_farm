@@ -208,9 +208,9 @@ class _CheckoutState extends State<Checkout> {
                     onPressed: () {
                     //  cart.createCart(cart.ListItem, cart.uid,'1,DaiLa,Hoang Mai',cart.totalPrice(cart.ListItem),ramdomNumber());
                     //  cart.addListCart(ramdomNumber(), cart.uid,cart.totalPrice(cart.ListItem) , 'assets/1.jpg');
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Pay()));
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Pay(ramdomNumber: ramdomNumber(),)));
                     },
-                    child: Text("Thanh toan"),
+                    child: Text("Thanh Toán"),
                 color: Colors.green,
               ),
               SizedBox(height: 40)

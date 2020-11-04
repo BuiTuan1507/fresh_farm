@@ -139,9 +139,13 @@ class _ListShipCartState extends State<ListShipCart> {
           )
               : Column(
             children: <Widget>[
-              Center(child: Text("Bạn chưa có sản phẩm yêu thích nào",style: TextStyle(fontSize: 24),)),
+              Container(
+                padding: EdgeInsets.only(top:60,left: 5,right: 5,bottom: 25),
+                  child: Text("Hiện tại không có đơn hàng nào đang giao",style: TextStyle(fontSize: 24),)),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: Text("Xem thêm sản phẩm"),
                 color: Colors.green,
               ),

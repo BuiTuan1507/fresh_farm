@@ -286,10 +286,16 @@ class Cart extends ChangeNotifier{
     photoURL = photoURL;
     email = email;
   }
-  void createCart(List<Item> item,String uid,String address,int totalPrice,int id){
+  void createCart(List<Item> item,String uid,String address,int totalPrice,int id, int time){
     List yourItemList = [];
+    int t = 1;
+    if (time == 1){
+      t = 1;
+    }else{
+      t = 2;
+    }
     var timeNow = DateTime.now();
-    var endTime = timeNow.add(new Duration(hours : 1));
+    var endTime = timeNow.add(new Duration(hours : t));
     for (int i = 0 ; i<item.length;i++){
       yourItemList.add({
         "id":item[i].id,
