@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Home.dart';
 import 'package:fresh_farm/App/Model/authentication.dart';
+import 'package:fresh_farm/UserCase/login_signup_page.dart';
 class forgetPassword extends StatefulWidget {
   const forgetPassword({Key key, this.auth}) : super(key: key);
 
@@ -38,7 +39,7 @@ class _forgetPasswordState extends State<forgetPassword> {
       try {
         {
           email = passwordController.text;
-          await widget.auth.resetPassword('buiminhtuan1507@gmail.com');
+          await widget.auth.resetPassword(email);
         }
         setState(() {
           _isLoading = false;
@@ -75,7 +76,7 @@ class _forgetPasswordState extends State<forgetPassword> {
         appBar:AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF0C9869),
-          title: Text("Change Password",
+          title: Text("Thiết lập lại mật khẩu",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
         ),
         body: Stack(
@@ -126,7 +127,7 @@ class _forgetPasswordState extends State<forgetPassword> {
         padding: EdgeInsets.only(top:10,bottom: 15),
         child:Center(
           child:  Text(
-            'Nhap email', style: TextStyle(
+            'Nhập email', style: TextStyle(
               fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87
           ),
           ),
@@ -150,11 +151,6 @@ class _forgetPasswordState extends State<forgetPassword> {
       );
     }
   }
-
-
-
-
-
   Widget showPasswordInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
@@ -163,12 +159,12 @@ class _forgetPasswordState extends State<forgetPassword> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Nhap email cua ban',
+            hintText: 'Nhập email của bạn',
             icon: new Icon(
-              Icons.lock,
+              Icons.mail,
               color: Color(0xFF0C9869),
             )),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? 'Email không thể để trống' : null,
         onSaved: (value) => email = value.trim(),
       ),
     );
@@ -181,11 +177,11 @@ class _forgetPasswordState extends State<forgetPassword> {
           onTap: (){
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyHomeAppPage()));
+                MaterialPageRoute(builder: (context) => LoginSignupPage()));
           },
           child: new Center(
             child:  Text(
-                'Quay ve trang chu' ,
+                'Quay về trang đăng nhập' ,
                 style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
           )
 
@@ -204,9 +200,9 @@ class _forgetPasswordState extends State<forgetPassword> {
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
             color: Color(0xFF0C9869),
-            child: new Text('Doi mat khau',
+            child: new Text('Đổi mật khẩu',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: validateAndSubmit,
+            onPressed: (passwordController.text != null ) ? validateAndSubmit : null,
           ),
         ));
   }

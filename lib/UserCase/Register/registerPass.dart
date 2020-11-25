@@ -40,7 +40,7 @@ class _signUpPassState extends State<signUpPass> {
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text('Mật khẩu'),
-
+        backgroundColor: Color(0xFF0C9869),
         centerTitle: true,
       ),
       body: SignUpPassPage(context),
@@ -63,7 +63,6 @@ class _signUpPassState extends State<signUpPass> {
   }
 
   Widget _showText() {
-    print('1');
     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 70, bottom: 0),
       child: Center(
@@ -80,7 +79,6 @@ class _signUpPassState extends State<signUpPass> {
   }
 
   Widget _showPasswordField() {
-    print('1');
     return new Container(
         padding: EdgeInsets.only(top: 50.0, left: 20.0, right: 20.0),
         child: TextFormField(
@@ -93,27 +91,28 @@ class _signUpPassState extends State<signUpPass> {
                   color: Colors.grey),
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.green))),
-          validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+          validator: (value) => value.isEmpty ? 'Mật khẩu không thể trống' : null,
           onSaved: (value) => pass = value.trim(),
         ));
   }
 
   Widget _showButton(context) {
-    print('1');
     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 50, bottom: 0),
-      height: 100.0,
-      child: Material(
-        borderRadius: BorderRadius.circular(20.0),
-        shadowColor: Colors.blueAccent,
-        color: Colors.blue,
-        elevation: 7.0,
-        child: GestureDetector(
-          onTap: () {
-            validateAndSubmit();
+      height: 95.0,
+      child: GestureDetector(
+        onTap: () {
+          validateAndSubmit();
+          if (pass != null)
+          {
             Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => signUpPrivacy(name: widget.name,email: widget.email,pass: pass,)));
-
+          }
           },
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.greenAccent,
+          color: Color(0xFF0C9869),
+          elevation: 7.0,
           child: Center(
             child: Text(
               'Tiếp',

@@ -37,6 +37,7 @@ class _signUpNameState extends State<signUpName> {
       appBar: AppBar(
         title: Text('Tên'),
         centerTitle: true,
+        backgroundColor: Color(0xFF0C9869),
       ),
       body: SignUpNamePage(context, _formKey, firstNameController),
     );
@@ -64,7 +65,7 @@ class _signUpNameState extends State<signUpName> {
     return new Container(
       padding: EdgeInsets.only(top: 30, right: 0, left: 0),
       child: Text(
-        'Bạn tên gì',
+        'Bạn tên gì ?',
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 22, fontWeight: FontWeight.bold,
@@ -85,18 +86,18 @@ class _signUpNameState extends State<signUpName> {
         .height;
     return new Container(
       padding: EdgeInsets.only(left: 20, right: 20, top: 10),
-      width: width * 0.9,
+      width: width ,
       child: TextFormField(
         controller: firstNameController,
         decoration: InputDecoration(
-            labelText: 'Ten cua ban',
+            labelText: 'Tên của bạn',
             labelStyle: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
                 color: Colors.grey),
             focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.green))),
-        validator: (value) => value.isEmpty ? 'Name can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? 'Tên không thể trống' : null,
         onSaved: (value) => name = value.trim(),
       ),
     );
@@ -105,18 +106,23 @@ class _signUpNameState extends State<signUpName> {
   Widget _showButton(context) {
     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 80, bottom: 0),
-      height: 130.0,
-      child: Material(
-        borderRadius: BorderRadius.circular(20.0),
-        shadowColor: Colors.blueAccent,
-        color: Colors.blue,
-        elevation: 7.0,
-        child: GestureDetector(
-          onTap: () {
-            validateAndSubmit();
+      height: 125.0,
+      child: GestureDetector(
+        onTap: () {
+          validateAndSubmit();
+          if(name != null)
+          {
             Navigator.push(context, MaterialPageRoute(
                 builder: (BuildContext context) => signUpEmail(name: name,)));
-          },
+          }
+
+        },
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.greenAccent,
+          color: Color(0xFF0C9869),
+          elevation: 7.0,
+
           child: Center(
             child: Text(
               'Tiếp',

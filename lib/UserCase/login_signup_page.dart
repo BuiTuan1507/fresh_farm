@@ -156,8 +156,20 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
                       showEmailInput(),
                       showPasswordInput(),
                       showPrimaryButton(),
-                      showSecondaryButton(),
-                      showForgetButton(),
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            padding:EdgeInsets.only(left: 25),
+                            child: showSecondaryButton(),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 30),
+                            child: showForgetButton(),
+                          ),
+
+
+                        ],
+                      ),
                       showErrorMessage(),
 
                     ],
@@ -223,12 +235,18 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Email',
+            labelText: 'Email',
+            labelStyle: TextStyle(
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+                color: Colors.grey),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.green)),
             icon: new Icon(
               Icons.mail,
               color: Color(0xFF0C9869),
             )),
-        validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? 'Email không thể trống' : null,
         onSaved: (value) => _email = value.trim(),
       ),
     );
@@ -242,12 +260,18 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Mật khẩu',
+            labelText: 'Mật khẩu',
+            labelStyle: TextStyle(
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+                color: Colors.grey),
+                focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.green)),
             icon: new Icon(
               Icons.lock,
               color: Color(0xFF0C9869),
             )),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? 'Mật khẩu không thể trống' : null,
         onSaved: (value) => _password = value.trim(),
       ),
     );
@@ -283,7 +307,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           },
           child: new Center(
             child:  Text(
-                'Tạo tài khoản mới' ,
+                'Quên mật khẩu' ,
                 style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
           )
 

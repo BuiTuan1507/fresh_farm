@@ -38,6 +38,7 @@ class _signUpEmailState extends State<signUpEmail> {
       appBar: AppBar(
         title: Text('Email',),
         centerTitle: true,
+        backgroundColor: Color(0xFF0C9869),
       ),
       body: SignUpEmailPage(context, emailController),
     );
@@ -79,14 +80,14 @@ class _signUpEmailState extends State<signUpEmail> {
         child: TextFormField(
           controller: emailController,
           decoration: InputDecoration(
-              labelText: 'Email cua ban',
+              labelText: 'Email của bạn',
               labelStyle: TextStyle(
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
                   color: Colors.grey),
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.green))),
-          validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+          validator: (value) => value.isEmpty ? 'Email không thể trống' : null,
           onSaved: (value) => email = value.trim(),
         ));
   }
@@ -94,18 +95,23 @@ class _signUpEmailState extends State<signUpEmail> {
   Widget _showButton(context) {
     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 50, bottom: 0),
-      height: 100.0,
-      child: Material(
-        borderRadius: BorderRadius.circular(20.0),
-        shadowColor: Colors.blueAccent,
-        color: Colors.blue,
-        elevation: 7.0,
-        child: GestureDetector(
-          onTap: () {
-            validateAndSubmit();
+      height: 95.0,
+      child: GestureDetector(
+        onTap: () {
+          validateAndSubmit();
+          if(email !=null)
+          {
             Navigator.push(context, MaterialPageRoute(
                 builder: (BuildContext context) => signUpPass(name: widget.name,email: email,)));
-          },
+          }
+
+        },
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.greenAccent,
+          color: Color(0xFF0C9869),
+          elevation: 7.0,
+
           child: Center(
             child: Text(
               'Tiếp',

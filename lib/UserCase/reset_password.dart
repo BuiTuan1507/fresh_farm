@@ -76,7 +76,7 @@ class _resetPasswordState extends State<resetPassword> {
         appBar:AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF0C9869),
-          title: Text("Change Password",
+          title: Text("Quên mật khẩu",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
         ),
         body: Stack(
@@ -127,7 +127,7 @@ class _resetPasswordState extends State<resetPassword> {
         padding: EdgeInsets.only(top:10,bottom: 15),
         child:Center(
           child:  Text(
-            'Nhap mat khau moi', style: TextStyle(
+            'Nhập mật khẩu mới', style: TextStyle(
               fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87
           ),
           ),
@@ -164,12 +164,12 @@ class _resetPasswordState extends State<resetPassword> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Password',
+            hintText: 'Email',
             icon: new Icon(
-              Icons.lock,
+              Icons.email,
               color: Color(0xFF0C9869),
             )),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? 'Email không thể trống' : null,
         onSaved: (value) => _password = value.trim(),
       ),
     );
@@ -186,7 +186,7 @@ class _resetPasswordState extends State<resetPassword> {
           },
           child: new Center(
               child:  Text(
-                  'Quay ve trang chu' ,
+                  'Quay về trang đăng nha' ,
                   style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
           )
 

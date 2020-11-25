@@ -13,6 +13,7 @@ class _signUpState extends State<signUp> {
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text('Tạo tài khoản',),
+        backgroundColor: Color(0xFF0C9869),
       ),
       body: SignUpPage(context),
     );
@@ -60,7 +61,7 @@ Widget _showText1(){
 }
 Widget _showText2(){
   return new Container(
-    padding: EdgeInsets.only(left: 20,top: 10,right: 10,bottom: 15),
+    padding: EdgeInsets.only(left: 10,top: 10,right: 10,bottom: 15),
     child: Text(
       'Chúng tôi sẽ giúp bạn tạo tài  khoản sau vài bước thực hiện dễ dàng',
       textAlign: TextAlign.center,
@@ -73,16 +74,16 @@ Widget _showText2(){
 Widget _showButton(context){
   return new Container(
     padding: EdgeInsets.only(left: 20,top: 10,bottom: 20,right: 20),
-    height: 80.0,
-    child: Material(
-      borderRadius: BorderRadius.circular(20.0),
-      shadowColor: Colors.blueAccent,
-      color: Colors.blue,
-      elevation: 7.0,
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => signUpName()));
-        },
+    height: 75.0,
+    child: GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => signUpName()));
+      },
+      child: Material(
+        borderRadius: BorderRadius.circular(20.0),
+        shadowColor: Colors.greenAccent,
+        color: Color(0xFF0C9869),
+        elevation: 7.0,
         child: Center(
           child: Text(
             'Tiếp',
@@ -107,7 +108,7 @@ Widget _showPopButton(context){
           },      child: Center(
         child: Text(
           'Đã có tài khoản', style: TextStyle(
-          color: Colors.blue,
+          color: Color(0xFF0C9869),
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),

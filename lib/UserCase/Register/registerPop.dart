@@ -108,6 +108,7 @@ class _signUpPrivacyState extends State<signUpPrivacy> {
       appBar: AppBar(
         title: Text('Điều khoản',),
         centerTitle: true,
+        backgroundColor: Color(0xFF0C9869),
       ),
       body: SignUpPage(context),
     );
@@ -142,7 +143,7 @@ class _signUpPrivacyState extends State<signUpPrivacy> {
   }
 
   Widget _showText2() {
-    print('1');
+
     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 20),
 
@@ -161,18 +162,16 @@ class _signUpPrivacyState extends State<signUpPrivacy> {
   Widget _showButton(context) {
     return new Container(
       padding: EdgeInsets.only(right: 20, left: 20, top: 50, bottom: 0),
-      height: 100.0,
-      child: Material(
-        borderRadius: BorderRadius.circular(20.0),
-        shadowColor: Colors.blueAccent,
-        color: Colors.blue,
-        elevation: 7.0,
-        child: GestureDetector(
-          onTap: () {
-            validateAndSubmit();
-            //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Profile()));
-
-          },
+      height: 95.0,
+      child: GestureDetector(
+        onTap: () {
+          validateAndSubmit();
+        },
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.greenAccent,
+          color: Color(0xFF0C9869),
+          elevation: 7.0,
           child: Center(
             child: Text(
               'Đăng ký',
@@ -187,19 +186,19 @@ class _signUpPrivacyState extends State<signUpPrivacy> {
     );
   }
   Widget _showButtonLogin(context) {
-    print('1');
      return new Container(
-      padding: EdgeInsets.only(right: 20, left: 20, top: 30, bottom: 0),
-      height: 70.0,
-      child: Material(
-        borderRadius: BorderRadius.circular(20.0),
-        shadowColor: Colors.blueAccent,
-        color: Colors.blue,
-        elevation: 7.0,
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => LoginSignupPage()));
-            },
+      padding: EdgeInsets.only(right: 20, left: 20, top: 40, bottom: 0),
+      height: 85.0,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => LoginSignupPage()));
+        },
+        child: Material(
+          borderRadius: BorderRadius.circular(20.0),
+          shadowColor: Colors.greenAccent,
+          color: Color(0xFF0C9869),
+          elevation: 7.0,
+
           child: Center(
             child: Text(
               'Đăng nhập',
