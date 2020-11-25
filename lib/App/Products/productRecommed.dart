@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:fresh_farm/App/Cart/TabBarCart.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
@@ -22,6 +23,7 @@ class _TestState extends State<Test> {
     List<Favorite> favorite = Provider.of<List<Favorite>>(context);
     List<Item> userList1 = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
+
     return (userList1 != null ) ?
       Consumer<Cart>(builder: (context, cart, child) {
         cart.addUser(widget.uid,widget.name, widget.photoURL, widget.email);
@@ -35,6 +37,7 @@ class _TestState extends State<Test> {
             }
           }
         }
+        List <int>  t = [0,0,0,0,0,0,0,0];
         List<Favorite> _userFavorite = [];
         for (int i = 0; i<favorite.length;i++){
           if (favorite[i].uid == cart.uid){
@@ -43,42 +46,52 @@ class _TestState extends State<Test> {
             print(favorite[i].id);
           }
         }
+
         for (int i =0;i<_userFavorite.length;i++){
           for (int j=0;j<8;j++){
             if (_userFavorite[i].id == userList[j].id){
-              userList[j].isLike = true;
-              print(userList[j].id);
+              //userList[j].isLike = true;
+              //print(userList[j].id);
+              t[j] = 1;
             }else{
-              userList[j].isLike = false;
+              //userList[j].isLike = false;
+              t[i] = 0;
             }
           }
         }
         return Scaffold(
             appBar: AppBar(
               title: Text('Mat hang dac biet hom nay'),
+              backgroundColor: Color(0xFF0C9869),
+
               actions: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Row(
                     children: <Widget>[
-                      IconButton(
-                        icon: Icon(
-                          Icons.shopping_cart,
-                          color: Colors.white,
+                      Badge(
+                         position: BadgePosition.topEnd(top: 0, end: 3),
+                          animationDuration: Duration(milliseconds: 300),
+                        animationType: BadgeAnimationType.slide,
+                        badgeContent: Text(
+                          cart.ListItem.length.toString(),
+                         style: TextStyle(color: Colors.white),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => TabBarCart()));
-                        },
-                      ),
-                      Text(cart.ListItem.length.toString())
+                        child: IconButton(icon: Icon(Icons.shopping_cart),iconSize: 30,
+                            onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                     builder: (context) => TabBarCart()));
+                                 },
+                        ),
+                       ),
+
                     ],
                   ),
                 )
               ],
               centerTitle: true,
             ),
-            body: shopItemsListBuilder(userList,cart,this.widget.uid)
+            body: shopItemsListBuilder(userList,cart,this.widget.uid, t)
         );
       })
      :  Container(child: Text("Loading",textAlign: TextAlign.center,));
@@ -91,7 +104,7 @@ class _TestState extends State<Test> {
 
 
 
-Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
+Widget shopItemsListBuilder(List userList,Cart cart,String uid,List t) {
 
   return GridView.builder(
     padding: EdgeInsets.all(7),
@@ -180,7 +193,7 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid) {
                                       Container(
                                         padding: EdgeInsets.only(left: 5,right: 15),
                                         child: IconButton(
-                                          color: (userList[i].isLike? Colors.red[800]:Colors.white),
+                                          color: ( (t[i] != 0)? Colors.red[800] : Colors.white),
                                           icon: Icon(Icons.favorite,),
                                           onPressed: () {
                                             if (userList[i].isLike == true){

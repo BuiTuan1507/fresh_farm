@@ -28,7 +28,7 @@ class _Rating1State extends State<Rating1> {
     String name = "";
     String photoURL = "";
     for (int i =0; i<userList.length;i++){
-      if (uid == userList[i].uid){
+      if (uid == userList[i].userID){
         name = userList[i].name;
         photoURL = userList[i].photoURL;
       }

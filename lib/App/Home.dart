@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/TabBarCart.dart';
 import 'package:fresh_farm/App/ListProduct/giavi.dart';
 import 'package:fresh_farm/App/ListProduct/hoaqua.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
@@ -36,9 +37,10 @@ class MyHomeAppPage extends StatefulWidget{
   final BaseAuth auth;
   final VoidCallback logoutCallback;
   final String userId;
+  String name;
+  String email;
 }
 class _MyHomeAppPageState extends State<MyHomeAppPage>{
-
   signOut() async {
     try {
       await widget.auth.signOut();
@@ -49,17 +51,32 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
   }
 
 
-  Widget buildDrawer(BuildContext context){
-    List<Item> userList = Provider.of<List<Item>>(context);
+
+  Widget buildDrawer(BuildContext context,String userId){
+    List<User> user = Provider.of<List<User>>(context);
+    if(user != null){
+      for (int i = 0; i< user.length; i++)
+      {
+        if (widget.userId == user[i].userID)
+        {
+          print(user[i].userID);
+          widget.name = user[i].name;
+          widget.email = user[i].email;
+        }
+      }
+    }
+
+
+    //name = currentUser.name;
     return new ListView(
       children: <Widget>[
 
         UserAccountsDrawerHeader(
 
-          accountName:new Text('Courage',style: TextStyle(fontWeight: FontWeight.bold,
+          accountName:new Text((widget.name != null) ? widget.name : ""  ,style: TextStyle(fontWeight: FontWeight.bold,
               fontSize: 28),
           ),
-          accountEmail: new Text('courage@gmail.com',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 16),),
+          accountEmail: new Text((widget.email != null) ? widget.email : "",style: TextStyle(fontStyle: FontStyle.italic,fontSize: 16),),
           currentAccountPicture: CircleAvatar(
             backgroundImage: AssetImage("assets/avatar.jpg"),
 
@@ -77,33 +94,36 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             child: Icon(Icons.markunread_mailbox,size: 26,color:Color(0xFF0C9869)),
           ),
           title: Text('Product',style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black45
+              fontSize: 18, fontWeight: FontWeight.bold
           ),),
         ),
-        ListTile(
-          leading: GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favorite1(uid: widget.userId)));
-            },
-            child: Icon(
-              Icons.favorite,
-              size: 26,
-              color: Color(0xFF0C9869),
+        ListTileTheme(
+          child: ListTile(
+            leading: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favorite1(uid: widget.userId)));
+              },
+              child: Icon(
+                Icons.favorite,
+                size: 26,
+                color:Color(0xFF0C9869),
+              ),
             ),
+            title: Text('Favorite',style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold
+            )),
           ),
-          title: Text('Favorite',style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
-          )),
         ),
+
         ListTile(
           leading: GestureDetector(
             onTap:(){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Checkout()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => TabBarCart()));
             },
             child: Icon(Icons.shopping_cart,size: 26, color:Color(0xFF0C9869) ),
           ),
           title: Text('Cart',style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
+              fontSize: 18, fontWeight: FontWeight.bold
           )),
         ),
         Divider(),
@@ -121,7 +141,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             child: Icon(Icons.person,size: 26, color:Color(0xFF0C9869) ),
           ),
           title: Text('Profile',style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
+              fontSize: 18, fontWeight: FontWeight.bold
           )),
         ),
         ListTile(
@@ -133,7 +153,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             child: Icon(Icons.search,size: 26, color:Color(0xFF0C9869) ),
           ),
           title: Text('Search',style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
+              fontSize: 18, fontWeight: FontWeight.bold
           )),
         ),
         ListTile(
@@ -141,7 +161,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             onTap: (){
 
             },
-            child: Icon(Icons.chat,size: 26,),
+            child: Icon(Icons.chat,size: 26,color:Color(0xFF0C9869),),
           ),
           title: Text('Help', style:  TextStyle(
             fontSize: 18, fontWeight: FontWeight.bold
@@ -152,9 +172,9 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Sale()));
             },
-            child: Icon(Icons.add_alert,size: 26,),
+            child: Icon(Icons.add_alert,size: 26,color:Color(0xFF0C9869),),
           ),
-          title: Text('Notification', style:  TextStyle(
+          title: Text('Sales', style:  TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold
           ),),
         ),
@@ -164,10 +184,10 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               signOut();
             },
             //onPressed: signOut,
-            child: Icon(Icons.exit_to_app,size: 26,color: Color(0xFF0C9869),),
+            child: Icon(Icons.exit_to_app,size: 26,color:Color(0xFF0C9869),),
           ),
           title: Text('Log Out',style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color:Colors.black45
+              fontSize: 18, fontWeight: FontWeight.bold
           )),
         ),
         //Text("Product")
@@ -187,10 +207,8 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               padding: EdgeInsets.only(right: 15.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>Checkout()));
-
-
-                },
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>TabBarCart()));
+                  },
                 child: Icon(
                   Icons.shopping_cart,
                   size: 30.0,
@@ -203,13 +221,13 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
 
         ),
         drawer: new Drawer(
-          child: buildDrawer(context)
+          child: buildDrawer(context,widget.userId)
         ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              HeaderWithSearchBox(size: size),
+              HeaderWithSearchBox(size: size,name:(widget.name != null) ? widget.name : ""),
               FeaturedPlants(),
               TitleWithMoreBtn(title: "Category", press: () {
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage(uid:widget.userId)));

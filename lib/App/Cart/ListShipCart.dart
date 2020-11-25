@@ -17,16 +17,20 @@ class _ListShipCartState extends State<ListShipCart> {
     return Consumer<Cart>(builder: (context,cart,child){
       List userFavorite = [];
       int count = 0;
-      if(userList1.length != 0){
-        var timeNow = DateTime.now();
-        for (int i =0 ;i<userList1.length;i++){
-          var timeShip = userList1[i].endTime.toDate();
-          if (timeShip.isAfter(timeNow)){
-            count = count + 1;
-            userFavorite.add(userList1[i]);
+      if(userList1 != null)
+        {
+          if(userList1.length != 0){
+            var timeNow = DateTime.now();
+            for (int i =0 ;i<userList1.length;i++){
+              var timeShip = userList1[i].endTime.toDate();
+              if (timeShip.isAfter(timeNow)){
+                count = count + 1;
+                userFavorite.add(userList1[i]);
+              }
+            }
           }
         }
-      }
+
 
 
       return Scaffold(

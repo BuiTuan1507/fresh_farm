@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 
 class HeaderWithSearchBox extends StatelessWidget {
-  const HeaderWithSearchBox({
-    Key key,
-    @required this.size,
-  }) : super(key: key);
 
+  HeaderWithSearchBox({Key key, this.size,this.name}) : super(key: key);
+  String name;
   final Size size;
 
   @override
@@ -36,7 +34,7 @@ class HeaderWithSearchBox extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Text(
-                  'Hi Courage',
+                  'Hi ' + name,
                   style: Theme.of(context).textTheme.headline5.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),

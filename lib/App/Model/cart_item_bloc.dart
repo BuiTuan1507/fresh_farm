@@ -93,26 +93,26 @@ class Rating{
 }
 class User{
   String name;
-  String uid;
+  String userID;
   String photoURL;
   String email ;
 
-  User(this.name, this.uid, this.photoURL, this.email);
+  User(this.name, this.userID, this.photoURL, this.email);
   User.fromJson(Map<String,dynamic> data)
       :name= data['name'],
-        uid = data['uid'],
+        userID = data['userID'],
         email = data['email'],
         photoURL= data['photoURL'];
   User.fromSnapshot(DocumentSnapshot snapshot) :
         name = snapshot['name'],
-        uid = snapshot["uid"],
+        userID = snapshot["userID"],
         email = snapshot["email"],
         photoURL = snapshot["photoURL"];
 
   toJson() {
     return {
       "name": name,
-      "uid": uid,
+      "userID": userID,
 
       "email" : email,
       "photoURL": photoURL,
