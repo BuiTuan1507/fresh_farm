@@ -24,7 +24,7 @@ class _TestState extends State<Test> {
     List<Item> userList1 = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
 
-    return (userList1 != null ) ?
+    return ((userList1 != null) && (favorite != null) ) ?
       Consumer<Cart>(builder: (context, cart, child) {
         cart.addUser(widget.uid,widget.name, widget.photoURL, widget.email);
         List<Item> userList = [];
@@ -37,31 +37,46 @@ class _TestState extends State<Test> {
             }
           }
         }
-        List <int>  t = [0,0,0,0,0,0,0,0];
-        List<Favorite> _userFavorite = [];
+        List <int>  t = [0,0,0,0,0,0,0,0]; //  hien thi favorite
+        List <int>  x = [0,0,0,0,0,0,0,0]; // hien thi cart
+        List<Favorite> userFavorite = [];
         for (int i = 0; i<favorite.length;i++){
           if (favorite[i].uid == cart.uid){
-            _userFavorite.add(favorite[i]);
-            print(favorite[i].name);
-            print(favorite[i].id);
+            userFavorite.add(favorite[i]);
+           // print(favorite[i].name);
+           // print(favorite[i].id);
           }
         }
 
-        for (int i =0;i<_userFavorite.length;i++){
+        for (int i =0;i<userFavorite.length;i++){
           for (int j=0;j<8;j++){
-            if (_userFavorite[i].id == userList[j].id){
+            if (userFavorite[i].id == userList[j].id){
               //userList[j].isLike = true;
               //print(userList[j].id);
               t[j] = 1;
-            }else{
-              //userList[j].isLike = false;
-              t[i] = 0;
             }
           }
         }
+
+        if(cart.ListItem != null)
+        {
+          for (int i = 0; i< cart.ListItem.length; i++)
+          {
+            for (int  j = 0; j < 8;j ++)
+            {
+              if (cart.ListItem[i].id == userList[i].id){
+                x[j] = 1;
+
+              }
+            }
+          }
+        }
+
+
+
         return Scaffold(
             appBar: AppBar(
-              title: Text('Mat hang dac biet hom nay'),
+              title: Text('Mặt hàng đặc biệt hôm nay'),
               backgroundColor: Color(0xFF0C9869),
 
               actions: <Widget>[
@@ -91,20 +106,14 @@ class _TestState extends State<Test> {
               ],
               centerTitle: true,
             ),
-            body: shopItemsListBuilder(userList,cart,this.widget.uid, t)
+            body: shopItemsListBuilder(userList,cart,this.widget.uid, t,x)
         );
       })
      :  Container(child: Text("Loading",textAlign: TextAlign.center,));
 
 
   }
-}
-
-
-
-
-
-Widget shopItemsListBuilder(List userList,Cart cart,String uid,List t) {
+  Widget shopItemsListBuilder(List userList,Cart cart,String uid,List t, List x) {
 
   return GridView.builder(
     padding: EdgeInsets.all(7),
@@ -116,6 +125,7 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid,List t) {
     ),
     itemCount: userList.length,
     itemBuilder: (_, i,) {
+
       return new Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
@@ -196,12 +206,12 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid,List t) {
                                           color: ( (t[i] != 0)? Colors.red[800] : Colors.white),
                                           icon: Icon(Icons.favorite,),
                                           onPressed: () {
-                                            if (userList[i].isLike == true){
+                                            if (t[i] != 0){
                                               //cart.removeFavorite(userList[i]);
-
+                                              t[i] = 0;
                                               cart.deleteFavorite(cart.uid + userList[i].id.toString());
                                             }else{
-
+                                              t[i] = 1;
                                               cart.createItemFavorite1(userList[i],cart.uid);
                                             }
 
@@ -210,10 +220,9 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid,List t) {
                                       ),
                                       Container(
                                         child: IconButton(
-
+                                          color: ((x[i] != 0) ? Colors.blue : Colors.black),
                                           icon: Icon(Icons.add_shopping_cart),
                                           onPressed: () {
-                                            //   bloc.addToCart(shopList[i]);
                                             cart.add(userList[i]);
 
                                           },
@@ -235,4 +244,5 @@ Widget shopItemsListBuilder(List userList,Cart cart,String uid,List t) {
 
     },
   );
+}
 }

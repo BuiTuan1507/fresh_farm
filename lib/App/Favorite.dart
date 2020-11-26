@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:fresh_farm/App/Products/Category.dart';
 
 import 'package:fresh_farm/App/Products/Detail.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
@@ -17,14 +18,14 @@ class _Favorite1State extends State<Favorite1> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     List<Favorite> userList1 = Provider.of<List<Favorite>>(context);
 
     return Consumer<Cart>(builder: (context,cart,child){
-      print(userList1[0].idFavorite);
       List userFavorite = [];
-      if (userList1!=null){
+      if (userList1 != null){
       for (int i=0;i<userList1.length;i++){
-        if(userList1[i].uid == '0oULJrkVt3bTsqetIYgTY75ucP03'){
+        if(userList1[i].uid == widget.uid){
           userFavorite.add(userList1[i]);
           }
         }
@@ -32,10 +33,10 @@ class _Favorite1State extends State<Favorite1> {
       return Scaffold(
         appBar:AppBar(
             centerTitle: true,
-            backgroundColor: Colors.green,
-            title: Text("Yeu thich",
+            backgroundColor: Color(0xFF0C9869),
+            title: Text("Yêu thích",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),)),
-        body:(userFavorite.length != 0)
+        body:(userFavorite != null)
                 ?
               SingleChildScrollView(
                    child: Column(
@@ -58,10 +59,10 @@ class _Favorite1State extends State<Favorite1> {
                                 side: BorderSide(color: Colors.green[500])
                             ),
                             color: Colors.white,
-                            child: Row(
+                            child: Stack(
                               children: <Widget>[
                                 Container(
-                                    padding:EdgeInsets.only(left: 10,right: 30, top:4, bottom: 4),
+                                    padding:EdgeInsets.only(left: 10,right: 15, top:4, bottom: 4),
                                     child: InkWell(
                                       onTap: () {
                                         Navigator.of(context).push(
@@ -79,8 +80,10 @@ class _Favorite1State extends State<Favorite1> {
                                                   fit: BoxFit.fill))
                                       ),
                                     )),
-                                Container(
-                                  padding: EdgeInsets.only(left: 20, right: 30),
+                                Positioned(
+                                  top:10,
+                                  bottom: 10,
+                                  left: size.width*0.35,
                                   child: Column(
                                     children: <Widget>[
                                       Row(
@@ -105,23 +108,18 @@ class _Favorite1State extends State<Favorite1> {
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  padding: EdgeInsets.only(left: 40),
-                                  child:  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          IconButton(
+                                Positioned(
+                                  top: 12,
+                                  bottom: 12,
+                                  left: size.width*0.65,
+                                  child:  Container (
+                                          child :IconButton(
                                             icon: Icon(Icons.delete,color: Colors.green[800],),
                                             onPressed: () {
 
                                              cart.deleteFavorite(favoriteList[i].idFavorite);
                                             },
                                           ),
-                                        ],
-                                      ),
-
-                                    ],
                                   ),
                                 )
 
@@ -140,9 +138,9 @@ class _Favorite1State extends State<Favorite1> {
                   child: Center(
                     child: RaisedButton(
                       onPressed: (){
-                        cart.createFavorite(cart.userFavorite);
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>MyCategoryPage(uid: cart.uid,)));
                       },
-                      child: Text('cap nhat danh sach yeu thich'),
+                      child: Text('Xem thêm sản phẩm'),
                     ),
                   ),
                 )
@@ -153,7 +151,9 @@ class _Favorite1State extends State<Favorite1> {
               children: <Widget>[
                 Center(child: Text("Bạn chưa có sản phẩm yêu thích nào",style: TextStyle(fontSize: 24),)),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>MyCategoryPage(uid: cart.uid,)));
+                  },
                   child: Text("Xem thêm sản phẩm"),
                   color: Colors.green,
                 ),

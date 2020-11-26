@@ -19,9 +19,17 @@ class _TabBarCartState extends State<TabBarCart> {
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.green,
-            elevation: 0,
+            backgroundColor: Color(0xFF0C9869),
+            elevation: 0, // ? la gi day
+
             title: Text('Giỏ Hàng',style: TextStyle(fontSize: 22),textAlign: TextAlign.center,),
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: ()
+                  {
+                   Navigator.pop(context);
+                  }
+              ),
             bottom: TabBar(
                 labelColor: Colors.green,
                 unselectedLabelColor: Colors.white,

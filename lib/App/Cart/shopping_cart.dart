@@ -19,7 +19,7 @@ class _CheckoutState extends State<Checkout> {
   @override
 
   Widget build(BuildContext context) {
-
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
 
       body: Consumer<Cart>(
@@ -68,7 +68,7 @@ class _CheckoutState extends State<Checkout> {
                               side: BorderSide(color: Colors.green[500])
                           ),
                           color: Colors.white,
-                          child: Row(
+                          child: Stack(
                             children: <Widget>[
                               Container(
                                   padding:EdgeInsets.only(left: 10,right: 15, top:4, bottom: 4),
@@ -89,8 +89,10 @@ class _CheckoutState extends State<Checkout> {
                                                 fit: BoxFit.fill))
                                     ),
                                   )),
-                              Container(
-                                padding: EdgeInsets.only(left: 15, right: 15),
+                              Positioned(
+                                top:0,
+                                bottom: 0,
+                                left: size.width*0.3,
                                 child: Column(
                                   children: <Widget>[
                                     Row(
@@ -103,8 +105,8 @@ class _CheckoutState extends State<Checkout> {
                                     ),
                                     Row(
                                       children: <Widget>[
-                                        Container(
-                                          padding :EdgeInsets.only(bottom: 0),
+                                        Center(
+
                                           child: Text('\$${cartList[i].price}', style: TextStyle(fontSize: 15, color: Colors.black),
                                           )
                                           ,)
@@ -113,8 +115,8 @@ class _CheckoutState extends State<Checkout> {
                                     Row(
                                       children: <Widget>[
                                         Container(
-                                          width: 30,
-                                          height: 30,
+                                          width: 35,
+                                          height: 35,
                                           padding: EdgeInsets.only(right: 12),
 
                                           child: new FloatingActionButton(
@@ -128,8 +130,8 @@ class _CheckoutState extends State<Checkout> {
                                         new Text('${cart.ListItem[i].count}',
                                             style: new TextStyle(fontSize: 16.0)),
                                         Container(
-                                          width: 30,
-                                          height: 30,
+                                          width: 35,
+                                          height: 35,
                                           padding: EdgeInsets.only(left: 12),
                                           child:  new FloatingActionButton(
                                             onPressed: minus,
@@ -148,8 +150,10 @@ class _CheckoutState extends State<Checkout> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                padding: EdgeInsets.only(left: 40),
+                              Positioned(
+                                top: 12,
+                                bottom: 12,
+                                left: size.width*0.65,
                                 child:  Column(
                                   children: <Widget>[
                                     Row(
@@ -185,7 +189,7 @@ class _CheckoutState extends State<Checkout> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          Text('Giá tiền:             ${cart.totalPrice(cart.ListItem)}',style: TextStyle(fontSize: 18, color: Colors.black),)
+                          Text('Giá tiền:                  ${cart.totalPrice(cart.ListItem)}',style: TextStyle(fontSize: 18, color: Colors.black),)
                         ],
                       ),
                       Row(

@@ -40,7 +40,11 @@ class _ListShipCartState extends State<ListShipCart> {
           SingleChildScrollView(
             child: Column(
                 children: <Widget>[
-                  Text('Ban co ${count} don hang dang giao',textAlign: TextAlign.center,style: TextStyle(fontSize:17),),
+                  Container(
+                    padding: EdgeInsets.only(top: 20, bottom: 15),
+                    child: Text('Bạn có  ${count} đơn hàng đang giao',textAlign: TextAlign.center,style: TextStyle(fontSize:20),),
+                  ),
+
                   ListView.builder(
 
 
@@ -92,7 +96,7 @@ class _ListShipCartState extends State<ListShipCart> {
                                     Row(
                                       children: <Widget>[
                                         Center(
-                                            child: Text("Don hang dang giao", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                            child: Text("Đơn hàng " + (i+1).toString(), style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
                                             )
                                         )
                                       ],

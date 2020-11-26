@@ -205,7 +205,7 @@ class _PayState extends State<Pay> {
                         validateAndSubmit();
                         String userAddress = address+_quan+_value;
                         cart.createCart(cart.ListItem, cart.uid,userAddress,cart.totalPrice(cart.ListItem),widget.ramdomNumber,_time);
-                        cart.addListCart(widget.ramdomNumber, cart.uid,cart.totalPrice(cart.ListItem) , 'assets/1.jpg');
+                        cart.addListCart(widget.ramdomNumber, cart.uid,cart.totalPrice(cart.ListItem) , cart.ListItem[0].imgPath);
                         Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Pay()));
                       },
                       child: Text("Thanh toan"),)
