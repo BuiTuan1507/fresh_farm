@@ -26,22 +26,9 @@ class _ShipCartState extends State<ShipCart> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Color(0xFF0C9869),
-        title: Text("Xem chi tiet don hang",
+        title: Text("Xem chi tiết đơn hàng",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
-        actions: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(right: 35.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.shopping_cart,
-                  size: 35.0,
-                ),
-              )
-          ),
-        ],
+
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
@@ -49,8 +36,17 @@ class _ShipCartState extends State<ShipCart> {
             .where("id",isEqualTo: widget.id)
             .snapshots(),
         builder:(context,snapshot){
-          print(widget.id);
-          print(snapshot.data.documents[0]['user']);
+          var cFormat;
+          var eFormat;
+          if (snapshot.hasData != null)
+            {
+              var createTime = snapshot.data.documents[0]['createTime'].toDate();
+              var endTime = snapshot.data.documents[0]['endTime'].toDate();
+              var createTimeFormat = DateFormat('H:m  dd-MM-yyyy');
+              cFormat = createTimeFormat.format(createTime);
+              eFormat = createTimeFormat.format(endTime);
+            }
+
           return (snapshot.hasData !=null)
               ? Column(
             children: <Widget>[
@@ -131,32 +127,43 @@ class _ShipCartState extends State<ShipCart> {
               ),
               Column(
                 children: <Widget>[
+
+                    Container (
+
+                      padding: EdgeInsets.only(top: 20),
+                      child: Text(
+                        'Thông tin đơn hàng ', textAlign: TextAlign.center, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   Container(
-                    child: Text('Địa chỉ: ${snapshot.data.documents[0]['address']}'),
+                    padding: EdgeInsets.only(top: 40, bottom:20 ,left: 16),
+                    child: Text('Địa chỉ: ${snapshot.data.documents[0]['address']}',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.only(top: 10),
                     child:Text(
-                     'Thời gian mua hàng : ${snapshot.data.documents[0]['createTime'].toDate()}'
-
+                     'Thời gian mua hàng : ${cFormat}',
+                      style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
                     ),
 
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10),
                     child:Text(
-                        'Thời gian giao hàng: ${snapshot.data.documents[0]['endTime'].toDate()}'
+                        'Thời gian giao hàng: ${eFormat}',
+                      style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10),
-                    child: Text('Giá tiền : ${snapshot.data.documents[0]['price']} ', style: TextStyle(fontSize: 18),),
+                    child: Text('Giá tiền : ${snapshot.data.documents[0]['price']} ',
+                      style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                   )
                 ],
               )
             ],
           )
-              : Center(child: Text("Hien tai khong co don hang nao duoc giao"));
+              : Center(child: Text("Hiện tại không còn đơn hàng nào đang được giao"));
         },
       ),
     );

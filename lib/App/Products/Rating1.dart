@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -25,20 +27,25 @@ class _Rating1State extends State<Rating1> {
   @override
   Widget build(BuildContext context) {
     List<User> userList = Provider.of<List<User>>(context);
-    String name = "";
-    String photoURL = "";
-    for (int i =0; i<userList.length;i++){
-      if (uid == userList[i].userID){
-        name = userList[i].name;
-        photoURL = userList[i].photoURL;
-      }
-    }
+
     return Scaffold(
         appBar: new AppBar(
-          title: new Text("Star Rating"),
+          title: new Text("Đánh giá"),
+          centerTitle: true,
+          backgroundColor: Color(0xFF0C9869),
         ),
         body:Consumer<Cart>(
             builder: (context,cart,child){
+              String name = "";
+              String photoURL = "";
+              if (userList != null){
+                for (int i =0; i<userList.length;i++){
+                  if (cart.uid == userList[i].userID){
+                    name = userList[i].name;
+                    photoURL = userList[i].photoURL;
+                  }
+                }
+              }
 
               return new Column(
                 children: <Widget>[
@@ -77,10 +84,10 @@ class _Rating1State extends State<Rating1> {
 
                         style: TextStyle(fontSize: 18),
                         decoration: InputDecoration(
-                          labelText: 'Enter the Value',
+                          labelText: 'Nhập đánh giá của bạn',
 
                         ),
-                        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+                        validator: (value) => value.isEmpty ? 'Đánh giá không thể để trống' : null,
                         onSaved: (value) => text = value.trim() as TextEditingController ,
 
                       ),
@@ -91,11 +98,14 @@ class _Rating1State extends State<Rating1> {
 
 
                   RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.green[500])),
                     onPressed: () {
 
                       cart.createReview(cart.idRating, cart.uid, rating, text.text,name,photoURL);
                     },
-                    child: Text('Submit'),
+                    child: Text('Add'),
                     textColor: Colors.white,
                     color: Colors.blueAccent,
                   )

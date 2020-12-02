@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Cart/ShipCart.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
+import 'package:fresh_farm/App/Products/Category.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 class AllCart extends StatefulWidget {
@@ -40,7 +41,7 @@ class _AllCartState extends State<AllCart> {
           SingleChildScrollView(
             child: Column(
                 children: <Widget>[
-                  Text('Ban co ${count} don hang dang giao',textAlign: TextAlign.center,style: TextStyle(fontSize:17),),
+                  Text('Bạn có ${count} đơn hàng đã giao',textAlign: TextAlign.center,style: TextStyle(fontSize:17),),
                   ListView.builder(
 
 
@@ -92,7 +93,7 @@ class _AllCartState extends State<AllCart> {
                                     Row(
                                       children: <Widget>[
                                         Center(
-                                            child: Text("Don hang dang giao", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                            child: Text("Đơn hàng đã giao", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
                                             )
                                         )
                                       ],
@@ -110,7 +111,7 @@ class _AllCartState extends State<AllCart> {
                                       children: <Widget>[
                                         Container(
                                           padding: EdgeInsets.only(top: 5),
-                                          child: Text('Mua hang luc: ${cFormat}'),
+                                          child: Text('Mua hàng lúc: ${cFormat}'),
                                         )
                                       ],
                                     ),
@@ -118,7 +119,7 @@ class _AllCartState extends State<AllCart> {
                                       children: <Widget>[
                                         Container(
                                           padding: EdgeInsets.only(top: 5),
-                                          child: Text('Giao hang truoc: ${eFormat}'),
+                                          child: Text('Giao hàng xong: ${eFormat}'),
                                         )
                                       ],
                                     ),
@@ -137,15 +138,15 @@ class _AllCartState extends State<AllCart> {
 
                     },
                   ),
-
-
                 ]),
           )
               : Column(
             children: <Widget>[
-              Center(child: Text("Bạn chưa có sản phẩm yêu thích nào",style: TextStyle(fontSize: 24),)),
+              Center(child: Text("Bạn chưa có đơn hàng nào",style: TextStyle(fontSize: 24),)),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage()));
+                },
                 child: Text("Xem thêm sản phẩm"),
                 color: Colors.green,
               ),

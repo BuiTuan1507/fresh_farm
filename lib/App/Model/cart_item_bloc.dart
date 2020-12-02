@@ -333,7 +333,7 @@ class Cart extends ChangeNotifier{
   void createReview(int id, String uid, int rating, String text,String name, String photoURL){
     Firestore firestoreReview = Firestore.instance;
 
-    firestoreReview.collection('Rating').document(id.toString()).setData({
+    firestoreReview.collection('Rating').document().setData({
       "id":id,
       "uid":uid,
       "rating":rating,
@@ -368,12 +368,14 @@ class Cart extends ChangeNotifier{
 
   CollectionReference users = Firestore.instance.collection('Rating');
 
-  Future<void> deleteReview(int id) {
-    return users
-        .document('2')
-        .delete()
-        .then((value) => print("User Updated"))
-        .catchError((error) => print("Failed to update user: $error"));
+  Future<void> deleteReview(int id,String uid) {
+    var query =  users
+        .where("id", isEqualTo: id).where("uid",isEqualTo: uid);
+    query.getDocuments().then((querySnapshot) => {
+      querySnapshot.documents.forEach((element) {
+        element.reference.delete();
+      })
+    });
   }
   CollectionReference usaa = Firestore.instance.collection('Favorite');
 
