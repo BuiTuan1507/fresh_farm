@@ -8,7 +8,7 @@ class signUpPrivacy extends StatefulWidget {
   String name;
   String email;
   String pass;
-  String photoURL="assets/avatar.jpg";
+  String photoURL="assets/ramdom.jpg";
 
   signUpPrivacy({Key key, this.name,this.email,this.pass}) : super(key: key);
   @override

@@ -136,7 +136,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
           leading: GestureDetector(
             onTap:(){
 
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProfilePage(uid: widget.userId)));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyProfilePage(uid: widget.userId,name: widget.name,email: widget.email,)));
             },
             child: Icon(Icons.person,size: 26, color:Color(0xFF0C9869) ),
           ),

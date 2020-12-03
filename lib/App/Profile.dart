@@ -7,13 +7,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fresh_farm/App/Home.dart';
 import 'package:fresh_farm/UserCase/reset_password.dart';
 import 'package:fresh_farm/UserCase/updateProfile.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 
 class MyProfilePage extends StatefulWidget{
-  const MyProfilePage({Key key, this.uid}) : super(key: key);
+  const MyProfilePage({Key key, this.uid, this.email, this.name}) : super(key: key);
 
   _MyProfilePageState createState() => new _MyProfilePageState();
   final String uid;
+  final String name;
+  final String email;
 
 }
 
@@ -21,13 +24,52 @@ class _MyProfilePageState extends State<MyProfilePage>{
   String name;
   String email;
   String photoURL;
-  File _imageFile;
+  File _image;
+  String urlUser ;
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+      print('Image Path $_image');
+    });
+  }
+  Future uploadPic(BuildContext context) async{
+    String fileName = basename(_image.path);
+    StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
+    StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
+
+    StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
+    taskSnapshot.ref.getDownloadURL().then((value) => {
+      urlUser = value.toString()
+    });
+    if (urlUser != null)
+    {
+      setState(() {
+        print("Profile Picture uploaded");
+
+        Firestore.instance.collection("User").document(widget.uid).updateData(
+            {
+              "name" : widget.name,
+              "email":widget.email,
+              "photoURL":urlUser
+            }
+        );
+        print(1234);
+
+        print(urlUser);
+        print(widget.uid);
+        Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+      });
+    }
+
+  }
 
   Widget build(BuildContext context) {
     Size size = MediaQuery
         .of(context)
         .size;
-    CollectionReference users = Firestore.instance.collection('User');
+
     return new Scaffold(
         resizeToAvoidBottomInset: false,
 
@@ -68,26 +110,40 @@ class _MyProfilePageState extends State<MyProfilePage>{
                         color: Colors.white30,
                         child: Column(
                           children: <Widget>[
-                            Center(
-                              child: Container(
-                                padding: EdgeInsets.only(top: 10, bottom: 10),
-                                color: Colors.white30,
-                                height: size.height * 0.25,
-                                width: size.width * 0.35,
-                                child: Container(
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: new AssetImage(
-                                            "assets/avatar.jpg")
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(left: 100),
+                                  child: CircleAvatar(
+                                    radius: 60,
+                                    child: ClipOval(
+                                      child: new SizedBox(
+                                        width: 120.0,
+                                        height: 120.0,
+                                        child: (_image!=null)?Image.file(
+                                          _image,
+                                          fit: BoxFit.fill,
+                                        ):Image.network(
+                                            snapshot.data['photoURL']
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-
-                              ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 60.0,left: 20),
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.camera_alt,
+                                      size: 30.0,
+                                    ),
+                                    onPressed: () {
+                                      getImage();
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-
 
                             Center(
                               child: Text(
@@ -129,7 +185,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                         Container(
                           padding: EdgeInsets.only(right: 20, bottom: 10),
                           child: Text(
-                              snapshot.data['photoURL'] , style: TextStyle(
+                              "091222212" , style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.black87)
@@ -263,7 +319,37 @@ class _MyProfilePageState extends State<MyProfilePage>{
                       ),
                     ),
                     SizedBox(height: 20,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        RaisedButton(
+                          color: Color(0xff476cfb),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          elevation: 4.0,
+                          splashColor: Colors.blueGrey,
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.white, fontSize: 16.0),
+                          ),
+                        ),
+                        RaisedButton(
+                          color: Color(0xff476cfb),
+                          onPressed: () {
+                            uploadPic(context);
+                          },
 
+                          elevation: 4.0,
+                          splashColor: Colors.blueGrey,
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(color: Colors.white, fontSize: 16.0),
+                          ),
+                        ),
+
+                      ],
+                    )
 
 
                   ]);
