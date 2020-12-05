@@ -26,6 +26,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
   String photoURL;
   File _image;
   String urlUser ;
+  bool isCheck = false;
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -35,32 +36,39 @@ class _MyProfilePageState extends State<MyProfilePage>{
     });
   }
   Future uploadPic(BuildContext context) async{
-    String fileName = basename(_image.path);
-    StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
-    StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
-
-    StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
-    taskSnapshot.ref.getDownloadURL().then((value) => {
-      urlUser = value.toString()
-    });
-    if (urlUser != null)
+    if (_image != null)
     {
-      setState(() {
-        print("Profile Picture uploaded");
+      while(urlUser == null){
 
-        Firestore.instance.collection("User").document(widget.uid).updateData(
-            {
-              "name" : widget.name,
-              "email":widget.email,
-              "photoURL":urlUser
-            }
-        );
-        print(1234);
+        String fileName = basename(_image.path);
+        StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
+        StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
 
-        print(urlUser);
-        print(widget.uid);
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
-      });
+        StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
+        taskSnapshot.ref.getDownloadURL().then((value) => {
+          urlUser = value.toString()
+        });
+
+        setState(() {
+          print("Profile Picture uploaded");
+
+          Firestore.instance.collection("User").document(widget.uid).updateData(
+              {
+                "name" : widget.name,
+                "email":widget.email,
+                "photoURL":urlUser
+              }
+          );
+          print(1234);
+
+          print(urlUser);
+          print(widget.uid);
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+        });
+
+      }
+
+
     }
 
   }
@@ -139,6 +147,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                     ),
                                     onPressed: () {
                                       getImage();
+                                      isCheck = true;
                                     },
                                   ),
                                 ),
@@ -168,7 +177,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                     Row(
                       children: <Widget>[
                         Container(
-                          padding: EdgeInsets.only(left: 40, right: 15, bottom: 10),
+                          padding: EdgeInsets.only(left:20, right: 15, bottom: 10),
                           child: Icon(
                             Icons.phone, size: 23, color: Color(0xFF0C9869),
                           ),
@@ -183,7 +192,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                           ),
                           ),),
                         Container(
-                          padding: EdgeInsets.only(right: 20, bottom: 10),
+                          padding: EdgeInsets.only(right: 20, bottom: 10, top : 15),
                           child: Text(
                               "091222212" , style: TextStyle(
                               fontSize: 18,
@@ -196,11 +205,11 @@ class _MyProfilePageState extends State<MyProfilePage>{
                     Row(
                       children: <Widget>[
                         Container(
-                            padding: EdgeInsets.only(top: 12, bottom: 10,),
+                            padding: EdgeInsets.only(top: 20, bottom: 10,),
                             child: Row(
                               children: <Widget>[
                                 Container(
-                                  padding: EdgeInsets.only(left: 40, right: 15),
+                                  padding: EdgeInsets.only(left: 15, right: 15),
                                   child: Icon(
                                     Icons.home, size: 23, color:Color(0xFF0C9869) ,
                                   ),
@@ -236,7 +245,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                             child: Row(
                               children: <Widget>[
                                 Container(
-                                  padding: EdgeInsets.only(left: 40, right: 15),
+                                  padding: EdgeInsets.only(left:20, right: 15),
                                   child: Icon(
                                     Icons.monetization_on, size: 23, color: Color(0xFF0C9869),
                                   ),
@@ -264,92 +273,98 @@ class _MyProfilePageState extends State<MyProfilePage>{
                         )
                       ],
                     ),
-
-                    Container(
-                      padding: EdgeInsets.only(
-                          top: 30, left: 40, right: 40, bottom: 5),
-                      height: 75,
-
-                      child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.blueAccent,
-                        color: Color(0xFF0C9869),
-                        elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => updateProfile(uid:widget.uid)));
-                          },
-                          child: Center(
-                            child: Text(
-                              'Cập nhật thông tin cá nhân',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Montserrat'),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20,),
-                    Container(
-                      padding: EdgeInsets.only(
-                          top: 5, left: 40, right: 40, bottom: 5),
-                      height: 50,
-
-                      child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.blueAccent,
-                        color: Color(0xFF0C9869),
-                        elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => resetPassword()));
-                          },
-                          child: Center(
-                            child: Text(
-                              'Đổi mật khẩu',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Montserrat'),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20,),
                     Row(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(
+                              top: 10, left: 35, right: 20, bottom: 15),
+                          height: 60,
+
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.greenAccent,
+                            color: Color(0xFF0C9869),
+                            elevation: 7.0,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => updateProfile(uid:widget.uid)));
+                              },
+                              child: Center(
+                                child: Text(
+                                  '    Cập nhật thông tin   ',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Container(
+                          padding: EdgeInsets.only(
+                              top: 10, left: 20, right: 0, bottom: 15),
+                          height: 60,
+
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.greenAccent,
+                            color: Color(0xFF0C9869),
+                            elevation: 7.0,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => resetPassword()));
+                              },
+                              child: Center(
+                                child: Text(
+                                  '    Đổi mật khẩu    ',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    (_image != null) ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         RaisedButton(
-                          color: Color(0xff476cfb),
+                          color:Color(0xFF0C9869),
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            setState(() {
+                              _image = null;
+                            });
                           },
                           elevation: 4.0,
                           splashColor: Colors.blueGrey,
                           child: Text(
-                            'Cancel',
+                            'Hủy bỏ',
                             style: TextStyle(color: Colors.white, fontSize: 16.0),
                           ),
                         ),
                         RaisedButton(
-                          color: Color(0xff476cfb),
+                          color:Color(0xFF0C9869),
                           onPressed: () {
                             uploadPic(context);
+
                           },
 
                           elevation: 4.0,
                           splashColor: Colors.blueGrey,
                           child: Text(
-                            'Submit',
+                            'Thay đổi',
                             style: TextStyle(color: Colors.white, fontSize: 16.0),
                           ),
                         ),
 
                       ],
-                    )
+                    ) : Container(height: 0)
+
 
 
                   ]);

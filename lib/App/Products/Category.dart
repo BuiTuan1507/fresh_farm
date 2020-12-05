@@ -24,8 +24,8 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.green,
-        title: Text("Danh muc san pham",
+        backgroundColor: Color(0xFF0C9869),
+        title: Text("Danh mục sản phẩm",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
     ),
     body:  GridView.count(
@@ -336,7 +336,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                                         image: AssetImage("assets/nhan/giocha.jpg"),
                                         fit: BoxFit.fill)))),
 
-                        Text('Sản phẩm chế biến sẵn',
+                        Text('Giò chả',
                             style: TextStyle(
                                 color: Color(0xFF575E67),
                                 fontFamily: 'Varela',
