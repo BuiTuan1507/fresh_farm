@@ -50,7 +50,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                     borderRadius: BorderRadius.circular(15.0),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
+                          color: Colors.white,
                           spreadRadius: 3.0,
                           blurRadius: 5.0)
                     ],
@@ -61,7 +61,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                     children: [
                       Expanded(
                         child: Container(
-
+                          padding: EdgeInsets.only(top: 3),
                           height: size.height*0.3,
                           width: size.width*0.4,
                           decoration: BoxDecoration(
@@ -71,9 +71,11 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
 
                   Text('Rau củ',
                       style: TextStyle(
-                          color: Color(0xFF575E67),
+                          color: Colors.black,
                           fontFamily: 'Varela',
-                          fontSize: 18.0)),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
                   Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Container(color: Color(0xFFEBEBEB), height: 1.0)),
@@ -92,7 +94,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       borderRadius: BorderRadius.circular(15.0),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.white,
                             spreadRadius: 3.0,
                             blurRadius: 5.0)
                       ],
@@ -103,7 +105,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       children: [
                         Expanded(
                             child: Container(
-
+                                padding: EdgeInsets.only(top: 3),
                                 height: size.height*0.3,
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
@@ -113,9 +115,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
 
                         Text('Hoa quả',
                             style: TextStyle(
-                                color: Color(0xFF575E67),
+                                color: Colors.black,
                                 fontFamily: 'Varela',
-                                fontSize: 18.0)),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold)),
                         Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Container(color: Color(0xFFEBEBEB), height: 1.0)),
@@ -137,7 +140,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       borderRadius: BorderRadius.circular(15.0),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.white,
                             spreadRadius: 3.0,
                             blurRadius: 5.0)
                       ],
@@ -148,7 +151,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       children: [
                         Expanded(
                             child: Container(
-
+                                padding: EdgeInsets.only(top: 3),
                                 height: size.height*0.3,
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
@@ -158,9 +161,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
 
                         Text('Hải sản',
                             style: TextStyle(
-                                color: Color(0xFF575E67),
+                                color: Colors.black,
                                 fontFamily: 'Varela',
-                                fontSize: 18.0)),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold)),
                         Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Container(color: Color(0xFFEBEBEB), height: 1.0)),
@@ -182,7 +186,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       borderRadius: BorderRadius.circular(15.0),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.white,
                             spreadRadius: 3.0,
                             blurRadius: 5.0)
                       ],
@@ -193,7 +197,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       children: [
                         Expanded(
                             child: Container(
-
+                                padding: EdgeInsets.only(top:3),
                                 height: size.height*0.3,
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
@@ -203,9 +207,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
 
                         Text('Thịt',
                             style: TextStyle(
-                                color: Color(0xFF575E67),
+                                color: Colors.black,
                                 fontFamily: 'Varela',
-                                fontSize: 18.0)),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold)),
                         Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Container(color: Color(0xFFEBEBEB), height: 1.0)),
@@ -227,7 +232,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       borderRadius: BorderRadius.circular(15.0),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.white,
                             spreadRadius: 3.0,
                             blurRadius: 5.0)
                       ],
@@ -238,7 +243,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       children: [
                         Expanded(
                             child: Container(
-
+                                padding: EdgeInsets.only(top: 3),
                                 height: size.height*0.3,
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
@@ -248,9 +253,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
 
                         Text('Ngũ cốc',
                             style: TextStyle(
-                                color: Color(0xFF575E67),
+                                color: Colors.black,
                                 fontFamily: 'Varela',
-                                fontSize: 18.0)),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold)),
                         Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Container(color: Color(0xFFEBEBEB), height: 1.0)),
@@ -272,7 +278,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       borderRadius: BorderRadius.circular(15.0),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.white,
                             spreadRadius: 3.0,
                             blurRadius: 5.0)
                       ],
@@ -283,7 +289,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       children: [
                         Expanded(
                             child: Container(
-
+                                padding: EdgeInsets.only(top:3),
                                 height: size.height*0.3,
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
@@ -293,9 +299,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
 
                         Text('Gia vị',
                             style: TextStyle(
-                                color: Color(0xFF575E67),
+                                color: Colors.black,
                                 fontFamily: 'Varela',
-                                fontSize: 18.0)),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold)),
                         Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Container(color: Color(0xFFEBEBEB), height: 1.0)),
@@ -317,7 +324,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       borderRadius: BorderRadius.circular(15.0),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.white,
                             spreadRadius: 3.0,
                             blurRadius: 5.0)
                       ],
@@ -328,7 +335,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       children: [
                         Expanded(
                             child: Container(
-
+                                padding: EdgeInsets.only(top:3),
                                 height: size.height*0.3,
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
@@ -338,9 +345,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
 
                         Text('Giò chả',
                             style: TextStyle(
-                                color: Color(0xFF575E67),
+                                color: Colors.black,
                                 fontFamily: 'Varela',
-                                fontSize: 18.0)),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold)),
                         Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Container(color: Color(0xFFEBEBEB), height: 1.0)),
@@ -362,7 +370,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       borderRadius: BorderRadius.circular(15.0),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.white,
                             spreadRadius: 3.0,
                             blurRadius: 5.0)
                       ],
@@ -373,7 +381,7 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
                       children: [
                         Expanded(
                             child: Container(
-
+                                padding: EdgeInsets.only(top:3),
                                 height: size.height*0.3,
                                 width: size.width*0.4,
                                 decoration: BoxDecoration(
@@ -383,9 +391,10 @@ class _MyCategoryPageState extends State<MyCategoryPage>{
 
                         Text('Trứng sữa',
                             style: TextStyle(
-                                color: Color(0xFF575E67),
+                                color: Colors.black,
                                 fontFamily: 'Varela',
-                                fontSize: 18.0)),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold)),
                         Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Container(color: Color(0xFFEBEBEB), height: 1.0)),

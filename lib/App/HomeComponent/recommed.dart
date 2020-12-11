@@ -13,7 +13,7 @@ class Recomend extends StatefulWidget {
 class _RecomendState extends State<Recomend> {
   @override
   Widget build(BuildContext context) {
-
+    Size size = MediaQuery.of(context).size;
       List<Item> userList1 = Provider.of<List<Item>>(context);
       return (userList1 != null) ?
       Consumer<Cart>(builder: (context, cart, child) {
@@ -46,7 +46,13 @@ class _RecomendState extends State<Recomend> {
             ],
           ),
         );
-      }) : Container(child: Text("Loading", textAlign: TextAlign.center,));
+      }) : Container(height: size.height,
+          width: size.width,
+          color: Colors.white,
+          child: Text(
+              "Loading",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black)));
     }
   }
 

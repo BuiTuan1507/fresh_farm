@@ -27,7 +27,7 @@ class _TestState extends State<Test> {
     List<Favorite> favorite = Provider.of<List<Favorite>>(context);
     List<Item> userList1 = Provider.of<List<Item>>(context);
     FirebaseService firebaseServices = FirebaseService();
-
+    Size size = MediaQuery.of(context).size;
     return ((userList1 != null) && (favorite != null))
         ? Consumer<Cart>(builder: (context, cart, child) {
             cart.addUser(
@@ -109,9 +109,13 @@ class _TestState extends State<Test> {
                     userList, cart, this.widget.uid, t, x));
           })
         : Container(
+          height: size.height,
+            width: size.width,
+            color: Colors.white,
             child: Text(
             "Loading",
             textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black),
           ));
   }
 

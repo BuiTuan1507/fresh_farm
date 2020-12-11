@@ -39,6 +39,7 @@ class MyHomeAppPage extends StatefulWidget{
   final String userId;
   String name;
   String email;
+  String photoURL;
 }
 class _MyHomeAppPageState extends State<MyHomeAppPage>{
   signOut() async {
@@ -62,6 +63,8 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
           print(user[i].userID);
           widget.name = user[i].name;
           widget.email = user[i].email;
+          widget.photoURL = user[i].photoURL;
+          print(user[i].photoURL);
         }
       }
     }
@@ -78,7 +81,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
           ),
           accountEmail: new Text((widget.email != null) ? widget.email : "",style: TextStyle(fontStyle: FontStyle.italic,fontSize: 16),),
           currentAccountPicture: CircleAvatar(
-            backgroundImage: AssetImage("assets/avatar.jpg"),
+            backgroundImage: (widget.photoURL == null) ? AssetImage("assets/ramdom.jpg") : NetworkImage(widget.photoURL),
 
           ),
           decoration: BoxDecoration(
@@ -234,7 +237,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               }),
               RecomendsPlants(),
               TitleWithMoreBtn(title: "Recomended", press: () {
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyHomeAppPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Test(uid: widget.userId,name: widget.name,email: widget.email,photoURL: widget.photoURL,)));
               }),
               Recomend(),
 
