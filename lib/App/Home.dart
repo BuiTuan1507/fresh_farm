@@ -129,12 +129,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
               fontSize: 18, fontWeight: FontWeight.bold
           )),
         ),
-        Divider(),
-        Container(
-          padding: EdgeInsets.only(left: 10),
-          child: Text('Products',style: TextStyle(fontSize: 16,),),
-        )
-        ,
+
         ListTile(
           leading: GestureDetector(
             onTap:(){

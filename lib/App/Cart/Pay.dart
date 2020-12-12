@@ -1,8 +1,12 @@
 
 
+import 'package:commons/commons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:fresh_farm/App/Cart/TabBarCart.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:provider/provider.dart';
 class Pay extends StatefulWidget {
   @override
@@ -198,17 +202,31 @@ class _PayState extends State<Pay> {
 
                       ],
                     ),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(top:5,left: 20,right: 30),
+                          child:  RaisedButton(
+                            onPressed:() {},
+                            child: Text("Chọn trên bản đồ"),),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top:5,left: 20),
+                          child:  RaisedButton(
+                            onPressed: () {
+                              validateAndSubmit();
+                              String userAddress = address+_quan+_value;
+                              cart.createCart(cart.ListItem, cart.uid,userAddress,cart.totalPrice(cart.ListItem),widget.ramdomNumber,_time);
+                              cart.addListCart(widget.ramdomNumber, cart.uid,cart.totalPrice(cart.ListItem) , cart.ListItem[0].imgPath);
+
+                              showDialog();
+                            },
+                            child: Text("Thanh toan"),),
+                        )
+                      ],
+                    )
 
 
-                    RaisedButton(
-                      onPressed: () {
-                        validateAndSubmit();
-                        String userAddress = address+_quan+_value;
-                        cart.createCart(cart.ListItem, cart.uid,userAddress,cart.totalPrice(cart.ListItem),widget.ramdomNumber,_time);
-                        cart.addListCart(widget.ramdomNumber, cart.uid,cart.totalPrice(cart.ListItem) , cart.ListItem[0].imgPath);
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Pay()));
-                      },
-                      child: Text("Thanh toan"),)
 
                   ],
                 ),
@@ -217,18 +235,15 @@ class _PayState extends State<Pay> {
     ));
   }
   Widget showDialog(){
-    return AlertDialog(
-            title: Text("Thông báo"),
-            content: Text("Bạn đã đặt hàng thành công"),
-          actions:[
-            FlatButton(
-              child: Text("Tiêp tục mua hàng"),
-              onPressed: (){
-                Navigator.of(context).pop();
-              },
-            )
-               ],
-          );
+    return successDialog(
+      context,
+      "Đặt hàng thành công",
+
+      positiveText: "Theo dõi",
+      positiveAction: () {
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>TabBarCart()));
+      },
+    );
         }
 
 

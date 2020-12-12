@@ -157,11 +157,18 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                                         Positioned(
                                           top: 28,
                                           left: queryData.size.width * 0.23,
-                                          child: Text(cartList[i].text,
-                                              overflow: TextOverflow.fade,
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                              )),
+                                          child:  Container(
+                                            padding: EdgeInsets.only(top: 4,left: 10,right: 10),
+                                            width: queryData.size.width*0.6,
+                                            child: Flexible(
+
+                                              child: Text(cartList[i].text, overflow: TextOverflow.fade,style: TextStyle(fontSize: 15, color: Colors.black),
+                                              )
+                                              ,),
+
+
+                                          ),
+
                                         ),
                                       ],
                                     ),
@@ -230,15 +237,3 @@ class _RatingAndReviewState extends State<RatingAndReview> {
   }
 }
 
-Widget buildText(Rating rating) {
-  return Container(
-    child: Container(
-      color: Colors.white54,
-      child: Text(rating.text,
-          overflow: TextOverflow.fade,
-          style: TextStyle(
-            fontSize: 17,
-          )),
-    ),
-  );
-}

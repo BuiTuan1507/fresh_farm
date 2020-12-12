@@ -17,12 +17,13 @@ class _SaleState extends State<Sale> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Consumer<Cart>(builder: (context,cart,child){
       return Scaffold(
         appBar:AppBar(
             centerTitle: true,
-            backgroundColor: Colors.green,
-            title: Text("Thong bao",
+            backgroundColor: Color(0xFF0C9869),
+            title: Text("Khuyến mãi",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),)),
         body: StreamBuilder(
           stream:  Firestore.instance
@@ -47,7 +48,8 @@ class _SaleState extends State<Sale> {
 
                         return new Container(
                           height: 100,
-                          padding: EdgeInsets.only(left: 20,top: 5,bottom: 5,right: 20),
+                          width: size.width,
+                          padding: EdgeInsets.only(left: 10,top: 5,bottom: 5,right: 10),
                           child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
@@ -57,7 +59,7 @@ class _SaleState extends State<Sale> {
                             child: Row(
                               children: <Widget>[
                                 Container(
-                                    padding:EdgeInsets.only(left: 10,right: 30, top:4, bottom: 4),
+                                    padding:EdgeInsets.only(left: 10,right: 10, top:4, bottom: 4),
                                     child: InkWell(
                                       onTap: () {
                                         Navigator.of(context).push(
@@ -76,31 +78,44 @@ class _SaleState extends State<Sale> {
                                       ),
                                     )),
                                 Container(
-                                  padding: EdgeInsets.only(left: 20, right: 30),
+                                  padding: EdgeInsets.only(left: 5, right: 5),
                                   child: Column(
                                     children: <Widget>[
                                       Row(
                                         children: <Widget>[
-                                          Center(
-                                              child: Text('artList', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
-                                              )
+
+                                              Center(
+                                                  child: Text(cartList['name'], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green[800]),
+                                                  )
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(left: 30,top: 5),
+                                                child: Text(
+                                                  "-${cartList['time']}%", style: TextStyle(fontSize:24,fontWeight:FontWeight.bold,color: Colors.orange),
+                                                ),
+
+
                                           )
+
                                         ],
                                       ),
-                                      Row(
-                                        children: <Widget>[
-                                          Container(
-                                            padding :EdgeInsets.only(bottom: 0),
-                                            child: Text(cartList['text'], style: TextStyle(fontSize: 15, color: Colors.black),
+                                      Container(
+                                        padding: EdgeInsets.only(top: 4,left: 10,right: 10),
+                                        width: size.width*0.6,
+                                        child: Flexible(
+
+                                            child: Text(cartList['text'], overflow: TextOverflow.fade,style: TextStyle(fontSize: 15, color: Colors.black),
                                             )
-                                            ,)
-                                        ],
+                                            ,),
+
+
                                       ),
 
 
                                     ],
                                   ),
                                 ),
+                                SizedBox(height: 20,)
 
 
 
@@ -121,7 +136,7 @@ class _SaleState extends State<Sale> {
             )
                 : Column(
               children: <Widget>[
-                Center(child: Text("khong co thong bao moi",style: TextStyle(fontSize: 24),)),
+                Center(child: Text("Chưa có thông tin giam giá",style: TextStyle(fontSize: 24),)),
                 RaisedButton(
                   onPressed: () {},
                   child: Text("Xem thêm sản phẩm"),
