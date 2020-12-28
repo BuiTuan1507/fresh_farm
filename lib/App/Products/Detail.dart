@@ -124,7 +124,7 @@ Widget InfoItemsListBuilder(context, cart) {
           Column(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(top: 25, left: 20, right: 20),
+                padding: EdgeInsets.only(top: 25, left: 10, right: 10),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);

@@ -38,42 +38,51 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   // Perform login or signup
   void validateAndSubmit() async {
-    setState(() {
-      _errorMessage = "";
-      _isLoading = true;
-    });
-    if (validateAndSave()) {
-      String userId = "";
-      String name = "1";
-      String email = "";
-      String photoURL = "";
-      try {
-        {
-          userId = await widget.auth.signIn(_email, _password);
-          name = await widget.auth.getEmail();
-          email = await widget.auth.getName();
-          photoURL = await widget.auth.getPhotoURL();
 
 
-          print ("chay di:$name");
-          print('Signed in: $userId');
+      setState(() {
+        _errorMessage = "";
+        _isLoading = true;
+      });
+      if (validateAndSave()) {
+        String userId = "";
+        String name = "1";
+        String email = "";
+        String photoURL = "";
+        try {
+          {
+            userId = await widget.auth.signIn(_email, _password);
+            name = await widget.auth.getEmail();
+            email = await widget.auth.getName();
+            photoURL = await widget.auth.getPhotoURL();
+
+
+            print ("chay di:$name");
+            print('Signed in: $userId');
+          }
+          setState(() {
+            _isLoading = false;
+          });
+
+          if (userId.length > 0 && userId != null) {
+            widget.loginCallback();
+          }
+        } catch (e) {
+          print('Error: $e');
+          setState(() {
+            _isLoading = false;
+            if(e.message != null){
+              _errorMessage = e.message;
+            }else{
+              _errorMessage = "loi";
+            }
+
+            _formKey.currentState.reset();
+          });
         }
-        setState(() {
-          _isLoading = false;
-        });
-
-        if (userId.length > 0 && userId != null) {
-          widget.loginCallback();
-        }
-      } catch (e) {
-        print('Error: $e');
-        setState(() {
-          _isLoading = false;
-          _errorMessage = e.message;
-          _formKey.currentState.reset();
-        });
       }
-    }
+
+
   }
 
   @override
@@ -146,7 +155,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           children: <Widget>[
             showLogo(),
             Container(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(10.0),
                 child: new Form(
                   key: _formKey,
                   child: new ListView(
@@ -229,7 +238,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   Widget showEmailInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
@@ -254,7 +263,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   Widget showPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 10.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
@@ -278,58 +287,68 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   }
 
   Widget showSecondaryButton() {
-    return new Container(
-      padding: EdgeInsets.only(top: 20),
-      child: InkWell(
-          onTap: (){
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>signUp()));
-          },
-          child: new Center(
+    return new GestureDetector(
+      onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>signUp()));
+      },
+      child: Container(
+        padding: EdgeInsets.only(top: 20),
+
+
+            child: new Center(
               child:  Text(
                   'Tạo tài khoản mới' ,
                   style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
-          )
+            )
+
 
       ),
     );
 
+
   }
   Widget showForgetButton() {
-    return new Container(
-      padding: EdgeInsets.only(top: 20),
-      child: InkWell(
-          onTap: (){
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>forgetPassword(auth: widget.auth,)));
-          },
-          child: new Center(
-            child:  Text(
-                'Quên mật khẩu' ,
-                style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
-          )
+    return new GestureDetector(
+        onTap: (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>forgetPassword(auth: widget.auth,)));
+        },
+      child: Container(
+        padding: EdgeInsets.only(top: 15),
 
-      ),
+
+            child: new Center(
+              child:  Text(
+                  'Quên mật khẩu' ,
+                  style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
+            )
+
+
+      )
+      ,
     );
 
   }
 
 
   Widget showPrimaryButton() {
-    return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
+    return new Container(
+        padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
         child: SizedBox(
           height: 45.0,
+
           child: new RaisedButton(
-            elevation: 5.0,
+
             shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)),
+                borderRadius: new BorderRadius.circular(10.0)),
             color: Color(0xFF0C9869),
             child: new Text('Đăng nhập',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: validateAndSubmit,
+            onPressed:
+            validateAndSubmit ,
           ),
         ));
   }

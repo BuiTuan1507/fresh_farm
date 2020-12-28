@@ -32,7 +32,7 @@ Widget SignUpPage(context){
 }
 Widget _showImage(){
   return new Container(
-    padding: EdgeInsets.only(left:50),
+    padding: EdgeInsets.only(left:30, right: 20),
     width: 400,
     height: 300,
     child: Row(
@@ -72,36 +72,40 @@ Widget _showText2(){
   );
 }
 Widget _showButton(context){
-  return new Container(
-    padding: EdgeInsets.only(left: 20,top: 10,bottom: 20,right: 20),
-    height: 75.0,
-    child: GestureDetector(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => signUpName()));
-      },
-      child: Material(
-        borderRadius: BorderRadius.circular(20.0),
-        shadowColor: Colors.greenAccent,
-        color: Color(0xFF0C9869),
-        elevation: 7.0,
-        child: Center(
-          child: Text(
-            'Tiếp',
-            style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Montserrat'),
+  return new GestureDetector(
+    onTap: () {
+      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => signUpName()));
+    },
+    child: Container(
+      padding: EdgeInsets.only(left: 20,top: 10,bottom: 20,right: 20),
+      height: 75.0,
+
+
+        child: Material(
+          borderRadius: BorderRadius.circular(10.0),
+          shadowColor: Colors.greenAccent,
+          color: Color(0xFF0C9869),
+
+          child: Center(
+            child: Text(
+              'Tiếp',
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat'),
+            ),
           ),
         ),
       ),
-    ),
+
 
   );
+
 }
 Widget _showPopButton(context){
   return  Container(
-      padding: EdgeInsets.only(top:30, left: 30, right: 30),
+      padding: EdgeInsets.only(top:10, left: 30, right: 30),
       child:GestureDetector(
           onTap: (){
             Navigator.of(context).pop();

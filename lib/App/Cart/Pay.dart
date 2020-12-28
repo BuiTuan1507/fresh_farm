@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fresh_farm/App/Cart/TabBarCart.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+
 import 'package:provider/provider.dart';
 class Pay extends StatefulWidget {
   @override

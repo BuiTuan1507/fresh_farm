@@ -8,7 +8,7 @@ class signUpPrivacy extends StatefulWidget {
   String name;
   String email;
   String pass;
-  String photoURL="assets/ramdom.jpg";
+  String photoURL= "https://firebasestorage.googleapis.com/v0/b/freshfarm-93585.appspot.com/o/ramdom.jpg?alt=media&token=a71ccf28-2dd0-46f9-ab39-ec751a0c15ef";
 
   signUpPrivacy({Key key, this.name,this.email,this.pass}) : super(key: key);
   @override
@@ -160,56 +160,64 @@ class _signUpPrivacyState extends State<signUpPrivacy> {
   }
 
   Widget _showButton(context) {
-    return new Container(
-      padding: EdgeInsets.only(right: 20, left: 20, top: 50, bottom: 0),
-      height: 95.0,
-      child: GestureDetector(
-        onTap: () {
-          validateAndSubmit();
-        },
-        child: Material(
-          borderRadius: BorderRadius.circular(20.0),
-          shadowColor: Colors.greenAccent,
-          color: Color(0xFF0C9869),
-          elevation: 7.0,
-          child: Center(
-            child: Text(
-              'Đăng ký',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat'),
+    return new GestureDetector(
+      onTap: () {
+        validateAndSubmit();
+      },
+      child: Container(
+        padding: EdgeInsets.only(right: 20, left: 20, top: 50, bottom: 0),
+        height: 95.0,
+
+
+          child: Material(
+            borderRadius: BorderRadius.circular(10.0),
+            shadowColor: Colors.greenAccent,
+            color: Color(0xFF0C9869),
+
+            child: Center(
+              child: Text(
+                'Đăng ký',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat'),
+              ),
             ),
           ),
         ),
-      ),
+
     );
+
   }
   Widget _showButtonLogin(context) {
-     return new Container(
-      padding: EdgeInsets.only(right: 20, left: 20, top: 40, bottom: 0),
-      height: 85.0,
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => LoginSignupPage()));
-        },
-        child: Material(
-          borderRadius: BorderRadius.circular(20.0),
-          shadowColor: Colors.greenAccent,
-          color: Color(0xFF0C9869),
-          elevation: 7.0,
 
-          child: Center(
-            child: Text(
-              'Đăng nhập',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat'),
-            ),
-          ),
-        ),
-      ),
-    ) ;
+     return new GestureDetector(
+       onTap: () {
+         Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => LoginSignupPage()));
+       },
+       child: Container(
+         padding: EdgeInsets.only(right: 20, left: 20, top: 40, bottom: 0),
+         height: 85.0,
+
+           child: Material(
+             borderRadius: BorderRadius.circular(10.0),
+             shadowColor: Colors.greenAccent,
+             color: Color(0xFF0C9869),
+
+
+             child: Center(
+               child: Text(
+                 'Đăng nhập',
+                 style: TextStyle(
+                     color: Colors.white,
+                     fontWeight: FontWeight.bold,
+                     fontFamily: 'Montserrat'),
+               ),
+             ),
+           ),
+         ),
+
+     );
+
   }
 }

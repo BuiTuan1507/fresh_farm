@@ -93,37 +93,41 @@ class _signUpEmailState extends State<signUpEmail> {
   }
 
   Widget _showButton(context) {
-    return new Container(
-      padding: EdgeInsets.only(right: 20, left: 20, top: 50, bottom: 0),
-      height: 95.0,
-      child: GestureDetector(
-        onTap: () {
-          validateAndSubmit();
-          if(email !=null)
-          {
-            Navigator.push(context, MaterialPageRoute(
-                builder: (BuildContext context) => signUpPass(name: widget.name,email: email,)));
-          }
+    return new GestureDetector(
+      onTap: () {
+        validateAndSubmit();
+        if(email !=null)
+        {
+          Navigator.push(context, MaterialPageRoute(
+              builder: (BuildContext context) => signUpPass(name: widget.name,email: email,)));
+        }
 
-        },
-        child: Material(
-          borderRadius: BorderRadius.circular(20.0),
-          shadowColor: Colors.greenAccent,
-          color: Color(0xFF0C9869),
-          elevation: 7.0,
+      },
+      child: Container(
+        padding: EdgeInsets.only(right: 20, left: 20, top: 50, bottom: 0),
+        height: 95.0,
 
-          child: Center(
-            child: Text(
-              'Tiếp',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat'),
+
+          child: Material(
+            borderRadius: BorderRadius.circular(10.0),
+            shadowColor: Colors.greenAccent,
+            color: Color(0xFF0C9869),
+
+
+            child: Center(
+              child: Text(
+                'Tiếp',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat'),
+              ),
             ),
           ),
         ),
-      ),
+
     );
+
   }
 
 }
