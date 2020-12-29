@@ -81,7 +81,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
           ),
           accountEmail: new Text((widget.email != null) ? widget.email : "",style: TextStyle(fontStyle: FontStyle.italic,fontSize: 16),),
           currentAccountPicture: CircleAvatar(
-            backgroundImage: (widget.photoURL == "https://firebasestorage.googleapis.com/v0/b/freshfarm-93585.appspot.com/o/ramdom.jpg?alt=media&token=a71ccf28-2dd0-46f9-ab39-ec751a0c15ef")
+            backgroundImage: (widget.photoURL == null)
                 ? NetworkImage("https://firebasestorage.googleapis.com/v0/b/freshfarm-93585.appspot.com/o/ramdom.jpg?alt=media&token=a71ccf28-2dd0-46f9-ab39-ec751a0c15ef")
                 : NetworkImage(widget.photoURL,),
 
