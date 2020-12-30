@@ -1,15 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:commons/commons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 import 'SearchDetail.dart';
 
 class CloudFirestoreSearch extends StatefulWidget {
+  String name;
+  CloudFirestoreSearch({Key key, this.name}) : super(key: key);
   @override
   _CloudFirestoreSearchState createState() => _CloudFirestoreSearchState();
 }
 
 class _CloudFirestoreSearchState extends State<CloudFirestoreSearch> {
-  String name = "";
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,7 @@ class _CloudFirestoreSearchState extends State<CloudFirestoreSearch> {
                 prefixIcon: Icon(Icons.search), hintText: 'Search...'),
             onChanged: (val) {
               setState(() {
-                name = val;
+                widget.name = val;
               });
             },
           ),
@@ -37,11 +41,22 @@ class _CloudFirestoreSearchState extends State<CloudFirestoreSearch> {
       body: StreamBuilder<QuerySnapshot>(
         stream:  Firestore.instance
             .collection('shopItems')
-            .where("searchKeywords", arrayContains: name)
+            .where("searchKeywords", arrayContains: widget.name)
             .snapshots(),
         builder: (context, snapshot) {
+          print(widget.name);
           return (snapshot.connectionState == ConnectionState.waiting)
-              ? Center(child: CircularProgressIndicator())
+              ? Center(child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(top: 50),
+                child: Text("Đang tìm kiếm", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),),
+              ),
+              CircularProgressIndicator()
+            ],
+          )
+
+          )
               : ListView.builder(
             itemCount: snapshot.data.documents.length,
             itemBuilder: (context, index) {
