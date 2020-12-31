@@ -38,7 +38,7 @@ class HeaderWithSearchBox extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Text(
-                  'Hi ' + name,
+                  'Xin chào ' + name,
                   style: Theme.of(context).textTheme.headline5.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
@@ -76,7 +76,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                       print(search);
                     },
                       decoration: InputDecoration(
-                        hintText: "Search",
+                        hintText: "Tìm kiếm",
                         hintStyle: TextStyle(
                           color: kPrimaryColor.withOpacity(0.5),
                         ),

@@ -186,7 +186,7 @@ class _resetPasswordState extends State<resetPassword> {
           },
           child: new Center(
               child:  Text(
-                  'Quay về trang đăng nha' ,
+                  'Quay về trang đăng nhập' ,
                   style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Color(0xFF0C9869))),
           )
 

@@ -3,6 +3,7 @@
 import 'package:commons/commons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/OrderSuccess.dart';
 
 import 'package:fresh_farm/App/Cart/TabBarCart.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
@@ -218,8 +219,8 @@ class _PayState extends State<Pay> {
                               String userAddress = address+_quan+_value;
                               cart.createCart(cart.ListItem, cart.uid,userAddress,cart.totalPrice(cart.ListItem),widget.ramdomNumber,_time);
                               cart.addListCart(widget.ramdomNumber, cart.uid,cart.totalPrice(cart.ListItem) , cart.ListItem[0].imgPath);
-
-                              showDialog();
+                              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OrderSuccess(id: widget.ramdomNumber,)));
+                             // showDialog();
                             },
                             child: Text("Thanh toan"),),
                         )

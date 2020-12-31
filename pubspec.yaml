@@ -112,6 +112,8 @@ flutter:
     - assets/nhan/trungsua.jpg
     - assets/firstImage.jpg
     - assets/ramdom.jpg
+    - assets/shoppingcart.png
+    - assets/reset.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

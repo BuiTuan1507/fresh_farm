@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fresh_farm/App/Cart/TabBarCart.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
+import 'package:fresh_farm/App/Products/Category.dart';
 import 'productRecommed.dart';
 import 'package:provider/provider.dart';
 
@@ -28,9 +31,9 @@ class _SearchDetailState extends State<SearchDetail> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.green,
-        title: Text("FreshFarm",
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
+        backgroundColor: Color(0xFF0C9869),
+        title: Text("Thông tin chi tiết",
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
     ),
       body:StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance.collection("shopItems").where('id',isEqualTo: widget.id).snapshots(),
@@ -52,7 +55,7 @@ class _SearchDetailState extends State<SearchDetail> {
                     Padding(
                       padding: EdgeInsets.only(left: 20),
                       child: Text(
-                          'Rau cu',style: TextStyle(
+                          "${searchItem.name}",style: TextStyle(
                         fontFamily: 'Varela',
                         fontSize: 42.0,
                         fontWeight: FontWeight.bold,
@@ -70,7 +73,7 @@ class _SearchDetailState extends State<SearchDetail> {
                     ),
 
                     Center(
-                      child: Text('\$${snapshot.data.documents[0]['price']}',style: TextStyle(
+                      child: Text('\đ${snapshot.data.documents[0]['price']}',style: TextStyle(
                           fontFamily: 'Varela',
                           fontSize: 22.0,
                           fontWeight: FontWeight.bold,
@@ -88,7 +91,7 @@ class _SearchDetailState extends State<SearchDetail> {
                     Center(
                       child: Container(
                         width: MediaQuery.of(context).size.width - 50.0,
-                        child: Text('Cold, creamy ice cream sandwiched between delicious deluxe cookies. Pick your favorite deluxe cookies and ice cream flavor.',
+                        child: Text('Sản phẩm được kiểm tra kĩ càng theo quy trình VietGap, tươi mới mỗi ngày',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontFamily: 'Varela',
@@ -112,9 +115,9 @@ class _SearchDetailState extends State<SearchDetail> {
                                       cart.add(searchItem);
                                       Navigator.of(context).push(
 
-                                          MaterialPageRoute(builder: (context) => Checkout()));
+                                          MaterialPageRoute(builder: (context) => TabBarCart()));
                                     },
-                                    child: Text('Add to cart',
+                                    child: Text('Thêm vào giỏ hàng',
                                       style: TextStyle(
                                           fontFamily: 'Varela',
                                           fontSize: 14.0,
@@ -131,10 +134,10 @@ class _SearchDetailState extends State<SearchDetail> {
                       onPressed: () {
                         Navigator.of(context).push(
 
-                            MaterialPageRoute(builder: (context) => Test()));
+                            MaterialPageRoute(builder: (context) => MyCategoryPage()));
 
                       },
-                      child: Text("Xem them san pham"),
+                      child: Text("Xem thêm sản phẩm"),
                       color: Colors.green,
                     ),
                     SizedBox(height: 40)

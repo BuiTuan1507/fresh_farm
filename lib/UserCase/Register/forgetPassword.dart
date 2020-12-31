@@ -124,14 +124,10 @@ class _forgetPasswordState extends State<forgetPassword> {
   }
   Widget showLogin(){
     return new Container(
-        padding: EdgeInsets.only(top:10,bottom: 15),
-        child:Center(
-          child:  Text(
-            'Nhập email', style: TextStyle(
-              fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87
-          ),
-          ),
-        )
+      height: 150,
+       width: 150,
+       padding: EdgeInsets.only(top: 0,left: 0),
+       child: Image.asset("assets/reset.png",),
 
     );
   }
@@ -196,9 +192,9 @@ class _forgetPasswordState extends State<forgetPassword> {
         child: SizedBox(
           height: 45.0,
           child: new RaisedButton(
-            elevation: 5.0,
+
             shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)),
+                borderRadius: new BorderRadius.circular(10.0)),
             color: Color(0xFF0C9869),
             child: new Text('Đổi mật khẩu',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),

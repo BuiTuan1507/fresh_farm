@@ -98,7 +98,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             },
             child: Icon(Icons.markunread_mailbox,size: 26,color:Color(0xFF0C9869)),
           ),
-          title: Text('Product',style: TextStyle(
+          title: Text('Sản phẩm',style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold
           ),),
         ),
@@ -114,7 +114,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
                 color:Color(0xFF0C9869),
               ),
             ),
-            title: Text('Favorite',style: TextStyle(
+            title: Text('Yêu thích',style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.bold
             )),
           ),
@@ -127,7 +127,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             },
             child: Icon(Icons.shopping_cart,size: 26, color:Color(0xFF0C9869) ),
           ),
-          title: Text('Cart',style: TextStyle(
+          title: Text('Giỏ hàng',style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold
           )),
         ),
@@ -140,7 +140,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             },
             child: Icon(Icons.person,size: 26, color:Color(0xFF0C9869) ),
           ),
-          title: Text('Profile',style: TextStyle(
+          title: Text('Thông tin cá nhân',style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold
           )),
         ),
@@ -152,7 +152,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             },
             child: Icon(Icons.search,size: 26, color:Color(0xFF0C9869) ),
           ),
-          title: Text('Search',style: TextStyle(
+          title: Text('Tìm kiếm',style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold
           )),
         ),
@@ -163,7 +163,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             },
             child: Icon(Icons.chat,size: 26,color:Color(0xFF0C9869),),
           ),
-          title: Text('Help', style:  TextStyle(
+          title: Text('Giúp đỡ', style:  TextStyle(
             fontSize: 18, fontWeight: FontWeight.bold
           ),),
         ),
@@ -174,7 +174,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             },
             child: Icon(Icons.add_alert,size: 26,color:Color(0xFF0C9869),),
           ),
-          title: Text('Sales', style:  TextStyle(
+          title: Text('Khuyến mãi', style:  TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold
           ),),
         ),
@@ -186,7 +186,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             //onPressed: signOut,
             child: Icon(Icons.exit_to_app,size: 26,color:Color(0xFF0C9869),),
           ),
-          title: Text('Log Out',style: TextStyle(
+          title: Text('Đăng xuất',style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold
           )),
         ),
@@ -201,7 +201,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor:Color(0xFF0C9869) ,
+          backgroundColor: Color(0xFF0C9869) ,
           actions: <Widget>[
             Padding(
               padding: EdgeInsets.only(right: 15.0),
@@ -229,11 +229,11 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
             children: <Widget>[
               HeaderWithSearchBox(size: size,name:(widget.name != null) ? widget.name : ""),
               FeaturedPlants(),
-              TitleWithMoreBtn(title: "Category", press: () {
+              TitleWithMoreBtn(title: "Loại", press: () {
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage(uid:widget.userId)));
               }),
               RecomendsPlants(),
-              TitleWithMoreBtn(title: "Recomended", press: () {
+              TitleWithMoreBtn(title: "Sản phẩm nên mua", press: () {
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Test(uid: widget.userId,name: widget.name,email: widget.email,photoURL: widget.photoURL,)));
               }),
               Recomend(),
