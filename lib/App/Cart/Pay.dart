@@ -144,20 +144,20 @@ class _PayState extends State<Pay> {
                             value: _quan,
                             items: [
                               DropdownMenuItem(
-                                child: Text("Mai Dong"),
-                                value: "Mai Dong",
+                                child: Text("Mai Động"),
+                                value: "Mai Động",
                               ),
                               DropdownMenuItem(
-                                child: Text("Giap Bat"),
-                                value: "Giap Bat",
+                                child: Text("Giáp Bát"),
+                                value: "Giáp Bát",
                               ),
                               DropdownMenuItem(
-                                  child: Text("Linh Dam"),
-                                  value: "Linh Dam"
+                                  child: Text("Linh Đàm"),
+                                  value: "Linh Đàm"
                               ),
                               DropdownMenuItem(
-                                  child: Text("Phung Khoan"),
-                                  value: "Phung Khoan"
+                                  child: Text("Phùng Khoan"),
+                                  value: "Phùng Khoan"
                               ),
                             ],
                             onChanged: (value) {
@@ -179,19 +179,19 @@ class _PayState extends State<Pay> {
                             items: [
                               DropdownMenuItem(
                                 child: Text("Hoàng Mai"),
-                                value: "Hoang Mai",
+                                value: "Hoàng Mai",
                               ),
                               DropdownMenuItem(
                                 child: Text("Hai Bà Trưng"),
-                                value: "Hai Ba Trung",
+                                value: "Hai Bà Trưng",
                               ),
                               DropdownMenuItem(
                                   child: Text("Hoài Kiếm"),
-                                  value: "Hoan Kiem"
+                                  value: "Hoài Kiếm"
                               ),
                               DropdownMenuItem(
                                   child: Text("Ba Đình"),
-                                  value: "Ba Dinh"
+                                  value: "Ba Đình"
                               ),
                             ],
                             onChanged: (value) {
@@ -222,7 +222,7 @@ class _PayState extends State<Pay> {
                               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OrderSuccess(id: widget.ramdomNumber,)));
                              // showDialog();
                             },
-                            child: Text("Thanh toan"),),
+                            child: Text("Thanh toán"),),
                         )
                       ],
                     )

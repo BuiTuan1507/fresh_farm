@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Cart/TabBarCart.dart';
+import 'package:fresh_farm/App/Help.dart';
 import 'package:fresh_farm/App/ListProduct/giavi.dart';
 import 'package:fresh_farm/App/ListProduct/hoaqua.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
@@ -159,7 +160,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AdminHelp()));
             },
             child: Icon(Icons.chat,size: 26,color:Color(0xFF0C9869),),
           ),

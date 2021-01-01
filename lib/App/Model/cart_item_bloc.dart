@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Model/Message.dart';
 import 'package:fresh_farm/UserCase/Register/registerName.dart';
 import 'service.dart';
 
@@ -419,7 +420,26 @@ class Cart extends ChangeNotifier{
     idRating = item.id;
     return idRating;
   }
+  void createChatUser (Message m,){
+    Firestore firestoreReview = Firestore.instance;
+    var timeNow = DateTime.now();
+    String uid = m.uid;
+    String name = m.name;
+    bool isLike = m.isLike;
+    String text = m.text;
+    bool unread = m.unread;
 
+    bool isAdmin = m.isAdmin;
+    firestoreReview.collection('Chat').document().setData({
+      "uid":uid,
+      "name":name,
+      "isLike":isLike,
+      "text":text,
+      "unread":unread,
+      "time":Timestamp.fromDate(timeNow),
+      "isAdmin":isAdmin
+    });
+  }
 
 }
 
