@@ -160,7 +160,7 @@ class _MyHomeAppPageState extends State<MyHomeAppPage>{
         ListTile(
           leading: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AdminHelp()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AdminHelp(uid: widget.userId,name: widget.name,)));
             },
             child: Icon(Icons.chat,size: 26,color:Color(0xFF0C9869),),
           ),

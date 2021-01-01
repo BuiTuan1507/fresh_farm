@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Model/Message.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         StreamProvider<List<User>>.value(value: firebaseServices.getUserList),
         StreamProvider<List<Favorite>>.value(value: firebaseServices.getFavorite),
         StreamProvider<List<ListCart>>.value(value: firebaseServices.getListCart),
+        StreamProvider<List<Message>>.value(value: firebaseServices.getListMessage),
 
 
       ],

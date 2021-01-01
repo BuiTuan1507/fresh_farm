@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'Message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'cart_item_bloc.dart';
 
@@ -34,6 +34,13 @@ class FirebaseService{
       .map((snapShot) => snapShot.documents
       .map((document) => ListCart.fromJson(document.data))
       .toList());
+  Stream<List<Message>> getListMessage =  Firestore.instance.collection('Chat')
+      .snapshots()
+      .map((snapShot) => snapShot.documents
+      .map((document) => Message.fromJson(document.data))
+      .toList());
+
+
 
   void dispose() {
     productStreamController.close(); // close our StreamController

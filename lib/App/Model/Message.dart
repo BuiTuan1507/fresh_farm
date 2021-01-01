@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Message{
   String uid;
   bool isAdmin;
-  String time;
+  Timestamp time;
   String text;
   bool isLike;
   bool unread;
@@ -44,18 +44,3 @@ class Message{
   }
 
 }
-List<Message> chats = [
-  Message(
-    "1qwqwa" ,false, '5:30 pm','Hey, how\'s it going? What did you do today?',false, true,"tuan"
-  ),
-  Message(
-    "1qwqwa",true, '6:30 pm','aaaaaaaaaaaaaaaaaaaaaaaaaaaa',false, true,"admin"
-  ),
-  Message(
-    "1qwqwa", false, '5:30 pm','Hey, how\'s it going? What did you do today?',false, true,"tuan"
-  ),
-  Message(
-    "1qwqwa", true, '5:30 pm','eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',false, true,"admin"
-  ),
-
-];
