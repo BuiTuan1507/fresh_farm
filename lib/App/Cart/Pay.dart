@@ -129,7 +129,7 @@ class _PayState extends State<Pay> {
                                     color: Colors.grey),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.green))),
-                            validator: (value) => value.isEmpty ? 'Address can\'t be empty' : null,
+                            validator: (value) => value.isEmpty ? 'Địa chỉ không thể trống' : null,
                             onSaved: (value) => address = value.trim(),
                           )
                       ),
@@ -145,19 +145,19 @@ class _PayState extends State<Pay> {
                             items: [
                               DropdownMenuItem(
                                 child: Text("Mai Động"),
-                                value: "Mai Động",
+                                value: "Mai Dong",
                               ),
                               DropdownMenuItem(
                                 child: Text("Giáp Bát"),
-                                value: "Giáp Bát",
+                                value: "Giap Bat",
                               ),
                               DropdownMenuItem(
                                   child: Text("Linh Đàm"),
-                                  value: "Linh Đàm"
+                                  value: "Linh Đam"
                               ),
                               DropdownMenuItem(
                                   child: Text("Phùng Khoan"),
-                                  value: "Phùng Khoan"
+                                  value: "Phung Khoan"
                               ),
                             ],
                             onChanged: (value) {
@@ -179,19 +179,19 @@ class _PayState extends State<Pay> {
                             items: [
                               DropdownMenuItem(
                                 child: Text("Hoàng Mai"),
-                                value: "Hoàng Mai",
+                                value: "Hoang Mai",
                               ),
                               DropdownMenuItem(
                                 child: Text("Hai Bà Trưng"),
-                                value: "Hai Bà Trưng",
+                                value: "Hai Ba Trung",
                               ),
                               DropdownMenuItem(
                                   child: Text("Hoài Kiếm"),
-                                  value: "Hoài Kiếm"
+                                  value: "Hoan Kiem"
                               ),
                               DropdownMenuItem(
                                   child: Text("Ba Đình"),
-                                  value: "Ba Đình"
+                                  value: "Ba Dinh"
                               ),
                             ],
                             onChanged: (value) {
@@ -216,7 +216,7 @@ class _PayState extends State<Pay> {
                           child:  RaisedButton(
                             onPressed: () {
                               validateAndSubmit();
-                              String userAddress = address+_quan+_value;
+                              String userAddress = address+ ", "+_quan + ", "+_value;
                               cart.createCart(cart.ListItem, cart.uid,userAddress,cart.totalPrice(cart.ListItem),widget.ramdomNumber,_time);
                               cart.addListCart(widget.ramdomNumber, cart.uid,cart.totalPrice(cart.ListItem) , cart.ListItem[0].imgPath);
                               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OrderSuccess(id: widget.ramdomNumber,)));

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_farm/App/Cart/TabBarCart.dart';
 import 'package:intl/intl.dart';
 class ListProductShipping extends StatefulWidget {
   int id;
@@ -16,7 +17,7 @@ class _ListProductShippingState extends State<ListProductShipping> {
         automaticallyImplyLeading: true,
         centerTitle: true,
         title: Text("Thông tin đơn hàng", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
-
+        backgroundColor: Color(0xFF0C9869),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
@@ -112,6 +113,30 @@ class _ListProductShippingState extends State<ListProductShipping> {
 
                     },
                   )
+              ),
+              Container(height: 80,),
+              Container(
+                height: 40,
+                width: 220,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.orange
+                ),
+                child: Center(
+                  child: InkWell(
+                    onTap: () {
+
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => TabBarCart()));
+                    },
+                    child: Text(
+                      "Quay về trang giỏ hàng",
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
               ),
              ])
               : Center(child: Text("Hiện tại không còn đơn hàng nào đang được giao"));

@@ -34,14 +34,16 @@ class _AllCartState extends State<AllCart> {
 
 
 
-      return Scaffold(
+      return
 
-          body:(userFavorite.length != 0)
+          (userFavorite.length != 0)
               ?
           SingleChildScrollView(
             child: Column(
                 children: <Widget>[
-                  Text('Bạn có ${count} đơn hàng đã giao',textAlign: TextAlign.center,style: TextStyle(fontSize:17),),
+                  Container(height: 10,),
+                  Text('Bạn có ${userFavorite.length} đơn hàng đã giao',textAlign: TextAlign.center,style: TextStyle(fontSize:17),),
+                  Container(height: 10,),
                   ListView.builder(
 
 
@@ -57,7 +59,7 @@ class _AllCartState extends State<AllCart> {
 
                       var favoriteList = userFavorite;
                       return new Container(
-                        height: 100,
+                        height: 120,
                         padding: EdgeInsets.only(left: 5,top: 5,bottom: 5,right: 5),
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -95,6 +97,17 @@ class _AllCartState extends State<AllCart> {
                                         Center(
                                             child: Text("Đơn hàng đã giao", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.green[800]),
                                             )
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(left: 50),
+                                          child:InkWell(
+                                            onTap: (){
+                                              print(userFavorite[i].id.toString());
+                                                cart.deleteListCart(userFavorite[i].id.toString());
+                                            },
+                                            child: Icon(Icons.delete,size: 24,)
+                                          )
+
                                         )
                                       ],
                                     ),
@@ -135,7 +148,6 @@ class _AllCartState extends State<AllCart> {
                         ,
                       );
 
-
                     },
                   ),
                 ]),
@@ -143,15 +155,31 @@ class _AllCartState extends State<AllCart> {
               : Column(
             children: <Widget>[
               Center(child: Text("Bạn chưa có đơn hàng nào",style: TextStyle(fontSize: 24),)),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage()));
-                },
-                child: Text("Xem thêm sản phẩm"),
-                color: Colors.green,
+              Container(
+                height: 40,
+                width: 200,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.orange
+                ),
+                child: Center(
+                  child: InkWell(
+                    onTap: () {
+
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyCategoryPage()));
+                    },
+                    child: Text(
+                      "Xem thêm sản phẩm",
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
               ),
             ],
-          ));
+          );
     },
     );
 

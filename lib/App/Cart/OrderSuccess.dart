@@ -16,8 +16,8 @@ class _OrderSuccessState extends State<OrderSuccess> {
       body: Stack(
           children: <Widget>[
             Positioned(
-              top: size.height*0.3,
-              left: size.width*0.25,
+              top: size.height*0.2,
+              left: size.width*0.22,
               child: Container(
                 height: 200,
                 width: 200,
@@ -25,8 +25,8 @@ class _OrderSuccessState extends State<OrderSuccess> {
               ),
             ), 
             Positioned(
-              top: size.height*0.6,
-              left: size.width*0.23,
+              top: size.height*0.55,
+              left: size.width*0.2,
               child: Container(
                 child: Text("Đặt hàng thành công !", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.red),),
               ),
@@ -36,7 +36,7 @@ class _OrderSuccessState extends State<OrderSuccess> {
               top: size.height*0.8,
               left: size.width*0.25,
               child: Container(
-                height: 50,
+                height: 45,
                 width: size.width*0.5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
@@ -49,7 +49,7 @@ class _OrderSuccessState extends State<OrderSuccess> {
                     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Shipping(id: widget.id,)));
                   },
                   child: Center(
-                    child: Text("Theo dõi đơn hàng", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20, color: Colors.white),),
+                    child: Text("Theo dõi đơn hàng", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18, color: Colors.white),),
                   ),
                 ),
               ),

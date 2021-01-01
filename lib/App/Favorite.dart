@@ -134,13 +134,24 @@ class _Favorite1State extends State<Favorite1> {
 
                       },
                     ),
+                Container(height: 40,),
                 Center(
-                  child: Center(
-                    child: RaisedButton(
-                      onPressed: (){
+                  child: Container(
+                    height: 40,
+                    width: 180,
+                    decoration: BoxDecoration(
+                      color: Colors.orange,
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: InkWell(
+
+                      onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>MyCategoryPage(uid: cart.uid,)));
                       },
-                      child: Text('Xem thêm sản phẩm'),
+                      child: Center(
+                        child: Text('Xem thêm sản phẩm', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color:Colors.white),),
+                      )
+
                     ),
                   ),
                 )
@@ -149,14 +160,28 @@ class _Favorite1State extends State<Favorite1> {
             )
                 : Column(
               children: <Widget>[
-                Center(child: Text("Bạn chưa có sản phẩm yêu thích nào",style: TextStyle(fontSize: 24),)),
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>MyCategoryPage(uid: cart.uid,)));
-                  },
-                  child: Text("Xem thêm sản phẩm"),
-                  color: Colors.green,
-                ),
+                Center(child: Text("Bạn chưa có sản phẩm yêu thích nào",style: TextStyle(fontSize: 22),)),
+                Container(height: 40,),
+                Center(
+                  child: Container(
+                    height: 40,
+                    width: 180,
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: InkWell(
+
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>MyCategoryPage(uid: cart.uid,)));
+                        },
+                        child: Center(
+                          child: Text('Xem thêm sản phẩm', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color:Colors.white),),
+                        )
+
+                    ),
+                  ),
+                )
               ],
             ));
           },

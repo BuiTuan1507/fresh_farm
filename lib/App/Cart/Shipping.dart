@@ -56,7 +56,7 @@ class _ShippingState extends State<Shipping> {
                     padding: EdgeInsets.only(left: 20, top: 15, bottom: 10),
                     child: Text("Thời gian mua hàng: ${cFormat}",
                       style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w400),),
+                          fontSize: 17, fontWeight: FontWeight.w400),),
                   )
                 ],
               ),
@@ -64,9 +64,9 @@ class _ShippingState extends State<Shipping> {
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                    child: Text("Thời gian giao hàng hàng: ${eFormat}",
+                    child: Text("Thời gian giao hàng: ${eFormat}",
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w400)),
+                            fontSize: 17, fontWeight: FontWeight.w400)),
                   )
                 ],
               ),
@@ -75,7 +75,7 @@ class _ShippingState extends State<Shipping> {
                   Container(
                     padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
                     child: Text("Id: ${snapshot.data.documents[0]['id']}", style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w400)),
+                        fontSize: 17, fontWeight: FontWeight.w400)),
                   )
                 ],
               ),
@@ -83,29 +83,12 @@ class _ShippingState extends State<Shipping> {
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                    child: Text("Tổng giá tiền : ${snapshot.data.documents[0]['price']}", style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w400)),
+                    child: Text("Tổng giá tiền : ${snapshot.data.documents[0]['price']} đ", style: TextStyle(
+                        fontSize: 17, fontWeight: FontWeight.w400)),
                   )
                 ],
               ),
-              Row(
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (BuildContext context) => ListProductShipping(id: snapshot.data.documents[0]['id'],)));
 
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                      child: Text("Xem thông tin chi tiết",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight
-                              .w400)),
-                    ),
-                  )
-
-                ],
-              ),
               Row(
                 children: <Widget>[
                   Column(
@@ -123,7 +106,7 @@ class _ShippingState extends State<Shipping> {
                               width: size.width * 0.75,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.lightGreenAccent,
+                                color: Color.fromRGBO(210, 230, 235, 1),
                               ),
 
                               child: Center(
@@ -153,7 +136,7 @@ class _ShippingState extends State<Shipping> {
                           Container(
                             padding: EdgeInsets.only(
                                 top: 10, left: 15, right: 15, bottom: 10),
-                            child: Icon(Icons.offline_pin, size: 28,
+                            child: Icon(Icons.timer, size: 28,
                               color: Colors.orange,),
                           ),
                           Container(
@@ -161,12 +144,12 @@ class _ShippingState extends State<Shipping> {
                               width: size.width * 0.75,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.lightGreenAccent,
+                                color: Colors.blueGrey,
                               ),
 
                               child: Center(
                                 child: Text(
-                                    "Đơn hàng đang xử lí"
+                                    "Đơn hàng được chấp nhận"
                                 ),
                               )
 
@@ -191,7 +174,7 @@ class _ShippingState extends State<Shipping> {
                           Container(
                             padding: EdgeInsets.only(
                                 top: 10, left: 15, right: 15, bottom: 10),
-                            child: Icon(Icons.offline_pin, size: 28,
+                            child: Icon(Icons.directions_car, size: 28,
                               color: Colors.orange,),
                           ),
                           Container(
@@ -199,12 +182,12 @@ class _ShippingState extends State<Shipping> {
                               width: size.width * 0.75,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.lightGreenAccent,
+                                color: Color.fromRGBO(220, 230, 235, 1),
                               ),
 
                               child: Center(
                                 child: Text(
-                                    "Đơn hàng đang xử lí"
+                                    "Đơn hàng đang giao"
                                 ),
                               )
 
@@ -229,7 +212,7 @@ class _ShippingState extends State<Shipping> {
                           Container(
                             padding: EdgeInsets.only(
                                 top: 10, left: 15, right: 15, bottom: 10),
-                            child: Icon(Icons.offline_pin, size: 28,
+                            child: Icon(Icons.folder, size: 28,
                               color: Colors.orange,),
                           ),
                           Container(
@@ -237,12 +220,12 @@ class _ShippingState extends State<Shipping> {
                               width: size.width * 0.75,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.lightGreenAccent,
+                                color: Color.fromRGBO(220, 230, 235, 1),
                               ),
 
                               child: Center(
                                 child: Text(
-                                    "Đơn hàng đang xử lí"
+                                    "Đơn hàng đã giao"
                                 ),
                               )
 
@@ -254,7 +237,35 @@ class _ShippingState extends State<Shipping> {
                   ),
 
                 ],
-              )
+              ),
+              Row(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top:20, left: 100),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (BuildContext context) => ListProductShipping(id: snapshot.data.documents[0]['id'],)));
+
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 200,
+                        padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.circular(20)
+                        ),
+                        child: Text("Xem thông tin chi tiết",
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight
+                                .w400, color: Colors.white)),
+                      ),
+                    ),
+                  )
+
+
+                ],
+              ),
 
 
             ],

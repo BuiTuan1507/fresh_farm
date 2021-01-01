@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fresh_farm/App/Cart/shop_items.dart';
+
 import 'package:fresh_farm/App/ListProduct/giavi.dart';
 import 'package:fresh_farm/App/ListProduct/haisan.dart';
 import 'package:fresh_farm/App/ListProduct/hoaqua.dart';

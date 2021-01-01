@@ -27,7 +27,7 @@ class _ShipCartState extends State<ShipCart> {
         centerTitle: true,
         backgroundColor: Color(0xFF0C9869),
         title: Text("Xem chi tiết đơn hàng",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
 
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -50,7 +50,66 @@ class _ShipCartState extends State<ShipCart> {
           return (snapshot.hasData !=null)
               ? Column(
             children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(left: 80, top: 20),
 
+                        child: Text(
+                          'Thông tin đơn hàng ', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(top: 40, bottom:10 ,left: 20),
+                        child: Text('Địa chỉ: ${snapshot.data.documents[0]['address']}',style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                        child:Text(
+                          'Thời gian mua hàng : ${cFormat}',
+                          style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600),
+                        ),
+
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
+                        child:Text(
+                          'Thời gian giao hàng: ${eFormat}',
+                          style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
+                        child: Text('Giá tiền : ${snapshot.data.documents[0]['price']} ',
+                          style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
+                      )
+                    ],
+                  ),
+
+
+
+
+
+                ],
+              ),
               SingleChildScrollView(
                   child: ListView.builder(
                      shrinkWrap: true,
@@ -125,42 +184,7 @@ class _ShipCartState extends State<ShipCart> {
                     },
                   )
               ),
-              Column(
-                children: <Widget>[
 
-                    Container (
-
-                      padding: EdgeInsets.only(top: 20),
-                      child: Text(
-                        'Thông tin đơn hàng ', textAlign: TextAlign.center, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  Container(
-                    padding: EdgeInsets.only(top: 40, bottom:20 ,left: 16),
-                    child: Text('Địa chỉ: ${snapshot.data.documents[0]['address']}',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child:Text(
-                     'Thời gian mua hàng : ${cFormat}',
-                      style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
-                    ),
-
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child:Text(
-                        'Thời gian giao hàng: ${eFormat}',
-                      style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text('Giá tiền : ${snapshot.data.documents[0]['price']} ',
-                      style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                  )
-                ],
-              )
             ],
           )
               : Center(child: Text("Hiện tại không còn đơn hàng nào đang được giao"));

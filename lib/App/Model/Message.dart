@@ -8,7 +8,8 @@ class Message{
   bool isLike;
   bool unread;
   String name;
-  Message(this.uid, this.isAdmin, this.time, this.text, this.isLike, this.unread, this.name);
+  String img;
+  Message(this.uid, this.isAdmin, this.time, this.text, this.isLike, this.unread, this.name, this.img);
   Message.fromJson(Map<String,dynamic> data)
       :uid= data['uid'],
         isAdmin = data['isAdmin'],
@@ -17,7 +18,8 @@ class Message{
           isLike = data['isLike'],
 
           unread = data['unread'],
-        name = data['name'];
+        name = data['name'],
+        img = data['img'];
   Message.fromSnapshot(DocumentSnapshot snapshot) :
         uid = snapshot['uid'],
         isAdmin = snapshot["isAdmin"],
@@ -26,7 +28,8 @@ class Message{
         unread = snapshot['unread'],
 
         text = snapshot["text"],
-        name = snapshot['name'];
+        name = snapshot['name'],
+        img = snapshot['img'];
 
   toJson() {
     return {
@@ -38,7 +41,7 @@ class Message{
       "time" : time,
       "text": text,
       "name":name,
-
+      "img":img
 
     };
   }

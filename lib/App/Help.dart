@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 class AdminHelp extends StatefulWidget {
   String uid;
   String name;
-  AdminHelp({Key key, this.uid, this.name})
+  String img;
+  AdminHelp({Key key, this.uid, this.name, this.img})
       : super(key: key);
   @override
   _AdminHelpState createState() => _AdminHelpState();
@@ -16,8 +17,8 @@ class AdminHelp extends StatefulWidget {
 class _AdminHelpState extends State<AdminHelp> {
     String text= "";
     var timeNow = DateTime.now();
-
-    _buildMessage(Message me) {
+    TextEditingController helpController = new  TextEditingController();
+    _buildMessage(Message me, Size size) {
       final Container msg = Container(
         margin: me.isAdmin
             ? EdgeInsets.only(
@@ -39,43 +40,65 @@ class _AdminHelpState extends State<AdminHelp> {
           )
               : BorderRadius.circular(15.0)
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: <Widget>[
-            Row(
+            Column(
               children: <Widget>[
-
                 Container(
-                  padding: EdgeInsets.only(bottom: 5,right: 10),
-                  child: Text(me.name, style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20, color: Colors.black),),
+                  padding: EdgeInsets.all((5)),
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundImage:(me.isAdmin == true ) ? NetworkImage(me.img) : AssetImage("assets/ramdom.jpg"),
+                     //
+                  ),
+                )
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+
+                    Container(
+                      padding: EdgeInsets.only(bottom: 5,right: 10),
+                      child: Text(me.name, style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20, color: Colors.black),),
+                    ),
+                    Container(
+                      child:  Text(
+
+                        '${DateFormat('H:m dd-MM').format(me.time.toDate())}',
+                        style: TextStyle(
+                          color: (me.isAdmin == true) ? Colors.white: Colors.black,
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Container(
-                  child:  Text(
 
-                    '${DateFormat('H:m  dd-MM-yyyy').format(me.time.toDate())}',
+                SizedBox(height: 6.0,),
+
+                Container(
+                  width: size.width*0.58,
+                  child: Text(
+                    me.text,
+                    overflow: TextOverflow.fade,
                     style: TextStyle(
                       color: (me.isAdmin == true) ? Colors.white: Colors.black,
-                      fontSize: 13.0,
+                      fontSize: 16.0,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                ),
+                )
+
               ],
             ),
 
-            SizedBox(height: 6.0,),
-
-
-            Text(
-              me.text,
-              style: TextStyle(
-                color: (me.isAdmin == true) ? Colors.white: Colors.black,
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
           ],
-        ),
+        )
+
       );
       if (me.isAdmin) {
         return msg;
@@ -96,31 +119,33 @@ class _AdminHelpState extends State<AdminHelp> {
         child: Row(
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.photo),
+              icon: Icon(Icons.camera_alt),
               iconSize: 25.0,
               color: Theme.of(context).primaryColor,
               onPressed: () {},
             ),
             Expanded(
               child: TextField(
+                controller: helpController,
                 textCapitalization: TextCapitalization.sentences,
                 onChanged: (value) {
                   text = value;
                 },
                 decoration: InputDecoration.collapsed(
-                  hintText: 'Send a message...',
+                  hintText: 'Viết tin nhắn vào đây',
                 ),
               ),
             ),
-            IconButton(
-              icon: Icon(Icons.send),
-              iconSize: 25.0,
-              color: Theme.of(context).primaryColor,
-              onPressed: () {
-                Message m = new Message(widget.uid, true, Timestamp.fromDate(timeNow), text, false, false, widget.name);
+            InkWell(
+              onTap: (){
+                Message m = new Message(widget.uid, true, Timestamp.fromDate(timeNow), text, false, false, widget.name,widget.img);
                 cart.createChatUser(m);
+                helpController.clear();
               },
-            ),
+              child: Icon(Icons.send, size: 25, color: Colors.blue,
+              ),
+            )
+
           ],
         ),
       );
@@ -146,7 +171,8 @@ class _AdminHelpState extends State<AdminHelp> {
                   bool isLike = userChat[i].isLike;
                   bool unread = userChat[i].unread;
                   String name = userChat[i].name;
-                  Message m = new Message(uid, isAdmin, time, text, isLike, unread, name);
+                  String img = userChat[i].img;
+                  Message m = new Message(uid, isAdmin, time, text, isLike, unread, name, img);
                     u.add(m);
 
 
@@ -199,7 +225,7 @@ class _AdminHelpState extends State<AdminHelp> {
                             itemBuilder: (BuildContext context, int index) {
                               final Message message = u[index];
 
-                              return _buildMessage(message);
+                              return _buildMessage(message, size);
                             },
                           ),
                         ),
