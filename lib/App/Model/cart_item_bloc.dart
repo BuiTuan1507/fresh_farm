@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -61,22 +62,25 @@ class Rating{
   int rating;
   String name;
   String photoURL;
+  int idRating;
 
-  Rating(this.id, this.uid, this.text,this.rating, this.photoURL,this.name);
+  Rating(this.id, this.uid, this.text,this.rating, this.photoURL,this.name, this.idRating);
   Rating.fromJson(Map<String,dynamic> data)
       :id= data['id'],
         uid = data['uid'],
         text = data['text'],
         rating= data['rating']   ,
         name = data['name'],
-        photoURL = data['photoURL'];
+        photoURL = data['photoURL'],
+        idRating = data['idRating'];
   Rating.fromSnapshot(DocumentSnapshot snapshot) :
         id = snapshot['id'],
         uid = snapshot["name"],
         rating = snapshot["rating"],
         text = snapshot["text"],
         name = snapshot['name'],
-        photoURL = snapshot['photoURL'];
+        photoURL = snapshot['photoURL'],
+        idRating = snapshot['idRating'];
 
   toJson() {
     return {
@@ -86,7 +90,8 @@ class Rating{
       "text" : text,
       "rating": rating,
       'name':name,
-      'photoURL':photoURL
+      'photoURL':photoURL,
+      'idRating':idRating
 
 
     };
@@ -97,18 +102,23 @@ class User{
   String userID;
   String photoURL;
   String email ;
-
-  User(this.name, this.userID, this.photoURL, this.email);
+  String phone;
+  int coin;
+  User(this.name, this.userID, this.photoURL, this.email, this.phone, this.coin);
   User.fromJson(Map<String,dynamic> data)
       :name= data['name'],
         userID = data['userID'],
         email = data['email'],
-        photoURL= data['photoURL'];
+        photoURL= data['photoURL'],
+        phone = data['phone'],
+        coin = data['coin'];
   User.fromSnapshot(DocumentSnapshot snapshot) :
         name = snapshot['name'],
         userID = snapshot["userID"],
         email = snapshot["email"],
-        photoURL = snapshot["photoURL"];
+        photoURL = snapshot["photoURL"],
+        phone = snapshot['phone'],
+        coin = snapshot['coin'];
 
   toJson() {
     return {
@@ -117,6 +127,8 @@ class User{
 
       "email" : email,
       "photoURL": photoURL,
+      "phone":phone,
+      "coin":coin
 
 
     };
@@ -347,10 +359,12 @@ class Cart extends ChangeNotifier{
   }
   void createReview(int id, String uid, int rating, String text,String name, String photoURL){
     Firestore firestoreReview = Firestore.instance;
-
+    var ramdomN = new Random();
+    int x = ramdomN.nextInt(100000);
     firestoreReview.collection('Rating').document().setData({
       "id":id,
       "uid":uid,
+      "idRating":x,
       "rating":rating,
       "text":text,
       "name":name,
@@ -383,9 +397,9 @@ class Cart extends ChangeNotifier{
 
   CollectionReference users = Firestore.instance.collection('Rating');
 
-  Future<void> deleteReview(int id,String uid) {
+  Future<void> deleteReview(int id,String uid,int x) {
     var query =  users
-        .where("id", isEqualTo: id).where("uid",isEqualTo: uid);
+        .where("id", isEqualTo: id).where("uid",isEqualTo: uid).where("idRating", isEqualTo: x);
     query.getDocuments().then((querySnapshot) => {
       querySnapshot.documents.forEach((element) {
         element.reference.delete();

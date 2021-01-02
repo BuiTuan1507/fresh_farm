@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/UserCase/Register/registerPass.dart';
-import 'package:fresh_farm/UserCase/Register/registerPhone.dart';
 
 
-class signUpEmail extends StatefulWidget {
+class signUpPhone extends StatefulWidget {
   String name;
-  signUpEmail({Key key, this.name}) : super(key: key);
+  String email;
+  signUpPhone({Key key, this.name, this.email}) : super(key: key);
   @override
-  _signUpEmailState createState() => _signUpEmailState();
+  _signUpPhoneState createState() => _signUpPhoneState();
 }
 
-class _signUpEmailState extends State<signUpEmail> {
+class _signUpPhoneState extends State<signUpPhone> {
   final _formKey = new GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  String email;
+  TextEditingController phoneController = TextEditingController();
+  String phone;
 
   bool validateAndSave() {
     final form = _formKey.currentState;
@@ -27,7 +27,7 @@ class _signUpEmailState extends State<signUpEmail> {
   void validateAndSubmit() {
     if (validateAndSave()) {
       setState(() {
-        email = emailController.text;
+        phone = phoneController.text;
       });
     }
   }
@@ -37,22 +37,22 @@ class _signUpEmailState extends State<signUpEmail> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        title: Text('Email',),
+        title: Text('Phone',),
         centerTitle: true,
         backgroundColor: Color(0xFF0C9869),
       ),
-      body: SignUpEmailPage(context, emailController),
+      body: SignUpPhonePage(context, phoneController),
     );
   }
 
-  Widget SignUpEmailPage(context, emailController) {
+  Widget SignUpPhonePage(context, phoneController) {
     return new Form(
       key: _formKey,
       child:  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _showText(),
-          _showPhoneField(emailController),
+          _showPhoneField(phoneController),
           _showButton(context)
         ],
       ),
@@ -65,7 +65,7 @@ class _signUpEmailState extends State<signUpEmail> {
       padding: EdgeInsets.only(top: 50, left: 0, right: 0),
       child: Center(
         child: Text(
-          'Nhập Email của bạn',
+          'Nhập Số điện thoại của bạn',
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold
@@ -81,15 +81,15 @@ class _signUpEmailState extends State<signUpEmail> {
         child: TextFormField(
           controller: emailController,
           decoration: InputDecoration(
-              labelText: 'Email của bạn',
+              labelText: 'Số điện thoại của bạn',
               labelStyle: TextStyle(
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
                   color: Colors.grey),
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.green))),
-          validator: (value) => value.isEmpty ? 'Email không thể trống' : null,
-          onSaved: (value) => email = value.trim(),
+          validator: (value) => value.isEmpty ? 'Số điện thoại không thể trống' : null,
+          onSaved: (value) => phone = value.trim(),
         ));
   }
 
@@ -97,10 +97,10 @@ class _signUpEmailState extends State<signUpEmail> {
     return new GestureDetector(
       onTap: () {
         validateAndSubmit();
-        if(email !=null)
+        if(phone !=null)
         {
           Navigator.push(context, MaterialPageRoute(
-              builder: (BuildContext context) => signUpPhone(name: widget.name,email: email,)));
+              builder: (BuildContext context) => signUpPass(name: widget.name,email: widget.email,phone: phone,)));
         }
 
       },
@@ -109,23 +109,23 @@ class _signUpEmailState extends State<signUpEmail> {
         height: 95.0,
 
 
-          child: Material(
-            borderRadius: BorderRadius.circular(10.0),
-            shadowColor: Colors.greenAccent,
-            color: Color(0xFF0C9869),
+        child: Material(
+          borderRadius: BorderRadius.circular(10.0),
+          shadowColor: Colors.greenAccent,
+          color: Color(0xFF0C9869),
 
 
-            child: Center(
-              child: Text(
-                'Tiếp',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat'),
-              ),
+          child: Center(
+            child: Text(
+              'Tiếp',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat'),
             ),
           ),
         ),
+      ),
 
     );
 

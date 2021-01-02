@@ -104,8 +104,10 @@ class _Rating1State extends State<Rating1> {
                     onPressed: () {
 
                       cart.createReview(cart.idRating, cart.uid, rating, text.text,name,photoURL);
+                      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Đánh giá thành công')));
+
                     },
-                    child: Text('Add'),
+                    child: Text('Thêm'),
                     textColor: Colors.white,
                     color: Colors.blueAccent,
                   )

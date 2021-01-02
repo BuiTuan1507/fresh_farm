@@ -27,6 +27,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
   File _image;
   String urlUser ;
   bool isCheck = false;
+  bool isLoading = false;
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -50,7 +51,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
         });
 
         setState(() {
-          print("Profile Picture uploaded");
+          print("Upload ảnh thành công");
 
           Firestore.instance.collection("User").document(widget.uid).updateData(
               {
@@ -63,7 +64,8 @@ class _MyProfilePageState extends State<MyProfilePage>{
 
           print(urlUser);
           print(widget.uid);
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+          isLoading = false;
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text('Upload ảnh thành công')));
         });
 
       }
@@ -85,21 +87,8 @@ class _MyProfilePageState extends State<MyProfilePage>{
           centerTitle: true,
           backgroundColor: Color(0xFF0C9869),
           title: Text("Thông tin cá nhân",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
-          actions: <Widget>[
-            Padding(
-                padding: EdgeInsets.only(right: 35.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MyHomeAppPage()));
-                  },
-                  child: Icon(
-                    Icons.home,
-                    size: 35.0,
-                  ),
-                )
-            ),
-          ],
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+
         ),
         body: StreamBuilder<DocumentSnapshot>(
         stream: Firestore.instance.collection("User").document(widget.uid).snapshots(),
@@ -153,7 +142,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                 ),
                               ],
                             ),
-
+                            Container(height: 15,),
                             Center(
                               child: Text(
                                 snapshot.data['name'], style: TextStyle(fontSize: 24,
@@ -161,6 +150,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                   color: Colors.black45),
                               ),
                             ),
+                            Container(height: 8,),
                             Center(
                               child: Text(
                                 snapshot.data['email'],
@@ -174,29 +164,30 @@ class _MyProfilePageState extends State<MyProfilePage>{
 
 
                     ),
+                    _showLoading(isLoading),
                     Row(
                       children: <Widget>[
                         Container(
-                          padding: EdgeInsets.only(left:20, right: 15, bottom: 10),
+                          padding: EdgeInsets.only(left:20, right: 15),
                           child: Icon(
-                            Icons.phone, size: 23, color: Color(0xFF0C9869),
+                            Icons.phone, size: 25, color: Colors.black,
                           ),
                         ),
                         Container(
                           padding: EdgeInsets.only(right: 20),
                           child: Text(
-                            'Số điện thoại :', style: TextStyle(
+                            'Số điện thoại: ', style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               color: Colors.black87
                           ),
                           ),),
                         Container(
                           padding: EdgeInsets.only(right: 20, bottom: 10, top : 15),
                           child: Text(
-                              "091222212" , style: TextStyle(
+                              snapshot.data['phone'] , style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               color: Colors.black87)
                           ),
                         ),
@@ -209,9 +200,9 @@ class _MyProfilePageState extends State<MyProfilePage>{
                             child: Row(
                               children: <Widget>[
                                 Container(
-                                  padding: EdgeInsets.only(left: 15, right: 15),
+                                  padding: EdgeInsets.only(left: 20, right: 15),
                                   child: Icon(
-                                    Icons.home, size: 23, color:Color(0xFF0C9869) ,
+                                    Icons.home, size: 25, color:Colors.black,
                                   ),
                                 ),
                                 Container(
@@ -219,7 +210,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                   child: Text(
                                     'Địa chỉ :', style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black87
                                   ),
                                   ),),
@@ -229,7 +220,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                   child: Text(
                                       'NoWhere' , style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black87)
                                   ),
                                 ),
@@ -247,24 +238,24 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                 Container(
                                   padding: EdgeInsets.only(left:20, right: 15),
                                   child: Icon(
-                                    Icons.monetization_on, size: 23, color: Color(0xFF0C9869),
+                                    Icons.monetization_on, size: 25, color: Colors.black,
                                   ),
                                 ),
                                 Container(
                                   padding: EdgeInsets.only(right: 20),
                                   child: Text(
-                                    'Xu thưởng :', style: TextStyle(
+                                    'Xu thưởng:', style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black87
                                   ),
                                   ),),
                                 Container(
                                   padding: EdgeInsets.only(right: 20),
                                   child: Text(
-                                      '200', style: TextStyle(
+                                      '${ snapshot.data['coin']} đ', style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black87)
                                   ),
                                 ),
@@ -278,13 +269,13 @@ class _MyProfilePageState extends State<MyProfilePage>{
                         Container(
                           padding: EdgeInsets.only(
                               top: 10, left: 35, right: 20, bottom: 15),
-                          height: 60,
+                          height: 65,
 
                           child: Material(
                             borderRadius: BorderRadius.circular(20.0),
                             shadowColor: Colors.greenAccent,
                             color: Color(0xFF0C9869),
-                            elevation: 7.0,
+
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => updateProfile(uid:widget.uid)));
@@ -305,7 +296,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                         Container(
                           padding: EdgeInsets.only(
                               top: 10, left: 20, right: 0, bottom: 15),
-                          height: 60,
+                          height: 65,
 
                           child: Material(
                             borderRadius: BorderRadius.circular(20.0),
@@ -351,7 +342,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                           color:Color(0xFF0C9869),
                           onPressed: () {
                             uploadPic(context);
-
+                            isLoading = true;
                           },
 
                           elevation: 4.0,
@@ -369,6 +360,15 @@ class _MyProfilePageState extends State<MyProfilePage>{
 
                   ]);
             }));
+  }
+  Widget _showLoading(bool isLoading) {
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return Container(
+      height: 0.0,
+      width: 0.0,
+    );
   }
 
 }

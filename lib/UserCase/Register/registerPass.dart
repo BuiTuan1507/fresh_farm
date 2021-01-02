@@ -6,7 +6,8 @@ import 'package:fresh_farm/UserCase/Register/registerPop.dart';
 class signUpPass extends StatefulWidget {
   String name;
   String email;
-  signUpPass({Key key, this.name,this.email}) : super(key: key);
+  String phone;
+  signUpPass({Key key, this.name,this.email, this.phone}) : super(key: key);
   @override
   _signUpPassState createState() => _signUpPassState();
 }
@@ -102,7 +103,7 @@ class _signUpPassState extends State<signUpPass> {
         validateAndSubmit();
         if (pass != null)
         {
-          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => signUpPrivacy(name: widget.name,email: widget.email,pass: pass,)));
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => signUpPrivacy(name: widget.name,email: widget.email,phone:widget.phone,pass: pass,)));
         }
       },
       child: Container(

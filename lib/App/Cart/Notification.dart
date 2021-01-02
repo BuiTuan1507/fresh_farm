@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:fresh_farm/App/Products/Category.dart';
 
 import 'package:fresh_farm/App/Products/Detail.dart';
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
@@ -24,7 +25,7 @@ class _SaleState extends State<Sale> {
             centerTitle: true,
             backgroundColor: Color(0xFF0C9869),
             title: Text("Khuyến mãi",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),)),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)),
         body: StreamBuilder(
           stream:  Firestore.instance
               .collection('Notification')
@@ -64,7 +65,7 @@ class _SaleState extends State<Sale> {
                                       onTap: () {
                                         Navigator.of(context).push(
 
-                                            MaterialPageRoute(builder: (context) => Detail(
+                                            MaterialPageRoute(builder: (context) => MyCategoryPage(
 
                                             )));
                                       },

@@ -1,4 +1,7 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:commons/commons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +17,12 @@ class _updateProfileState extends State<updateProfile> {
   final _formKey = new GlobalKey<FormState>();
   String email;
   String name;
-  String photoURL;
+  String phone;
   String _errorMessage;
   bool _isLoading;
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController photoURLController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   bool validateAndSave() {
     final form = _formKey.currentState;
     if (form.validate()) {
@@ -48,9 +51,16 @@ class _updateProfileState extends State<updateProfile> {
             {
               "name" : name,
               "email":email,
-              "photoURL":photoURL
+              "phone":phone
             }
         );
+        print(name);
+        print(phone);
+        print(email);
+        phoneController.clear();
+        emailController.clear();
+        nameController.clear();
+        showDialog();
       }else{
         print ("111");
       }
@@ -83,8 +93,8 @@ class _updateProfileState extends State<updateProfile> {
         appBar:AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF0C9869),
-          title: Text("FreshFarm",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
+          title: Text("Cập nhật thông tin",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),),
         ),
         body: Stack(
           children: <Widget>[
@@ -158,8 +168,8 @@ class _updateProfileState extends State<updateProfile> {
         padding: EdgeInsets.only(top:20,bottom: 20),
         child:Center(
           child:  Text(
-            'Cap nhat thong tin ca nhan', style: TextStyle(
-              fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black87
+            'Cập nhật thông tin cá nhân', style: TextStyle(
+              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87
           ),
           ),
         )
@@ -197,7 +207,7 @@ class _updateProfileState extends State<updateProfile> {
               Icons.mail,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? 'Email không thể để trống' : null,
         onSaved: (value) => email = value.trim(),
       ),
     );
@@ -211,15 +221,14 @@ class _updateProfileState extends State<updateProfile> {
       child: new TextFormField(
         controller: nameController,
         maxLines: 1,
-        obscureText: true,
-        autofocus: false,
+
         decoration: new InputDecoration(
-            hintText: 'Name',
+            hintText: 'Tên',
             icon: new Icon(
               Icons.lock,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? 'Tên không thể để trống' : null,
         onSaved: (value) => name = value.trim(),
       ),
     );
@@ -228,18 +237,17 @@ class _updateProfileState extends State<updateProfile> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: new TextFormField(
-        controller: photoURLController,
+        controller: phoneController,
         maxLines: 1,
-        obscureText: true,
-        autofocus: false,
+
         decoration: new InputDecoration(
-            hintText: 'Address',
+            hintText: 'Số điện thoại',
             icon: new Icon(
-              Icons.lock,
+              Icons.phone,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
-        onSaved: (value) => photoURL = value.trim(),
+        validator: (value) => value.isEmpty ? 'Số điện thoại không thể trống' : null,
+        onSaved: (value) => phone = value.trim(),
       ),
     );
   }
@@ -247,17 +255,32 @@ class _updateProfileState extends State<updateProfile> {
     return new Padding(
         padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
         child: SizedBox(
-          height: 40.0,
+          height: 50.0,
           child: new RaisedButton(
-            elevation: 5.0,
+
             shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)),
+                borderRadius: new BorderRadius.circular(12.0)),
             color: Color(0xFF0C9869),
-            child: new Text('Cap nhat thong tin',
+            child: new Text('Cập nhật thông tin',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: validateAndSubmit,
+            onPressed: validateAndSubmit
+
+
+
+           ,
           ),
         ));
   }
+  Widget showDialog(){
+    return successDialog(
+      context,
+      "Sửa thông tin thành công",
+
+      positiveAction: () {
+
+      },
+    );
+  }
+
 
 }

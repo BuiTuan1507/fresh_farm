@@ -8,9 +8,10 @@ class signUpPrivacy extends StatefulWidget {
   String name;
   String email;
   String pass;
+  String phone;
   String photoURL= "https://firebasestorage.googleapis.com/v0/b/freshfarm-93585.appspot.com/o/ramdom.jpg?alt=media&token=a71ccf28-2dd0-46f9-ab39-ec751a0c15ef";
 
-  signUpPrivacy({Key key, this.name,this.email,this.pass}) : super(key: key);
+  signUpPrivacy({Key key, this.name,this.email,this.pass, this.phone}) : super(key: key);
   @override
   _signUpPrivacyState createState() => _signUpPrivacyState();
 }
@@ -54,7 +55,9 @@ class _signUpPrivacyState extends State<signUpPrivacy> {
               "name": widget.name,
               "email": widget.email,
               "userID": userId,
-              "photoURL": widget.photoURL
+              "photoURL": widget.photoURL,
+              "phone":widget.phone,
+              "coin":0
             }
         );
         showDialog(

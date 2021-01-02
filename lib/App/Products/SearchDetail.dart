@@ -106,7 +106,7 @@ class _SearchDetailState extends State<SearchDetail> {
                             width: MediaQuery.of(context).size.width - 50.0,
                             height: 50.0,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25.0),
+                                borderRadius: BorderRadius.circular(12.0),
                                 color: Color(0xFF0C9869)
                             ),
                             child: Center(
@@ -130,6 +130,7 @@ class _SearchDetailState extends State<SearchDetail> {
                             )
                         )
                     ),
+                    Container(height: 15,),
                     RaisedButton(
                       onPressed: () {
                         Navigator.of(context).push(
@@ -138,7 +139,7 @@ class _SearchDetailState extends State<SearchDetail> {
 
                       },
                       child: Text("Xem thêm sản phẩm"),
-                      color: Colors.green,
+                      color: Color.fromRGBO(220, 230, 235, 1),
                     ),
                     SizedBox(height: 40)
                   ],

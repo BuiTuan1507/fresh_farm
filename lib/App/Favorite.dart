@@ -65,6 +65,9 @@ class _Favorite1State extends State<Favorite1> {
                                     padding:EdgeInsets.only(left: 10,right: 15, top:4, bottom: 4),
                                     child: InkWell(
                                       onTap: () {
+
+                                        Item item123 = new Item(userFavorite[i].id,userFavorite[i].name,userFavorite[i].imgPath,userFavorite[i].price,userFavorite[i].count,userFavorite[i].isLike,userFavorite[i].rating);
+                                        cart.addInfoItem(item123);
                                         Navigator.of(context).push(
 
                                             MaterialPageRoute(builder: (context) => Detail(

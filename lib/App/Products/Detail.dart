@@ -102,7 +102,7 @@ Widget InfoItemsListBuilder(context, cart) {
               width: MediaQuery.of(context).size.width - 50.0,
               height: 50.0,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25.0),
+                  borderRadius: BorderRadius.circular(12.0),
                   color: Color(0xFF0C9869)),
               child: Center(
                   child: InkWell(
@@ -112,36 +112,45 @@ Widget InfoItemsListBuilder(context, cart) {
                             builder: (context) => TabBarCart()));
                       },
                       child: Text(
-                        'Add to cart',
+                        'Thêm vào giỏ hàng',
                         style: TextStyle(
                             fontFamily: 'Varela',
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ))))),
+      Container(height: 20,),
       Row(
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(top: 25, left: 10, right: 10),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                    cart.removeInfoItem(infoItem[0]);
-                  },
-                  child: Text(
-                    "Xem thêm sản phẩm",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+          Container(width: 10,),
+          Container(
+            height: 45,
+
+              padding: EdgeInsets.only(top: 12, left: 15, right: 10, ),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0),color: Color.fromRGBO(220, 230, 235, 1)),
+
+              child:  GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  cart.removeInfoItem(infoItem[0]);
+                },
+                child: Text(
+                  "Xem thêm sản phẩm",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
-              )
-            ],
-          ),
-          Column(
-            children: <Widget>[
+              ),
+
+
+
+            ),
+
+
+            Container(width: 10,),
               Container(
-                padding: EdgeInsets.only(top: 25),
+                height: 45,
+
+                padding: EdgeInsets.only(top: 12, left: 15, right: 10, ),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0),color: Color.fromRGBO(220, 230, 235, 1)),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -153,13 +162,13 @@ Widget InfoItemsListBuilder(context, cart) {
                     cart.removeInfoItem(infoItem[0]);
                   },
                   child: Text(
-                    'Đáng giá sản phẩm',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    'Đánh giá sản phẩm',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                 ),
-              )
-            ],
-          )
+
+          ),
+          Container(width: 10,)
         ],
       )
     ],

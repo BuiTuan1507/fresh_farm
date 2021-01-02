@@ -88,8 +88,9 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                                                   width: 80,
                                                   height: 80,
                                                   decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(25),
                                                       image: DecorationImage(
-                                                          image: AssetImage(
+                                                          image: NetworkImage(
                                                               cartList[i]
                                                                   .photoURL),
                                                           fit: BoxFit.fill))),
@@ -139,7 +140,7 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                                                         onPressed: () {
                                                           cart.deleteReview(
                                                               cartList[i].id,
-                                                              cart.uid);
+                                                              cart.uid,cartList[i].idRating);
                                                         },
                                                         icon: Icon(
                                                           Icons.delete,
@@ -190,7 +191,7 @@ class _RatingAndReviewState extends State<RatingAndReview> {
                           },
                           child: Text(
                             'Đánh giá sản phẩm',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 17),
                           ),
                         ),
                       ),

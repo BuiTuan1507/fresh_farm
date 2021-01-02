@@ -1,3 +1,4 @@
+import 'package:commons/commons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm/App/Home.dart';
@@ -44,6 +45,8 @@ class _resetPasswordState extends State<resetPassword> {
         setState(() {
           _isLoading = false;
         });
+        showDialog();
+        passwordController.clear();
 
 
       } catch (e) {
@@ -76,7 +79,7 @@ class _resetPasswordState extends State<resetPassword> {
         appBar:AppBar(
           centerTitle: true,
           backgroundColor: Color(0xFF0C9869),
-          title: Text("Quên mật khẩu",
+          title: Text("Đổi mật khẩu",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
         ),
         body: Stack(
@@ -128,7 +131,7 @@ class _resetPasswordState extends State<resetPassword> {
         child:Center(
           child:  Text(
             'Nhập mật khẩu mới', style: TextStyle(
-              fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87
+              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87
           ),
           ),
         )
@@ -164,12 +167,12 @@ class _resetPasswordState extends State<resetPassword> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Email',
+            hintText: 'mật khẩu',
             icon: new Icon(
-              Icons.email,
+              Icons.lock,
               color: Color(0xFF0C9869),
             )),
-        validator: (value) => value.isEmpty ? 'Email không thể trống' : null,
+        validator: (value) => value.isEmpty ? 'Mật khẩu không thể trống' : null,
         onSaved: (value) => _password = value.trim(),
       ),
     );
@@ -201,15 +204,26 @@ class _resetPasswordState extends State<resetPassword> {
         child: SizedBox(
           height: 45.0,
           child: new RaisedButton(
-            elevation: 5.0,
             shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)),
+                borderRadius: new BorderRadius.circular(12.0)),
             color: Color(0xFF0C9869),
-            child: new Text('Doi mat khau',
+            child: new Text('Đổi mật khẩu',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: validateAndSubmit,
           ),
         ));
   }
+  Widget showDialog(){
+    return successDialog(
+      context,
+      "Đổi mật khẩu thành công",
+
+
+      positiveAction: () {
+
+      },
+    );
+  }
+
 }
 
