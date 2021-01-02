@@ -3,6 +3,7 @@ import 'package:fresh_farm/App/Cart/TabBarCart.dart';
 
 import 'package:fresh_farm/App/Model/cart_item_bloc.dart';
 import 'package:fresh_farm/App/Cart/shopping_cart.dart';
+import 'package:fresh_farm/App/Products/Category.dart';
 import 'package:fresh_farm/App/Products/RatingAndReview.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,7 @@ class _DetailState extends State<Detail> {
               title: Text('Chi tiết sản phẩm',
                   style: TextStyle(
                       fontFamily: 'Varela',
-                      fontSize: 22.0,
+                      fontSize: 21.0,
                       color: Colors.white)),
               leading: IconButton(
                   icon: Icon(Icons.arrow_back),
@@ -131,7 +132,8 @@ Widget InfoItemsListBuilder(context, cart) {
 
               child:  GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => MyCategoryPage()));
                   cart.removeInfoItem(infoItem[0]);
                 },
                 child: Text(
@@ -159,7 +161,7 @@ Widget InfoItemsListBuilder(context, cart) {
                             builder: (BuildContext context) =>
                                 RatingAndReview()));
                     cart.getIdRating(infoItem[0]);
-                    cart.removeInfoItem(infoItem[0]);
+                   // cart.removeInfoItem(infoItem[0]);
                   },
                   child: Text(
                     'Đánh giá sản phẩm',

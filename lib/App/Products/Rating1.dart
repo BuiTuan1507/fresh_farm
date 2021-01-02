@@ -13,7 +13,7 @@ class Rating1 extends StatefulWidget {
 class _Rating1State extends State<Rating1> {
   int id;
   String uid;
-  int rating = 3;
+  int ratingT = 3;
   int starCount = 5;
   TextEditingController text = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
@@ -66,6 +66,7 @@ class _Rating1State extends State<Rating1> {
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (rating) {
+                        ratingT = rating.round();
                         print(rating);
                       },
                     )
@@ -103,7 +104,7 @@ class _Rating1State extends State<Rating1> {
                         side: BorderSide(color: Colors.green[500])),
                     onPressed: () {
 
-                      cart.createReview(cart.idRating, cart.uid, rating, text.text,name,photoURL);
+                      cart.createReview(cart.idRating, cart.uid, ratingT, text.text,name,photoURL);
                       Scaffold.of(context).showSnackBar(SnackBar(content: Text('Đánh giá thành công')));
 
                     },

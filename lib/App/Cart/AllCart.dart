@@ -18,19 +18,38 @@ class _AllCartState extends State<AllCart> {
     return Consumer<Cart>(builder: (context,cart,child){
       List userFavorite = [];
       int count = 0;
-      if (userList1 != null)
+      List userList99 = [];
+      if(userList1 != null){
+        for (int i = 0; i< userList1.length; i++){
+          if(cart.uid == userList1[i].uid){
+            userList99.add(userList1[i]);
+          }
+        }
+      }
+      if (userList99 != null)
         {
-          if(userList1.length != 0){
+          if(userList99.length != 0){
             var timeNow = DateTime.now();
-            for (int i =0 ;i<userList1.length;i++){
-              var timeShip = userList1[i].endTime.toDate();
+            for (int i =0 ;i<userList99.length;i++){
+              var timeShip = userList99[i].endTime.toDate();
               if (timeShip.isBefore(timeNow)){
                 count = count + 1;
-                userFavorite.add(userList1[i]);
+                userFavorite.add(userList99[i]);
               }
             }
           }
         }
+      if(userFavorite != null){
+        for (int i =0; i< userFavorite.length; i++){
+          for(int j = 0; j< userFavorite.length; j++){
+            if(userFavorite[j].createTime.millisecondsSinceEpoch <  userFavorite[i].createTime.millisecondsSinceEpoch){
+              ListCart m = userFavorite[j];
+              userFavorite[j] = userFavorite[i];
+              userFavorite[i] = m;
+            }
+          }
+        }
+      }
 
 
 
